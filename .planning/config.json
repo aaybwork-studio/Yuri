@@ -1,0 +1,12 @@
+{
+  "project_name": "YURI",
+  "styling": {
+    "framework": "tailwind",
+    "version": "v4"
+  },
+  "workflow": {
+    "package_manager": "npm",
+    "bundler": "vite",
+    "mode": "mvp"
+  }
+}

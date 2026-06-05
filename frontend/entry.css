@@ -229,3 +229,38 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.3rem !important;
   text-transform: lowercase !important;
 }
+
+/* Glassmorphism backdrop filter blur for dropdowns, drawers, and popups */
+.header__submenu, 
+.menu-drawer, 
+.cart-drawer, 
+.modal__content, 
+.predictive-search, 
+.details-modal,
+.header__active-menu-item {
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  background-color: color-mix(in srgb, var(--color-warm-white) 85%, transparent) !important;
+}
+
+/* Menu active state transitions */
+.header__active-menu-item, 
+.list-menu__item--active {
+  color: var(--color-forest) !important;
+  font-weight: 500 !important;
+  opacity: 1 !important;
+}
+
+/* Full screen viewport height hero image banner overrides */
+.banner--medium, .banner--large, .banner--adapt {
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+}
+
+.banner__content {
+  padding: 3rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+

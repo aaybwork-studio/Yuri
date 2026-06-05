@@ -31,3 +31,42 @@ h1, h2, h3, h4, h5, h6 {
 .zen-border {
   border-color: color-mix(in srgb, var(--color-forest) 15%, transparent);
 }
+
+/* Navigation Header styling overrides */
+.header__menu-item {
+  font-family: var(--font-sans) !important;
+  color: var(--color-forest) !important;
+  font-size: 1.3rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: lowercase !important;
+  transition: opacity 0.2s ease, color 0.2s ease !important;
+}
+
+.header__menu-item:hover {
+  opacity: 0.7;
+}
+
+.header__submenu {
+  background-color: var(--color-warm-white) !important;
+  border: 1px solid color-mix(in srgb, var(--color-forest) 10%, transparent) !important;
+  box-shadow: none !important;
+}
+
+.header__submenu .header__menu-item {
+  font-size: 1.2rem !important;
+}
+
+/* Header utility icons */
+.header__icon {
+  color: var(--color-forest) !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.header__icon:hover {
+  opacity: 0.7;
+}
+
+/* Announcement Bar style overrides */
+.utility-bar {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-sand) 15%, transparent) !important;
+}

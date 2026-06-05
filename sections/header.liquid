@@ -114,7 +114,7 @@
   endif
 %}
 
-<{{ header_tag }} {% if header_tag == 'sticky-header' %}data-sticky-type="{{ section.settings.sticky_header_type }}"{% endif %} class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
+<{{ header_tag }} {% if header_tag == 'sticky-header' %}data-sticky-type="{{ section.settings.sticky_header_type }}"{% endif %} class="header-wrapper bg-warm-white {% if section.settings.show_line_separator %} border-b zen-border{% endif %}" style="background-color: var(--color-warm-white);">
   {%- liquid
     assign social_links = false
     assign localization_forms = false
@@ -160,7 +160,7 @@
                 }}
               </div>
             {%- else -%}
-              <span class="h2">{{ shop.name }}</span>
+              <span class="h2 font-serif text-forest tracking-wide font-normal lowercase" style="font-family: var(--font-serif); color: var(--color-forest); font-size: 2.2rem;">{{ shop.name }}</span>
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}
@@ -200,7 +200,7 @@
                 }}
               </div>
             {%- else -%}
-              <span class="h2">{{ shop.name }}</span>
+              <span class="h2 font-serif text-forest tracking-wide font-normal lowercase" style="font-family: var(--font-serif); color: var(--color-forest); font-size: 2.2rem;">{{ shop.name }}</span>
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}

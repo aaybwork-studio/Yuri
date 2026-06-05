@@ -122,3 +122,46 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-forest) !important;
   color: var(--color-warm-white) !important;
 }
+
+/* Image Banner styling overrides for YURI Zen Luxury look */
+.banner__box {
+  background-color: var(--color-warm-white) !important;
+  border: 1px solid color-mix(in srgb, var(--color-forest) 15%, transparent) !important;
+  box-shadow: none !important;
+  border-radius: 0px !important; /* Tatami minimal style */
+  padding: 4rem 6rem !important; /* Spacious padding */
+}
+
+@media screen and (max-width: 749px) {
+  .banner__box {
+    padding: 2.5rem 3rem !important;
+  }
+}
+
+.banner__heading {
+  font-family: var(--font-serif) !important;
+  color: var(--color-forest) !important;
+  font-weight: 300 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.03em !important;
+  text-transform: lowercase !important;
+}
+
+.banner__heading.h1 {
+  font-size: 3.5rem !important;
+}
+
+@media screen and (min-width: 750px) {
+  .banner__heading.h1 {
+    font-size: 5.2rem !important;
+  }
+}
+
+.banner__text {
+  font-family: var(--font-sans) !important;
+  color: var(--color-sage) !important;
+  font-size: 1.4rem !important;
+  letter-spacing: 0.05em !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 2rem !important;
+}

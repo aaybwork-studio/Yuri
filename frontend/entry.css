@@ -165,3 +165,67 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 1.5rem !important;
   margin-bottom: 2rem !important;
 }
+
+/* Footer styling overrides */
+.footer {
+  background-color: var(--color-sand-cream) !important;
+  color: var(--color-forest) !important;
+  border-top: 1px solid color-mix(in srgb, var(--color-forest) 10%, transparent) !important;
+}
+
+.footer-block__heading {
+  font-family: var(--font-serif) !important;
+  color: var(--color-forest) !important;
+  font-size: 1.6rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: lowercase !important;
+  margin-bottom: 2rem !important;
+}
+
+.footer-block__details-content a {
+  font-family: var(--font-sans) !important;
+  color: var(--color-sage) !important;
+  font-size: 1.3rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: lowercase !important;
+  transition: color 0.2s ease !important;
+}
+
+.footer-block__details-content a:hover {
+  color: var(--color-forest) !important;
+}
+
+.footer__copyright {
+  font-family: var(--font-sans) !important;
+  color: var(--color-sage) !important;
+  font-size: 1.1rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: lowercase !important;
+  margin-top: 3rem !important;
+  border-top: 1px solid color-mix(in srgb, var(--color-forest) 8%, transparent) !important;
+  padding-top: 2rem !important;
+}
+
+/* Newsletter Input Form inside Footer */
+.footer__newsletter .field__input {
+  border-radius: 0px !important; /* Crisp right angles */
+  border: 1px solid color-mix(in srgb, var(--color-forest) 20%, transparent) !important;
+  background-color: var(--color-warm-white) !important;
+  color: var(--color-forest) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 1.3rem !important;
+}
+
+.footer__newsletter .field__input:focus {
+  border-color: var(--color-forest) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.footer__newsletter .field__label {
+  font-family: var(--font-sans) !important;
+  color: var(--color-sage) !important;
+  font-size: 1.3rem !important;
+  text-transform: lowercase !important;
+}

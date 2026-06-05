@@ -278,4 +278,82 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Wabi-sabi card background adjustments based on Aesop reference */
+.card, .card-wrapper {
+  background-color: var(--color-sand-cream) !important;
+  border: 1px solid color-mix(in srgb, var(--color-forest) 8%, transparent) !important;
+  border-radius: 0px !important;
+  transition: transform 0.3s ease, border-color 0.3s ease !important;
+  box-shadow: none !important;
+}
 
+.card:hover {
+  border-color: color-mix(in srgb, var(--color-forest) 20%, transparent) !important;
+}
+
+.card__inner {
+  background-color: transparent !important;
+}
+
+.card__heading {
+  font-family: var(--font-sans) !important;
+  font-weight: 500 !important;
+  font-size: 1.4rem !important;
+  letter-spacing: 0.05em !important;
+  color: var(--color-forest) !important;
+  text-transform: capitalize !important;
+  margin-top: 1.2rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.price {
+  font-family: var(--font-sans) !important;
+  font-size: 1.3rem !important;
+  color: var(--color-sage) !important;
+  letter-spacing: 0.05em !important;
+}
+
+/* Collection List / Category blocks overrides */
+.collection-list-wrapper {
+  background-color: var(--color-warm-white) !important;
+}
+
+.collection-card {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.collection-card .card__heading {
+  font-family: var(--font-serif) !important;
+  font-size: 1.8rem !important;
+  text-transform: lowercase !important;
+  margin-bottom: 1rem !important;
+  color: var(--color-forest) !important;
+  text-align: left !important;
+}
+
+/* Dynamic Scroll Animations Override */
+@keyframes yuri-fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-trigger, 
+.animate--slide-in, 
+.grid__item {
+  opacity: 0;
+  animation: yuri-fade-slide-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+/* Introduce slight delays for grids to look sequential */
+.grid__item:nth-child(2) { animation-delay: 0.1s; }
+.grid__item:nth-child(3) { animation-delay: 0.2s; }
+.grid__item:nth-child(4) { animation-delay: 0.3s; }
+.grid__item:nth-child(5) { animation-delay: 0.4s; }
+.grid__item:nth-child(6) { animation-delay: 0.5s; }

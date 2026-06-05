@@ -25,6 +25,14 @@ Re-skin the main page layout, header, footer, and basic sections with the Zen ae
   * [x] Task 2.3: Restyle the home page hero section with earth-grounded colors and large typography.
   * [x] Task 2.4: Restyle the footer with warm neutrals and botanical text spacing.
 
+### Phase 2.1: Customise the Home Page
+Tailor home page sections to reflect the earthly grounded luxury Zen aesthetic.
+* **Goal**: Re-skin default home page blocks (Featured Collection, Rich Text, Multicolumn) and ensure beautiful grids.
+* **Tasks**:
+  * [ ] Task 2.1.1: Restyle the Featured Collection section with custom zen text borders, card styles, and typography.
+  * [ ] Task 2.1.2: Restyle the Rich Text section (editorial quote box with spacious margins).
+  * [ ] Task 2.1.3: Custom-style the Multicolumn grid (e.g. showing "Hand-poured", "Natural Scent", "Zen-inspired" value props).
+
 ### Phase 3: Product Pages, Scent Profiles & Accordions
 Create a premium product detail page template with customized metafield elements.
 * **Goal**: Build custom sections for scent notes, ingredients accordions, and high-end buy-buttons.

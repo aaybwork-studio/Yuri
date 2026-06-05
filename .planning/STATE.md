@@ -3,25 +3,33 @@
 ## 1. Project Overview
 * **Project Name**: YURI
 * **Current Milestone**: v1.0
-* **Current Phase**: Phase 2.1: Customise the Home Page
-* **Overall Status**: `IN_PROGRESS` (Executing Phase 2.1 Home Page Customizations)
+* **Current Phase**: Phase 3: Product Pages, Scent Profiles & Accordions
+* **Overall Status**: `IN_PROGRESS` (Executing Phase 3 Product Pages)
 
 ---
 
 ## 2. Active Phase Progress
-**Phase 2.1: Customise the Home Page**
+**Phase 3: Product Pages, Scent Profiles & Accordions**
 * Status: `IN_PROGRESS`
-* Target: Re-skin default home page blocks (Featured Collection, Rich Text, Multicolumn) and ensure beautiful grids.
+* Target: Create premium product detail page template with scent profiles and accordion details.
 
 | Task ID | Task Description | Status | Commit/SHA | Notes |
 | :--- | :--- | :---: | :---: | :--- |
-| Task 2.1.1 | Restyle the Featured Collection section with custom zen text borders, card styles, and typography | `[ ]` | - | Pending |
-| Task 2.1.2 | Restyle the Rich Text section (editorial quote box with spacious margins) | `[ ]` | - | Pending |
-| Task 2.1.3 | Custom-style the Multicolumn grid (e.g. showing "Hand-poured", "Natural Scent", "Zen-inspired" value props) | `[ ]` | - | Pending |
+| Task 3.1 | Modify `sections/main-product.liquid` to use custom zen layouts and fonts | `[ ]` | - | Pending |
+| Task 3.2 | Implement a custom "Scent Profile Grid" block displaying Top, Mid, and Base notes | `[ ]` | - | Pending |
+| Task 3.3 | Implement smooth, accessible accordion tabs for ingredients, care instructions, and shipping | `[ ]` | - | Pending |
+| Task 3.4 | Integrate variant selector restyling matching the brand tokens | `[ ]` | - | Pending |
 
 ---
 
 ## 2a. Completed Phase Progress
+**Phase 2.1: Customise the Home Page** (COMPLETED - Commit `32a7fdd`)
+* Removed the announcement bar layout from header-group (`32a7fdd`)
+* Configured index.json template layout to match Aesop's category/formulation sections
+* Customized card styles to use light sand backgrounds and thin wabi-sabi borders
+* Overrode collection listing cards to show titles above images
+* Added custom smooth viewport scroll fade-slide animations with offsets
+
 **Phase 2: Core Theme Layout & Design System** (COMPLETED - Commit `43d3a6d`)
 * Custom styled announcement bar & navigation header (`7e1b1c2`)
 * Added global wabi-sabi card borders and minimal tatami-style buttons (`17ce8b3`)

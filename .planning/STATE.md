@@ -3,26 +3,32 @@
 ## 1. Project Overview
 * **Project Name**: YURI
 * **Current Milestone**: v1.0
-* **Current Phase**: Phase 2: Core Theme Layout & Design System
-* **Overall Status**: `IN_PROGRESS` (Executing Phase 2 Layout & Design System)
+* **Current Phase**: Phase 3: Product Pages, Scent Profiles & Accordions
+* **Overall Status**: `IN_PROGRESS` (Executing Phase 3 Product Pages)
 
 ---
 
 ## 2. Active Phase Progress
-**Phase 2: Core Theme Layout & Design System**
+**Phase 3: Product Pages, Scent Profiles & Accordions**
 * Status: `IN_PROGRESS`
-* Target: Re-skin the main layouts, header, announcement bar, banner, and footer with Zen styling.
+* Target: Create premium product detail page template with scent profiles and accordion details.
 
 | Task ID | Task Description | Status | Commit/SHA | Notes |
 | :--- | :--- | :---: | :---: | :--- |
-| Task 2.1 | Custom-style the announcement bar and header with Zen spacing and fonts in `sections/announcement-bar.liquid` and `sections/header.liquid` | `[ ]` | - | Pending |
-| Task 2.2 | Implement thin, elegant grid borders and spacious container paddings in global styles | `[ ]` | - | Pending |
-| Task 2.3 | Restyle the home page hero section (image banner) with earthy colors and large typography | `[ ]` | - | Pending |
-| Task 2.4 | Restyle the footer with warm neutrals and botanical text spacing | `[ ]` | - | Pending |
+| Task 3.1 | Modify `sections/main-product.liquid` to use custom zen layouts and fonts | `[ ]` | - | Pending |
+| Task 3.2 | Implement a custom "Scent Profile Grid" block displaying Top, Mid, and Base notes | `[ ]` | - | Pending |
+| Task 3.3 | Implement smooth, accessible accordion tabs for ingredients, care instructions, and shipping | `[ ]` | - | Pending |
+| Task 3.4 | Integrate variant selector restyling matching the brand tokens | `[ ]` | - | Pending |
 
 ---
 
 ## 2a. Completed Phase Progress
+**Phase 2: Core Theme Layout & Design System** (COMPLETED - Commit `43d3a6d`)
+* Custom styled announcement bar & navigation header (`7e1b1c2`)
+* Added global wabi-sabi card borders and minimal tatami-style buttons (`17ce8b3`)
+* Customized home page image banner typography & container (`de0c0fd`)
+* Rebuilt footer color scheme, copyright layout, and newsletter forms (`43d3a6d`)
+
 **Phase 1: Foundations, Tailwind v4 & Vite Setup** (COMPLETED - Commit `dc56f53f`)
 
 

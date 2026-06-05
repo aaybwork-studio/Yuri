@@ -20,10 +20,10 @@ Establish the compilation toolchain and integrate the design system tokens.
 Re-skin the main page layout, header, footer, and basic sections with the Zen aesthetic.
 * **Goal**: Update global styles, spacing, typography, and line aesthetics across the store.
 * **Tasks**:
-  * [ ] Task 2.1: Custom-style the announcement bar and header with zen spacing and fonts.
-  * [ ] Task 2.2: Implement thin, elegant grid borders and spacious container paddings.
-  * [ ] Task 2.3: Restyle the home page hero section with earth-grounded colors and large typography.
-  * [ ] Task 2.4: Restyle the footer with warm neutrals and botanical text spacing.
+  * [x] Task 2.1: Custom-style the announcement bar and header with zen spacing and fonts.
+  * [x] Task 2.2: Implement thin, elegant grid borders and spacious container paddings.
+  * [x] Task 2.3: Restyle the home page hero section with earth-grounded colors and large typography.
+  * [x] Task 2.4: Restyle the footer with warm neutrals and botanical text spacing.
 
 ### Phase 3: Product Pages, Scent Profiles & Accordions
 Create a premium product detail page template with customized metafield elements.

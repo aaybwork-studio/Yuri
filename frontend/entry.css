@@ -264,3 +264,18 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center !important;
 }
 
+/* Short minimal header padding overrides */
+.header {
+  padding-top: 0.8rem !important;
+  padding-bottom: 0.8rem !important;
+  min-height: unset !important;
+}
+
+@media screen and (min-width: 990px) {
+  .header {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+}
+
+

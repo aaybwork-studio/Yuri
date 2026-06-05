@@ -70,3 +70,55 @@ h1, h2, h3, h4, h5, h6 {
 .utility-bar {
   border-bottom: 1px solid color-mix(in srgb, var(--color-sand) 15%, transparent) !important;
 }
+
+/* Wabi-sabi elegant cards & borders */
+.card, .card-wrapper, .product-grid, .grid__item {
+  border-color: color-mix(in srgb, var(--color-forest) 10%, transparent) !important;
+}
+
+/* Add padding & spacing adjustments */
+.page-width {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  max-width: 1400px !important; /* Spacious layout */
+}
+
+@media screen and (min-width: 750px) {
+  .page-width {
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
+  }
+}
+
+/* Buttons matching Zen Earthly luxury */
+.button, .shopify-payment-button__button {
+  font-family: var(--font-sans) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: lowercase !important;
+  border-radius: 0px !important; /* Crisp right angles like tatami mats */
+  background-color: var(--color-forest) !important;
+  color: var(--color-warm-white) !important;
+  border: 1px solid var(--color-forest) !important;
+  transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease !important;
+  box-shadow: none !important;
+  padding: 1.2rem 3rem !important;
+  min-height: unset !important;
+}
+
+.button:hover, .shopify-payment-button__button:hover {
+  background-color: transparent !important;
+  color: var(--color-forest) !important;
+}
+
+/* Secondary buttons */
+.button--secondary {
+  background-color: transparent !important;
+  color: var(--color-forest) !important;
+  border: 1px solid color-mix(in srgb, var(--color-forest) 30%, transparent) !important;
+}
+
+.button--secondary:hover {
+  background-color: var(--color-forest) !important;
+  color: var(--color-warm-white) !important;
+}

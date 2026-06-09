@@ -1,176 +1,99 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "yuri.",
-            "heading_size": "hxxl"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "earthly grounded luxury for the senses. hand-poured botanical formulations.",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "explore formulations",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+    "custom_hero": {
+      "type": "custom-hero",
       "settings": {
-        "image_overlay_opacity": 0,
-        "image_height": "large",
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "subheading_1": "essential elements",
+        "heading_1": "wabi-sabi scent spaces",
+        "button_label_1": "explore formulations",
+        "button_link_1": "shopify:\/\/collections\/all",
+        "subheading_2": "hand-poured pure soy",
+        "heading_2": "scented botanical candles",
+        "button_label_2": "view collection",
+        "button_link_2": "shopify:\/\/collections\/all",
+        "subheading_3": "home atmosphere",
+        "heading_3": "curated incense & trays",
+        "button_label_3": "discover trays",
+        "button_link_3": "shopify:\/\/collections\/all"
       }
     },
-    "collection_list": {
-      "type": "collection-list",
+    "custom_featured_products": {
+      "type": "custom-featured-products",
       "settings": {
-        "title": "Discover by category or range",
-        "heading_size": "h2",
-        "columns_desktop": 5,
-        "color_scheme": "scheme-1",
-        "swipe_on_mobile": true,
-        "padding_top": 48,
-        "padding_bottom": 48
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Revered formulations",
-        "heading_size": "h2",
+        "subheading": "new and notable",
+        "title": "revered formulations",
+        "description": "natural scented candles and curated trays designed to elevate your sensory space.",
         "collection": "all",
-        "products_to_show": 3,
-        "columns_desktop": 3,
-        "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": true,
-        "image_ratio": "square",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "1",
-        "padding_top": 48,
-        "padding_bottom": 48
+        "products_to_show": 6
       }
     },
-    "image_with_text": {
-      "type": "image-with-text",
+    "custom_browse_mirrored": {
+      "type": "custom-browse-mirrored",
       "blocks": {
-        "caption": {
-          "type": "caption",
+        "cat_candles": {
+          "type": "category",
           "settings": {
-            "caption": "Seasonal suggestions",
-            "text_style": "caption-with-letter-spacing",
-            "text_size": "small"
+            "title": "candles",
+            "link": "shopify:\/\/collections\/all"
           }
         },
-        "heading": {
-          "type": "heading",
+        "cat_fragrances": {
+          "type": "category",
           "settings": {
-            "heading": "Warm weather companions",
-            "heading_size": "h1"
+            "title": "fragrances",
+            "link": "shopify:\/\/collections\/all"
           }
         },
-        "text": {
-          "type": "text",
+        "cat_trays": {
+          "type": "category",
           "settings": {
-            "text": "<p>In the heat, the skin on our body can experience increased sun exposure and perspiration. Accordingly, protect with sunscreen, opt for lightweight hydration and refresh with vivifying aromas.<\/p>"
+            "title": "trays",
+            "link": "shopify:\/\/collections\/all"
+          }
+        },
+        "cat_accessories": {
+          "type": "category",
+          "settings": {
+            "title": "accessories",
+            "link": "shopify:\/\/collections\/all"
           }
         }
       },
       "block_order": [
-        "caption",
-        "heading",
-        "text"
+        "cat_candles",
+        "cat_fragrances",
+        "cat_trays",
+        "cat_accessories"
       ],
       "settings": {
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "text_first",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "scheme-1",
-        "mobile_content_alignment": "left",
-        "padding_top": 48,
-        "padding_bottom": 48
+        "row1_caption": "a moment for yourself",
+        "row1_heading": "many considered gestures",
+        "row1_text": "<p>impeccable candles and delicate accessories, featuring finely tuned formulations and meticulously crafted ceramic ware.<\/p>",
+        "row1_btn_label": "discover gifts",
+        "row1_btn_link": "shopify:\/\/collections\/all",
+        "row2_caption": "delightful home scents",
+        "row2_heading": "the fragrance finder",
+        "row2_text": "<p>discover the ideal scented creations for your home environment. let us guide you through our botanicals.<\/p>",
+        "row2_btn_label": "find your scent",
+        "row2_btn_link": "shopify:\/\/collections\/all",
+        "category_heading": "browse by category"
       }
     },
-    "multicolumn": {
-      "type": "multicolumn",
-      "blocks": {
-        "column1": {
-          "type": "column",
-          "settings": {
-            "title": "Bathroom Essentials Bundle",
-            "text": "<p>A clean formulation set for your botanical space.<\/p>"
-          }
-        },
-        "column2": {
-          "type": "column",
-          "settings": {
-            "title": "Oral Care Duo",
-            "text": "<p>A dynamic refreshing pair for everyday routine.<\/p>"
-          }
-        },
-        "column3": {
-          "type": "column",
-          "settings": {
-            "title": "Hwyl Ensemble",
-            "text": "<p>A collection of scented formulations.<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "column1",
-        "column2",
-        "column3"
-      ],
+    "custom_about_us": {
+      "type": "custom-about-us",
       "settings": {
-        "title": "Curated bundles",
-        "heading_size": "h2",
-        "image_width": "third",
-        "image_ratio": "square",
-        "columns_desktop": 3,
-        "column_alignment": "left",
-        "background_style": "none",
-        "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 48,
-        "padding_bottom": 48
+        "subheading": "a new standard in atmosphere",
+        "heading": "yuri blends tranquility with luxury.",
+        "text": "<p>our meticulously hand-poured soy candles and fragrance diffusers restore harmony and clarity to your living space. rooted in organic zen styling, yuri brings nature into your home.<\/p>",
+        "btn_label": "explore our story",
+        "btn_link": "shopify:\/\/pages\/about"
       }
     }
   },
   "order": [
-    "image_banner",
-    "collection_list",
-    "featured_collection",
-    "image_with_text",
-    "multicolumn"
+    "custom_hero",
+    "custom_featured_products",
+    "custom_browse_mirrored",
+    "custom_about_us"
   ]
 }

@@ -1,0 +1,246 @@
+<div class="yuri-hero-slider w-full h-[50vh] md:h-[66vh] bg-warm-white relative" id="HeroSlider-{{ section.id }}">
+  {%- assign has_slides = false -%}
+  
+  {%- for i in (1..3) -%}
+    {%- capture img_key -%}image_{{ i }}{%- endcapture -%}
+    {%- capture heading_key -%}heading_{{ i }}{%- endcapture -%}
+    {%- capture subheading_key -%}subheading_{{ i }}{%- endcapture -%}
+    {%- capture button_label_key -%}button_label_{{ i }}{%- endcapture -%}
+    {%- capture button_link_key -%}button_link_{{ i }}{%- endcapture -%}
+    
+    {%- assign slide_img = section.settings[img_key] -%}
+    {%- assign slide_heading = section.settings[heading_key] -%}
+    {%- assign slide_subheading = section.settings[subheading_key] -%}
+    {%- assign slide_btn_label = section.settings[button_label_key] -%}
+    {%- assign slide_btn_link = section.settings[button_link_key] -%}
+    
+    {%- if slide_img != blank or i == 1 -%}
+      {%- assign has_slides = true -%}
+      <div class="yuri-hero-slide {% if i == 1 %}is-active{% endif %} absolute inset-0 w-full h-full" data-slide-index="{{ forloop.index0 }}">
+        <div class="absolute inset-0 bg-black/10 z-10"></div>
+        
+        {%- if slide_img != blank -%}
+          {{ slide_img | image_url: width: 2000 | image_tag: 
+            class: 'w-full h-full object-cover',
+            loading: 'eager',
+            fetchpriority: 'high'
+          }}
+        {%- else -%}
+          {%- comment -%}Fallback to generated placeholders{%- endcomment -%}
+          {%- assign fallback_img_name = 'yuri-hero-' | append: i | append: '.png' -%}
+          <img src="{{ fallback_img_name | asset_url }}" class="w-full h-full object-cover" alt="YURI Zen Lifestyle Slide" loading="eager">
+        {%- endif -%}
+        
+        <div class="absolute inset-0 z-20 flex flex-col justify-center items-center text-center p-8">
+          <div class="max-w-[70rem] px-4 animate-fade-in-up">
+            {%- if slide_subheading != blank -%}
+              <p class="font-sans text-warm-white uppercase tracking-wider text-xs md:text-sm mb-4" style="color: var(--color-warm-white); letter-spacing: 0.15em;">
+                {{ slide_subheading | escape }}
+              </p>
+            {%- endif -%}
+            
+            {%- if slide_heading != blank -%}
+              <h2 class="font-serif text-warm-white text-3xl md:text-5xl font-light mb-6 lowercase" style="color: var(--color-warm-white); font-family: var(--font-serif); line-height: 1.2;">
+                {{ slide_heading | escape }}
+              </h2>
+            {%- endif -%}
+            
+            {%- if slide_btn_label != blank and slide_btn_link != blank -%}
+              <a href="{{ slide_btn_link }}" class="button button--primary border-warm-white hover:bg-warm-white hover:text-forest mt-4" style="background-color: var(--color-warm-white) !important; color: var(--color-forest) !important; border-color: var(--color-warm-white) !important;">
+                {{ slide_btn_label | escape }}
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if has_slides -%}
+    {%- comment -%}Pagination Dots{%- endcomment -%}
+    <div class="absolute bottom-8 left-0 right-0 z-30 flex justify-center gap-3">
+      {%- for i in (1..3) -%}
+        {%- capture img_key -%}image_{{ i }}{%- endcapture -%}
+        {%- assign slide_img = section.settings[img_key] -%}
+        {%- if slide_img != blank or i == 1 -%}
+          <button class="w-2.5 h-2.5 rounded-full border border-warm-white bg-transparent transition-all duration-300 {% if i == 1 %}!bg-warm-white scale-125{% endif %}" 
+                  style="border-color: var(--color-warm-white);"
+                  data-dot-index="{{ forloop.index0 }}"
+                  aria-label="Go to slide {{ i }}">
+          </button>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('HeroSlider-{{ section.id }}');
+    if (!slider) return;
+    
+    const slides = slider.querySelectorAll('.yuri-hero-slide');
+    const dots = slider.querySelectorAll('[data-dot-index]');
+    if (slides.length <= 1) return;
+    
+    let currentSlide = 0;
+    let slideInterval;
+    
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        if (i === index) {
+          slide.classList.add('is-active');
+        } else {
+          slide.classList.remove('is-active');
+        }
+      });
+      
+      dots.forEach((dot, i) => {
+        if (i === index) {
+          dot.classList.add('!bg-warm-white', 'scale-125');
+        } else {
+          dot.classList.remove('!bg-warm-white', 'scale-125');
+        }
+      });
+      currentSlide = index;
+    }
+    
+    function nextSlide() {
+      let next = (currentSlide + 1) % slides.length;
+      showSlide(next);
+    }
+    
+    function startInterval() {
+      stopInterval();
+      slideInterval = setInterval(nextSlide, 4500);
+    }
+    
+    function stopInterval() {
+      if (slideInterval) clearInterval(slideInterval);
+    }
+    
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        const index = parseInt(dot.getAttribute('data-dot-index'));
+        showSlide(index);
+        startInterval();
+      });
+    });
+    
+    startInterval();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Yuri Slideshow Hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Slide 1 Details"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Slide 1 Image"
+    },
+    {
+      "type": "text",
+      "id": "subheading_1",
+      "label": "Slide 1 Subheading",
+      "default": "essential elements"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Slide 1 Heading",
+      "default": "wabi-sabi scent spaces"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Slide 1 Button Label",
+      "default": "explore formulations"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Slide 1 Button Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Slide 2 Details"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Slide 2 Image"
+    },
+    {
+      "type": "text",
+      "id": "subheading_2",
+      "label": "Slide 2 Subheading",
+      "default": "hand-poured pure soy"
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Slide 2 Heading",
+      "default": "scented botanical candles"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Slide 2 Button Label",
+      "default": "view collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Slide 2 Button Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Slide 3 Details"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Slide 3 Image"
+    },
+    {
+      "type": "text",
+      "id": "subheading_3",
+      "label": "Slide 3 Subheading",
+      "default": "home atmosphere"
+    },
+    {
+      "type": "text",
+      "id": "heading_3",
+      "label": "Slide 3 Heading",
+      "default": "curated incense & trays"
+    },
+    {
+      "type": "text",
+      "id": "button_label_3",
+      "label": "Slide 3 Button Label",
+      "default": "discover trays"
+    },
+    {
+      "type": "url",
+      "id": "button_link_3",
+      "label": "Slide 3 Button Link",
+      "default": "/collections/all"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Yuri Slideshow Hero"
+    }
+  ]
+}
+{% endschema %}

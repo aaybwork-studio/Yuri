@@ -23,6 +23,16 @@
 ---
 
 ## 2a. Completed Phase Progress
+**Phase 2.2: Reshape the Landing Page UI** (COMPLETED)
+* Copied brand monogram and green wordmark assets to the theme assets folder.
+* Modified `sections/header.liquid` to split navigation links around the centered monogram logo.
+* Created custom slideshow hero section `custom-hero.liquid` (2/3 height, client-side fade autoplay).
+* Created custom featured products section `custom-featured-products.liquid` (borderless cards, horizontal scroll).
+* Created custom browse mirrored section `custom-browse-mirrored.liquid` (100vh rows, category slider).
+* Created custom about us section `custom-about-us.liquid` (100vh split panels).
+* Created custom brand footer card section `custom-footer.liquid` (rounded card layout, newsletter signup, centered logo).
+* Configured index.json template and footer-group.json to render the new custom sections.
+
 **Phase 2.1: Customise the Home Page** (COMPLETED - Commit `32a7fdd`)
 * Removed the announcement bar layout from header-group (`32a7fdd`)
 * Configured index.json template layout to match Aesop's category/formulation sections

@@ -126,6 +126,13 @@
     if localization.available_countries.size > 1 and section.settings.enable_country_selector or section.settings.enable_language_selector and localization.available_languages.size > 1
       assign localization_forms = true
     endif
+
+    assign link_count = section.settings.menu.links.size
+    assign limit_left = link_count | divided_by: 2
+    assign modulo = link_count | modulo: 2
+    if modulo != 0
+      assign limit_left = limit_left | plus: 1
+    endif
   -%}
   <header class="header {% if section.settings.logo_position == 'middle-split' %}header--yuri-split{% else %}header--{{ section.settings.logo_position }}{% endif %} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
     {%- liquid
@@ -137,6 +144,16 @@
         render 'header-search', input_id: 'Search-In-Modal-1'
       endif
     -%}
+
+    {%- if section.settings.logo_position == 'middle-split' and section.settings.menu != blank -%}
+      {%- liquid
+        if section.settings.menu_type_desktop == 'dropdown'
+          render 'header-dropdown-menu', limit: limit_left, offset: 0
+        elsif section.settings.menu_type_desktop != 'drawer'
+          render 'header-mega-menu', limit: limit_left, offset: 0
+        endif
+      -%}
+    {%- endif -%}
 
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
@@ -173,14 +190,14 @@
     {%- endif -%}
 
     {%- liquid
-      if section.settings.menu != blank
+      if section.settings.menu != blank and section.settings.logo_position != 'middle-split'
         if section.settings.menu_type_desktop == 'dropdown'
           render 'header-dropdown-menu'
         elsif section.settings.menu_type_desktop != 'drawer'
           render 'header-mega-menu'
         endif
       endif
-    %}
+    -%}
 
     {%- if section.settings.logo_position == 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
@@ -210,6 +227,19 @@
       {%- if request.page_type == 'index' -%}
         </h1>
       {%- endif -%}
+    {%- endif -%}
+
+    {%- if section.settings.logo_position == 'middle-split' -%}
+      <div class="header__split-right-wrapper">
+        {%- liquid
+          if section.settings.menu != blank
+            if section.settings.menu_type_desktop == 'dropdown'
+              render 'header-dropdown-menu', limit: 999, offset: limit_left
+            elsif section.settings.menu_type_desktop != 'drawer'
+              render 'header-mega-menu', limit: 999, offset: limit_left
+            endif
+          endif
+        -%}
     {%- endif -%}
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
@@ -291,6 +321,10 @@
         {%- endif -%}
       </a>
     </div>
+
+    {%- if section.settings.logo_position == 'middle-split' -%}
+      </div>
+    {%- endif -%}
   </header>
 </{{ header_tag }}>
 

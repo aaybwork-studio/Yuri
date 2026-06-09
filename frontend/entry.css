@@ -383,9 +383,22 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center !important;
 }
 
-.header--yuri-split .header__icons {
+.header__split-right-wrapper {
   grid-column: 3 !important;
   justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 3rem !important;
+}
+
+.header__split-right-wrapper .header__inline-menu {
+  grid-column: auto !important;
+  justify-self: auto !important;
+}
+
+.header--yuri-split .header__icons {
+  grid-column: auto !important;
+  justify-self: auto !important;
 }
 
 .header-wrapper.is-transparent {

@@ -73,6 +73,13 @@ progress:
 
 ---
 
+## Accumulated Context
+
+### Roadmap Evolution
+- Phase 5 added: Homepage layout reform
+
+---
+
 ## 3. Decisions & ADRs
 
 * **Decision 1**: Build on top of Shopify Dawn base theme rather than from scratch (defined in `.planning/PROJECT.md`).

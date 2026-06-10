@@ -1,10 +1,11 @@
 ---
 phase: 5
 slug: homepage-layout-reform
-status: draft
+status: approved
 shadcn_initialized: false
 preset: none
 created: 2026-06-11
+reviewed_at: 2026-06-11
 ---
 
 # Phase 5 — UI Design Contract
@@ -21,7 +22,7 @@ created: 2026-06-11
 | Preset | not applicable | N/A |
 | Component library | none | Native Liquid templates |
 | Icon library | Native Dawn SVGs | Dawn theme icon assets (`snippets/icon-*.liquid`) |
-| Font | Hanken Grotesk (Sans), Space Grotesk (Serif) | Pre-populated from `entry.css` / Phase 1 tokens |
+| Font | Space Grotesk & Hanken Grotesk | Pre-populated from `entry.css` / Phase 1 tokens |
 
 ---
 
@@ -36,25 +37,36 @@ Declared values (must be multiples of 4):
 | md | 16px | Default element spacing |
 | lg | 24px | Section padding (minimum threshold) |
 | xl | 32px | Layout gaps |
-| 2xl | 48px | Major section breaks |
+| 2xl | 48px | Page width mobile padding, major section breaks |
 | 3xl | 64px | Page-level spacing (default section padding) |
-| 4xl | 128px | Page-level spacing (maximum section padding) |
 
 Exceptions:
-- Dot separators in navbar use `0.8rem` (8px) margin.
-- Page margins (desktop page-width) use `5rem` (50px) padding (from `entry.css`).
-- Dynamic section spacing ranges from 24px to 128px (step 8px) configurable in Liquid schema.
+- **Navbar Dot Separators**: `8px` (0.8rem) margin between links.
+- **Page-level width padding (desktop)**: `48px` (4.8rem) padding on desktop for `.page-width` to ensure grid alignment.
+- **Dynamic Section Padding**: Top/bottom padding range up to `128px` (which is a multiple of 4) is configurable in Liquid schema settings to support custom Zen layouts.
 
 ---
 
 ## Typography
 
-| Role | Size | Weight | Line Height | Source / Notes |
-|------|------|--------|-------------|----------------|
-| Body | 14px (1.4rem) | regular (400) | 1.5 | Hanken Grotesk body styling |
-| Label | 12px (1.2rem) - 13px (1.3rem) | medium (500) | 1.3 | Navbar, product price, footer links |
-| Heading | 16px (1.6rem) - 18px (1.8rem) | light (300) / regular (400) | 1.2 | Card headings, footer block titles |
-| Display | 35px (3.5rem) - 52px (5.2rem) | light (300) / regular (400) | 1.1 | Hero banner title, section main header |
+| Role | Size | Weight | Line Height | Font Family | Source / Notes |
+|------|------|--------|-------------|-------------|----------------|
+| Body | 16px | 300 (Light) | 1.5 | Hanken Grotesk | General content, section descriptions |
+| Label | 12px | 500 (Medium) | 1.2 | Hanken Grotesk / Space Grotesk | Navbar navigation links, product details, buttons |
+| Heading | 24px | 500 (Medium) | 1.2 | Space Grotesk | Product card titles, block headings |
+| Display | 48px | 300 (Light) | 1.1 | Space Grotesk | Hero title, split panel section headers |
+
+---
+
+## Visual Hierarchy and Focal Point
+
+- **Primary Focal Point**: The full-screen slideshow hero image and large display headings (`Space Grotesk`, `48px`, `300 (Light)`).
+- **Accessibility Labels**: Icon-only navigation buttons in the header (search, wishlist star, cart) must render with screen-reader friendly `aria-label` text (e.g. `aria-label="search"`, `aria-label="wishlist"`, `aria-label="cart"`).
+- **Hierarchy Scale**:
+  1. **Anchor**: Full-screen slide image and display titles (`48px`).
+  2. **Page sections**: Block headings (`24px`).
+  3. **Product details/UI buttons**: Labels, price tags, and custom buttons (`12px`).
+  4. **Supportive text**: Description paragraphs (`16px`).
 
 ---
 
@@ -62,16 +74,16 @@ Exceptions:
 
 | Role | Value | Usage | Source / Notes |
 |------|-------|-------|----------------|
-| Dominant (60%) | #eeecd3 | Background, surfaces | Warm Sand White (`--color-brand-bg`) |
-| Secondary (30%) | #403002 | Typography, primary elements, borders | Dark Brown (`--color-brand-text`) |
-| Accent (10%) | #cc1574 / #efbf04 | Highlights, badges, hover fills | Rose (`--color-accent-rose`) / Gold (`--color-accent-gold`) |
-| Destructive | #cc1574 | Destructive actions, system warnings | Rose (`--color-accent-rose`) |
+| Dominant (60%) | `#eeecd3` | Base body background (`--color-brand-bg`), transparent ivory surfaces | Warm Sand White |
+| Secondary (30%) | `#403002` | Dark brown (`--color-brand-text`), primary text, primary button backgrounds, header/footer text | Dark Brown |
+| Secondary (30%) | `#2C3A2E` | Grounded Forest Green (`--color-forest`), solid card backgrounds, custom panels | Grounded Forest |
+| Accent (10%) | `#efbf04` | Gold (`--color-accent-gold`), active wishlist indicator, focus outlines | Gold |
+| Accent (10%) | `#cc1574` | Rose (`--color-accent-rose`), sale badge highlights, promo tags | Rose |
+| Destructive | `#cc1574` | Warning messages, error states | Rose |
 
 Accent reserved for:
-- Sale badge highlight (`#cc1574`)
-- Accent buttons custom background/border hover states
-- Wishlist star active indicator state
-- Focus outlines / highlighted navigation dots
+- **Gold (`#efbf04`)**: Active wishlist star icon states, focus outlines, selected navigation dots.
+- **Rose (`#cc1574`)**: Sale badges, product highlight badges, error message text.
 
 ---
 
@@ -92,6 +104,7 @@ Accent reserved for:
 | Registry | Blocks Used | Safety Gate |
 |----------|-------------|-------------|
 | shadcn official | none | not required |
+| none | none | not applicable |
 
 ---
 
@@ -123,11 +136,11 @@ Accent reserved for:
 
 ## Checker Sign-Off
 
-- [ ] Dimension 1 Copywriting: PASS
-- [ ] Dimension 2 Visuals: PASS
-- [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
-- [ ] Dimension 5 Spacing: PASS
-- [ ] Dimension 6 Registry Safety: PASS
+- [x] Dimension 1 Copywriting: PASS
+- [x] Dimension 2 Visuals: PASS
+- [x] Dimension 3 Color: PASS
+- [x] Dimension 4 Typography: PASS
+- [x] Dimension 5 Spacing: PASS
+- [x] Dimension 6 Registry Safety: PASS
 
-**Approval:** pending
+**Approval:** approved 2026-06-11

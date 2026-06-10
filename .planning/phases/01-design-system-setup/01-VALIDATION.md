@@ -38,10 +38,11 @@ created: 2026-06-10
 
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| 01-01-01 | 01 | 1 | FR 6.1 | — | N/A | manual | browser inspection | N/A | ⬜ pending |
-| 01-01-02 | 01 | 1 | FR 6.1 | — | N/A | manual | check preload tags | N/A | ⬜ pending |
-| 01-01-03 | 01 | 1 | FR 6.1 | — | N/A | manual | run theme compilation | N/A | ⬜ pending |
-| 01-01-04 | 01 | 1 | FR 6.1 | — | N/A | manual | inspect active hovers | N/A | ⬜ pending |
+| 01-01-01 | 01 | 1 | FR 6.1 | — | N/A | lint | shopify theme check | layout/theme.liquid | ⬜ pending |
+| 01-01-02 | 01 | 1 | FR 6.1 | — | N/A | build | npm run build | frontend/entry.css | ⬜ pending |
+| 01-02-01 | 02 | 2 | FR 6.1 | — | N/A | lint | shopify theme check | config/settings_data.json | ⬜ pending |
+| 01-02-02 | 02 | 2 | FR 6.1 | — | N/A | build | npm run build | frontend/entry.css | ⬜ pending |
+| 01-02-03 | 02 | 2 | FR 6.1 | — | N/A | lint | shopify theme check | sections/custom-footer.liquid | ⬜ pending |
 
 ---
 

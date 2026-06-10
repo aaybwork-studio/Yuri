@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "skills": {
+    "fixing-motion-performance": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/fixing-motion-performance/SKILL.md",
+      "computedHash": "9e46bdd3a4ad4844d2144c1c748dcd22c5e9d476a974b95e373db8b4e30c8ad2"
+    },
+    "gpt-taste": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/gpt-taste/SKILL.md",
+      "computedHash": "d7fb17c930a2a504dd5e3944aac92cf0cc2938dae5a475b2427c5c961034230b"
+    },
+    "scroll-experience": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/scroll-experience/SKILL.md",
+      "computedHash": "585612d4791ec9d05843661ce0995d2e65ae18585f5c55287412ee5eb7ca40a7"
+    },
+    "shopify-development": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/shopify-development/SKILL.md",
+      "computedHash": "d313d08c047304de15381b672aeb940b7fd0b2487213f00b4c1041ed17413138"
+    },
+    "tailwind-patterns": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/tailwind-patterns/SKILL.md",
+      "computedHash": "54ea413749acbfadc152864d73e16e6cf5d13f8c88c7fbf8f84693988789c30a"
+    },
+    "web-design-guidelines": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "de44ccda534f5eaf1595f0d2c6403bcaaf96d6f060fa0bb1cdf0037fe1867c6c"
+    }
+  }
+}

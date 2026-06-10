@@ -118,7 +118,7 @@
     "predictive_search_show_vendor": false,
     "predictive_search_show_price": false,
     "currency_code_enabled": true,
-    "cart_type": "notification",
+    "cart_type": "drawer",
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
@@ -140,46 +140,46 @@
     "color_schemes": {
       "scheme-1": {
         "settings": {
-          "background": "#ffffff",
+          "background": "#eeecd3",
           "background_gradient": "",
-          "text": "#121212",
-          "button": "#121212",
-          "button_label": "#ffffff",
-          "secondary_button_label": "#121212",
-          "shadow": "#121212"
+          "text": "#403002",
+          "button": "#403002",
+          "button_label": "#eeecd3",
+          "secondary_button_label": "#403002",
+          "shadow": "#403002"
         }
       },
       "scheme-2": {
         "settings": {
-          "background": "#f3f3f3",
+          "background": "#403002",
           "background_gradient": "",
-          "text": "#121212",
-          "button": "#121212",
-          "button_label": "#f3f3f3",
-          "secondary_button_label": "#121212",
-          "shadow": "#121212"
+          "text": "#eeecd3",
+          "button": "#eeecd3",
+          "button_label": "#403002",
+          "secondary_button_label": "#eeecd3",
+          "shadow": "#403002"
         }
       },
       "scheme-3": {
         "settings": {
-          "background": "#242833",
+          "background": "#cc1574",
           "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#000000",
-          "secondary_button_label": "#ffffff",
-          "shadow": "#121212"
+          "text": "#eeecd3",
+          "button": "#eeecd3",
+          "button_label": "#cc1574",
+          "secondary_button_label": "#eeecd3",
+          "shadow": "#403002"
         }
       },
       "scheme-4": {
         "settings": {
-          "background": "#121212",
+          "background": "#efbf04",
           "background_gradient": "",
-          "text": "#ffffff",
-          "button": "#ffffff",
-          "button_label": "#121212",
-          "secondary_button_label": "#ffffff",
-          "shadow": "#121212"
+          "text": "#403002",
+          "button": "#403002",
+          "button_label": "#efbf04",
+          "secondary_button_label": "#403002",
+          "shadow": "#403002"
         }
       },
       "scheme-5": {
@@ -201,46 +201,46 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#FFFFFF",
+            "background": "#eeecd3",
             "background_gradient": "",
-            "text": "#121212",
-            "button": "#121212",
-            "button_label": "#FFFFFF",
-            "secondary_button_label": "#121212",
-            "shadow": "#121212"
+            "text": "#403002",
+            "button": "#403002",
+            "button_label": "#eeecd3",
+            "secondary_button_label": "#403002",
+            "shadow": "#403002"
           }
         },
         "scheme-2": {
           "settings": {
-            "background": "#F3F3F3",
+            "background": "#403002",
             "background_gradient": "",
-            "text": "#121212",
-            "button": "#121212",
-            "button_label": "#F3F3F3",
-            "secondary_button_label": "#121212",
-            "shadow": "#121212"
+            "text": "#eeecd3",
+            "button": "#eeecd3",
+            "button_label": "#403002",
+            "secondary_button_label": "#eeecd3",
+            "shadow": "#403002"
           }
         },
         "scheme-3": {
           "settings": {
-            "background": "#242833",
+            "background": "#cc1574",
             "background_gradient": "",
-            "text": "#FFFFFF",
-            "button": "#FFFFFF",
-            "button_label": "#000000",
-            "secondary_button_label": "#FFFFFF",
-            "shadow": "#121212"
+            "text": "#eeecd3",
+            "button": "#eeecd3",
+            "button_label": "#cc1574",
+            "secondary_button_label": "#eeecd3",
+            "shadow": "#403002"
           }
         },
         "scheme-4": {
           "settings": {
-            "background": "#121212",
+            "background": "#efbf04",
             "background_gradient": "",
-            "text": "#FFFFFF",
-            "button": "#FFFFFF",
-            "button_label": "#121212",
-            "secondary_button_label": "#FFFFFF",
-            "shadow": "#121212"
+            "text": "#403002",
+            "button": "#403002",
+            "button_label": "#efbf04",
+            "secondary_button_label": "#403002",
+            "shadow": "#403002"
           }
         },
         "scheme-5": {
@@ -361,7 +361,7 @@
       "predictive_search_show_vendor": false,
       "predictive_search_show_price": false,
       "currency_code_enabled": true,
-      "cart_type": "notification",
+      "cart_type": "drawer",
       "show_vendor": false,
       "show_cart_note": false,
       "cart_drawer_collection": "",

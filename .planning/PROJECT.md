@@ -42,8 +42,29 @@
 * **Decision**: Build on top of Dawn.
 * **Rationale**: Dawn provides complete out-of-the-box Shopify OS 2.0 section models, customer account routing, checkout pipelines, and localization structures. Customizing it gives the speed of a production-ready framework while tailoring the UI layer entirely to our Zen design tokens.
 
----
-
 ## 4. Current Milestone Goals
-* **Milestone 1.0**: Establish theme foundations, setup Tailwind v4 and Vite, and implement the brand design system (colors, typography, spacing).
-* **Milestone 1.1**: Build custom home page hero, collection faceted search, and side-out Ajax Cart Drawer.
+* **Milestone 1.0**: Establish theme foundations, setup Tailwind v4 and Vite, and implement the brand design system (completed).
+* **Milestone 1.1**: Homepage Personalization & Brand Vibe (active)
+  * Goal: Redesign and personalize the homepage layout and theme foundations to reflect the new YURI visual identity.
+  * Target features:
+    * **Design System**: Establish global color tokens (#ebf2e8, #2d4c29, #587811), typography, spacing, and reset styles.
+    * **Homepage Hero & Slideshow**: Refactor the custom slideshow hero section to showcase the sculptural 3D candles.
+    * **Product Grids & Hover Effects**: Restyle the homepage product grids with floating borderless layouts and tactile hover transitions.
+    * **Scroll-Driven Narrative Flow**: Smooth scroll-triggered animations using GSAP and Lenis.
+
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd-transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements invalidated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd-complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state

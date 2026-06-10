@@ -24,7 +24,14 @@
 * **FR 5.1**: Integrate interactive metafield displays on the product detail page, showing a visual "Scent Profile Grid" (Top notes, Mid notes, Base notes).
 * **FR 5.2**: Implement smooth accordion tabs for "Scent Experience", "Ingredients & Safety", and "Shipping & Returns".
 
+### FR 6: Homepage Personalization (Milestone v1.1)
+* **FR 6.1**: Refactor global design system variables with the new Figma color palette (Sage, Forest Green, Olive Green) and Cormorant Garamond / Plus Jakarta Sans typography.
+* **FR 6.2**: Restructure the homepage hero slideshow (`sections/custom-hero.liquid`) to showcase sculptural wax/concrete products with smooth autoplay transitions and editorial styling.
+* **FR 6.3**: Refactor the custom featured products grid (`sections/custom-featured-products.liquid`) to use floating, borderless card layouts with tactile micro-interactions and hover details.
+* **FR 6.4**: Integrate scroll-driven storytelling and smooth navigation (via GSAP and Lenis) across homepage sections for a premium, meditative user experience.
+
 ---
+
 
 ## 2. Non-Functional Requirements
 

@@ -92,6 +92,17 @@
 
 ---
 
+## Page Layout & Editorial Styling Reform
+
+**User's choice:**
+- Split featured products section layout with header on left (1/3) and product grid/carousel on right (2/3).
+- Dark solid color backgrounds option for product cards, featuring white packaging/bottles.
+- Mirrored split rows showing a product package stand adjacent to its typographic detail/spec card (or inside a dark block background card).
+
+**Notes:** User provided a secondary image reference showing a premium split grid/carousel layout and spec card product packaging placements, which will be implemented across custom sections.
+
+---
+
 ## the agent's Discretion
 
 - Details of padding values, precise responsive heights, and layout alignments of icons/elements in the navbar.

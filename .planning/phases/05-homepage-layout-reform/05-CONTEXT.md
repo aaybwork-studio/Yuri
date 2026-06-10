@@ -34,6 +34,9 @@ This phase delivers a major homepage layout reform for YURI, converting the hard
 ### Carousel & Grid Layouts
 - **D-11:** Allow toggling between a horizontal scroll carousel and a static responsive grid in `custom-featured-products` schema settings, with configurable column counts (3 or 4 columns on desktop).
 - **D-12:** Add a schema setting to select the panel split ratio (50/50, asymmetric 60/40, or asymmetric 40/60) in mirrored rows (`custom-browse-mirrored.liquid`).
+- **D-13:** Add an option in `sections/custom-featured-products.liquid` to split the section layout: placing the section header (title, subtitle, description) in a left column (1/3 width on desktop) and the product grid/carousel on the right side (2/3 width).
+- **D-14:** Support a solid dark-block card layout style option for product cards (a solid `#403002` or `#2C3A2E` background card container) to display light/white product packaging with custom details.
+- **D-15:** Support custom image layouts in mirrored rows/panels to place a product package stand adjacent to a typographic detail spec card (or inside a dark block background card) to match the high-contrast wabi-sabi aesthetic.
 
 ### the agent's Discretion
 - Spacing classes and grid container alignments (excluding margins and padding sizes configured by settings) are left to the agent's discretion.
@@ -84,6 +87,9 @@ This phase delivers a major homepage layout reform for YURI, converting the hard
   - Logo aligned to the right.
   - Hover animation removed.
 - **Full-Screen Hero**: Slideshow hero displaying full screen (`100vh`).
+- **Signature Blend Split Grid/Carousel**: Splitting the featured products section so the header sits on the left (1/3 width), and the product cards slide/render on the right (2/3 width).
+- **Contrast Product Cards**: Styling products in solid dark rectangular boxes/cards displaying white product bottles/packaging.
+- **Product & Spec Card Layout**: Showcasing product containers standing adjacent to typographic detail specs cards in mirrored layout rows.
 
 </specifics>
 

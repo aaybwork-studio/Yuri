@@ -42,7 +42,7 @@ Declared values (must be multiples of 4):
 Exceptions:
 - **Page-level width padding**: 32px (2rem) on mobile / 80px (5rem) on desktop for `.page-width`
 - **Hero/Banner padding**: 40px/48px on mobile, 64px/96px on desktop
-- **Primary/Secondary buttons padding**: 12px (1.2rem) vertical, 30px (3rem) horizontal
+- **Primary/Secondary buttons padding**: 12px (1.2rem) vertical, 32px (3.2rem) horizontal
 - **Footer card padding**: 32px/64px on mobile, 48px/80px on desktop
 
 ---
@@ -51,10 +51,21 @@ Exceptions:
 
 | Role | Size | Weight | Line Height | Font Family |
 |------|------|--------|-------------|-------------|
-| Body | 14px - 16px | 300 (Light) / 400 (Regular) | 1.5 - 1.6 | Hanken Grotesk |
-| Label | 11px - 13px | 400 (Regular) / 500 (Medium) | 1.2 - 1.4 | Hanken Grotesk / Space Grotesk (lowercase) |
-| Heading | 18px - 32px | 500 (Medium) / 600 (Semibold) | 1.2 - 1.3 | Space Grotesk |
-| Display | 36px - 64px | 300 (Light) / 400 (Regular) | 1.1 - 1.2 | Space Grotesk |
+| Body | 16px | 300 (Light) | 1.5 | Hanken Grotesk |
+| Label | 12px | 500 (Medium) | 1.2 | Hanken Grotesk / Space Grotesk (lowercase) |
+| Heading | 24px | 500 (Medium) | 1.2 | Space Grotesk |
+| Display | 48px | 300 (Light) | 1.1 | Space Grotesk |
+
+---
+
+## Visual Hierarchy and Focal Point
+
+- **Primary Focal Point**: The central monogram logo in the header and the display headings in Space Grotesk.
+- **Hierarchy Scale**:
+  1. **Anchor**: Central monogram logo (`Dawn` branding) and large display headings (`Space Grotesk`, `48px`, `300 (Light)`).
+  2. **Navigation & Headers**: Section headings (`Space Grotesk`, `24px`, `500 (Medium)`).
+  3. **Interactive Elements / Accents**: Highlight badges / CTAs (accent colors `#efbf04` and `#cc1574`).
+  4. **Supportive Information**: Body text (`Hanken Grotesk`, `16px`, `300 (Light)`) and labels (`Hanken Grotesk`, `12px`, `500 (Medium)`).
 
 ---
 

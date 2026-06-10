@@ -8,12 +8,13 @@ This roadmap defines the phases of the YURI high-end luxury e-commerce theme dev
 
 ### Phase 1: Design System Setup
 Establish the new brand typography, color palette, and layout system.
-* **Goal**: Implement the new color variables (#ebf2e8, #2d4c29, #587811) and editorial typography (Cormorant Garamond & Plus Jakarta Sans) in Tailwind v4 and Dawn templates.
+* **Goal**: Implement the new color variables (#eeecd3 background, #403002 text/primary, #cc1574 Rose, #efbf04 Gold) and typography (Space Grotesk and Hanken Grotesk) across stylesheets, layout, and native configuration.
 * **Tasks**:
-  * [ ] Task 1.1: Update `frontend/entry.css` with the new design variables (sage neutral, deep forest green, earthy olive) and reset margins.
-  * [ ] Task 1.2: Ensure Google Fonts (Cormorant Garamond & Plus Jakarta Sans) are correctly linked in `layout/theme.liquid`.
-  * [ ] Task 1.3: Verify Vite + Tailwind compilation is outputting correct variables to theme assets.
-  * [ ] Task 1.4: Refactor global buttons, links, and text containers to match the new editorial style.
+  * [x] Task 1.1: Font Integration and Scroll Setup (Plan 01)
+  * [x] Task 1.2: Tailwind CSS v4 Variables & Resets Configuration (Plan 01)
+  * [ ] Task 1.3: Dawn Native Settings Synchronization (Plan 02)
+  * [ ] Task 1.4: Interactive Transitions and Badges (Plan 02)
+  * [ ] Task 1.5: Custom Templates & Footer Accent Refactoring (Plan 02)
 
 ### Phase 2: Homepage Hero & Slideshow
 Refactor the homepage hero section to showcase the sculptural 3D products and visual assets.

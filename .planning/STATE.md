@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: - Homepage Personalization & Brand Vibe
 status: executing
-last_updated: "2026-06-10T17:51:28.904Z"
-last_activity: 2026-06-10 — Milestone v1.1 started
+last_updated: "2026-06-10T18:00:00.000Z"
+last_activity: 2026-06-10 -- Plan 01 executed successfully
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  total_plans: 2
+  completed_plans: 1
+  percent: 50
 ---
 
 # Project State: YURI
@@ -20,7 +20,7 @@ progress:
 * **Project Name**: YURI
 * **Current Milestone**: v1.1
 * **Current Phase**: Phase 1: Design System Setup
-* **Overall Status**: `IN_PROGRESS` (Planning/Executing Phase 1)
+* **Overall Status**: `IN_PROGRESS` (Executing Phase 1)
 
 ---
 
@@ -33,10 +33,11 @@ progress:
 
 | Task ID | Task Description | Status | Commit/SHA | Notes |
 | :--- | :--- | :---: | :---: | :--- |
-| Task 1.1 | Update `frontend/entry.css` with the new design variables (sage neutral, forest green, olive) and resets | `[ ]` | - | Pending |
-| Task 1.2 | Ensure Google Fonts (Cormorant Garamond & Plus Jakarta Sans) are linked in `layout/theme.liquid` | `[ ]` | - | Pending |
-| Task 1.3 | Verify Vite + Tailwind compilation outputs correct styles to theme assets | `[ ]` | - | Pending |
-| Task 1.4 | Refactor global buttons, links, and text containers to match the editorial style | `[ ]` | - | Pending |
+| Plan 01 Task 1 | Font Integration and Scroll Setup | `[x]` | `c06a19f` | Google Fonts loaded, scroll listener added |
+| Plan 01 Task 2 | Tailwind CSS v4 Variables & Resets Configuration | `[x]` | `d25185a` | YURI design tokens, resets, wabi-sabi borders, transparent cards |
+| Plan 02 Task 1 | Dawn Native Settings Synchronization | `[ ]` | - | Pending |
+| Plan 02 Task 2 | Interactive Transitions and Badges | `[ ]` | - | Pending |
+| Plan 02 Task 3 | Custom Templates & Footer Accent Refactoring | `[ ]` | - | Pending |
 
 ---
 
@@ -76,6 +77,8 @@ progress:
 
 * **Decision 1**: Build on top of Shopify Dawn base theme rather than from scratch (defined in `.planning/PROJECT.md`).
 * **Decision 2**: Use Tailwind CSS v4 via a Vite compilation watcher compiling into the Shopify `assets/` folder.
+* **Decision 3**: Use Google Fonts static URLs with preconnect, dns-prefetch, and preloads for Hanken Grotesk and Space Grotesk in `theme.liquid` to minimize FOUT (D-14, D-15, D-17).
+* **Decision 4**: Define brand-new semantic Tailwind v4 variables (`--color-brand-bg`, `--color-brand-text`, etc.) in `entry.css` and use 10% opacity for wabi-sabi borders and transparent backgrounds for cards (D-01, D-03, D-04, D-10, D-16).
 
 ---
 
@@ -86,7 +89,7 @@ progress:
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Ready to execute
-Last activity: 2026-06-10 — Milestone v1.1 started
+Phase: 1 (Design System Setup) — EXECUTING
+Plan: 2 of 2
+Status: Executing Phase 1
+Last activity: 2026-06-10 -- Plan 01 executed successfully

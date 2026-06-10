@@ -12,9 +12,9 @@ Establish the new brand typography, color palette, and layout system.
 * **Tasks**:
   * [x] Task 1.1: Font Integration and Scroll Setup (Plan 01)
   * [x] Task 1.2: Tailwind CSS v4 Variables & Resets Configuration (Plan 01)
-  * [ ] Task 1.3: Dawn Native Settings Synchronization (Plan 02)
-  * [ ] Task 1.4: Interactive Transitions and Badges (Plan 02)
-  * [ ] Task 1.5: Custom Templates & Footer Accent Refactoring (Plan 02)
+  * [x] Task 1.3: Dawn Native Settings Synchronization (Plan 02)
+  * [x] Task 1.4: Interactive Transitions and Badges (Plan 02)
+  * [x] Task 1.5: Custom Templates & Footer Accent Refactoring (Plan 02)
 
 ### Phase 2: Homepage Hero & Slideshow
 Refactor the homepage hero section to showcase the sculptural 3D products and visual assets.

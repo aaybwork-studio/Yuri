@@ -42,16 +42,50 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h0 {
 
 /* Navigation Header styling overrides */
 .header__menu-item {
-  font-family: var(--font-sans) !important;
+  font-family: var(--font-serif) !important;
   color: var(--color-forest) !important;
   font-size: 1.3rem !important;
   letter-spacing: 0.1em !important;
   text-transform: lowercase !important;
-  transition: opacity 0.2s ease, color 0.2s ease !important;
+  transition: color 0.3s ease !important;
 }
 
 .header__menu-item:hover {
-  opacity: 0.7;
+  color: var(--color-brand-text) !important;
+  opacity: 1 !important;
+}
+
+/* Double Text Slide luxury mask animation (D-19) */
+.yuri-nav-link {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.yuri-nav-text {
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.yuri-nav-link::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  width: 100%;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(100%);
+  white-space: nowrap;
+}
+
+.yuri-nav-link:hover .yuri-nav-text {
+  transform: translateY(-100%);
+}
+
+.yuri-nav-link:hover::after {
+  transform: translateY(0%);
 }
 
 .header__submenu {
@@ -100,35 +134,121 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h0 {
 
 /* Buttons matching Zen Earthly luxury */
 .button, .shopify-payment-button__button {
-  font-family: var(--font-sans) !important;
+  font-family: var(--font-serif) !important; /* Space Grotesk */
   font-weight: 500 !important;
   letter-spacing: 0.1em !important;
   text-transform: lowercase !important;
   border-radius: 0px !important; /* Crisp right angles like tatami mats */
-  background-color: var(--color-forest) !important;
-  color: var(--color-warm-white) !important;
-  border: 1px solid var(--color-forest) !important;
-  transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease !important;
+  background-color: transparent !important;
+  color: var(--color-brand-text) !important;
+  border: 1px solid var(--color-brand-text) !important;
   box-shadow: none !important;
   padding: 1.2rem 3rem !important;
   min-height: unset !important;
+  position: relative !important;
+  overflow: hidden !important;
+  z-index: 1 !important;
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.button::before, .shopify-payment-button__button::before {
+  content: "" !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: var(--color-brand-text) !important; /* #403002 */
+  transform: scaleY(0) !important;
+  transform-origin: bottom !important;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: -1 !important;
 }
 
 .button:hover, .shopify-payment-button__button:hover {
+  color: var(--color-brand-bg) !important; /* #eeecd3 */
   background-color: transparent !important;
-  color: var(--color-forest) !important;
+}
+
+.button:hover::before, .shopify-payment-button__button:hover::before {
+  transform: scaleY(1) !important;
 }
 
 /* Secondary buttons */
 .button--secondary {
   background-color: transparent !important;
-  color: var(--color-forest) !important;
-  border: 1px solid color-mix(in srgb, var(--color-forest) 30%, transparent) !important;
+  color: var(--color-brand-text) !important;
+  border: 1px solid color-mix(in srgb, var(--color-brand-text) 30%, transparent) !important;
+}
+
+.button--secondary::before {
+  background-color: color-mix(in srgb, var(--color-brand-text) 30%, transparent) !important;
 }
 
 .button--secondary:hover {
-  background-color: var(--color-forest) !important;
-  color: var(--color-warm-white) !important;
+  color: var(--color-brand-bg) !important;
+}
+
+/* Accent Gold button modifier */
+.button.button--accent-gold, .button--accent-gold {
+  color: var(--color-accent-gold) !important;
+  border-color: var(--color-accent-gold) !important;
+}
+.button.button--accent-gold::before, .button--accent-gold::before {
+  background-color: var(--color-accent-gold) !important;
+}
+.button.button--accent-gold:hover, .button--accent-gold:hover {
+  color: var(--color-brand-text) !important;
+}
+
+/* Accent Rose button modifier */
+.button.button--accent-rose, .button--accent-rose {
+  color: var(--color-accent-rose) !important;
+  border-color: var(--color-accent-rose) !important;
+}
+.button.button--accent-rose::before, .button--accent-rose::before {
+  background-color: var(--color-accent-rose) !important;
+}
+.button.button--accent-rose:hover, .button--accent-rose:hover {
+  color: var(--color-brand-bg) !important;
+}
+
+/* Badges styling (D-08, D-11) */
+.badge {
+  font-family: var(--font-serif) !important;
+  text-transform: lowercase !important;
+  letter-spacing: 0.1em !important;
+  border-radius: 40px !important; /* Pills rounded */
+  padding: 0.6rem 1.5rem !important;
+}
+
+/* Sale Badge (Rose) */
+.price__badge-sale,
+.badge.color-scheme-5,
+.badge[class*="badge-sale"] {
+  background-color: var(--color-accent-rose) !important;
+  color: var(--color-brand-bg) !important;
+  border: 1px solid var(--color-accent-rose) !important;
+}
+
+/* Sold Out Badge (subdued #403002 at 60% opacity) */
+.price__badge-sold-out,
+.badge.color-scheme-3,
+.badge[class*="badge-sold-out"] {
+  background-color: color-mix(in srgb, var(--color-brand-text) 60%, transparent) !important;
+  color: var(--color-brand-bg) !important;
+  border: 1px solid transparent !important;
+}
+
+/* Accessibility: Reduced Motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  .yuri-nav-text,
+  .yuri-nav-link::after,
+  .button::before,
+  .shopify-payment-button__button::before {
+    transition: none !important;
+    transform: none !important;
+  }
 }
 
 /* Image Banner styling overrides for YURI Zen Luxury look */

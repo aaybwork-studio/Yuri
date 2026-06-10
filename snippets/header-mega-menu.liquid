@@ -20,11 +20,10 @@
                 class="header__menu-item list-menu__item link focus-inset"
               >
                 <span
-                  {%- if link.child_active %}
-                    class="header__active-menu-item"
-                  {% endif %}
+                  class="yuri-nav-link{% if link.child_active %} header__active-menu-item{% endif %}"
+                  data-text="{{ link.title | escape }}"
                 >
-                  {{- link.title | escape -}}
+                  <span class="yuri-nav-text">{{- link.title | escape -}}</span>
                 </span>
                 {{- 'icon-caret.svg' | inline_asset_content -}}
               </summary>
@@ -47,7 +46,7 @@
                           aria-current="page"
                         {% endif %}
                       >
-                        {{ childlink.title | escape }}
+                        <span class="yuri-nav-link" data-text="{{ childlink.title | escape }}"><span class="yuri-nav-text">{{ childlink.title | escape }}</span></span>
                       </a>
                       {%- if childlink.links != blank -%}
                         <ul class="list-unstyled" role="list">
@@ -61,7 +60,7 @@
                                   aria-current="page"
                                 {% endif %}
                               >
-                                {{ grandchildlink.title | escape }}
+                                <span class="yuri-nav-link" data-text="{{ grandchildlink.title | escape }}"><span class="yuri-nav-text">{{ grandchildlink.title | escape }}</span></span>
                               </a>
                             </li>
                           {%- endfor -%}
@@ -83,11 +82,10 @@
             {% endif %}
           >
             <span
-              {%- if link.current %}
-                class="header__active-menu-item"
-              {% endif %}
+              class="yuri-nav-link{% if link.current %} header__active-menu-item{% endif %}"
+              data-text="{{ link.title | escape }}"
             >
-              {{- link.title | escape -}}
+              <span class="yuri-nav-text">{{- link.title | escape -}}</span>
             </span>
           </a>
         {%- endif -%}

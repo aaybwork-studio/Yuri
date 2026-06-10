@@ -1,31 +1,42 @@
-<div class="color-{{ section.settings.color_scheme }} gradient" style="background-color: var(--color-warm-white);">
+<div class="color-{{ section.settings.color_scheme }} gradient" style="background-color: var(--color-brand-bg);">
   <div class="yuri-about-container border-b zen-border">
     
     {%- comment -%}Left Side: Styled Content Box{%- endcomment -%}
-    <div class="flex-1 flex flex-col justify-center items-center px-8 py-16 md:px-20 md:py-24" 
-         style="background-color: {{ section.settings.bg_color }};">
+    {%- liquid
+      assign panel_bg = 'var(--color-brand-bg)'
+      assign panel_text = 'var(--color-brand-text)'
+      if section.settings.bg_style == 'gold'
+        assign panel_bg = 'var(--color-accent-gold)'
+        assign panel_text = 'var(--color-brand-text)'
+      elsif section.settings.bg_style == 'rose'
+        assign panel_bg = 'var(--color-accent-rose)'
+        assign panel_text = 'var(--color-brand-bg)'
+      endif
+    -%}
+    <div class="flex-grow flex flex-col justify-center items-center px-8 py-16 md:px-20 md:py-24" 
+         style="background-color: {{ panel_bg }}; color: {{ panel_text }};">
       <div class="max-w-[480px]">
         {%- if section.settings.subheading != blank -%}
-          <p class="font-sans text-sage text-xs uppercase tracking-widest mb-4" style="color: var(--color-sage); letter-spacing: 0.15em;">
+          <p class="font-sans text-xs uppercase tracking-widest mb-4" style="color: color-mix(in srgb, {{ panel_text }} 70%, transparent); letter-spacing: 0.15em;">
             {{ section.settings.subheading | escape }}
           </p>
         {%- endif -%}
         
         {%- if section.settings.heading != blank -%}
-          <h2 class="font-serif text-forest text-3xl md:text-5xl font-light mb-6 lowercase" 
-              style="color: var(--color-forest); font-family: var(--font-serif); line-height: 1.2;">
+          <h2 class="font-serif text-3xl md:text-5xl font-light mb-6 lowercase" 
+              style="color: {{ panel_text }}; font-family: var(--font-serif); line-height: 1.2;">
             {{ section.settings.heading | escape }}
           </h2>
         {%- endif -%}
         
         {%- if section.settings.text != blank -%}
-          <div class="font-sans text-sage text-sm md:text-base leading-relaxed mb-8" style="color: var(--color-sage);">
+          <div class="font-sans text-sm md:text-base leading-relaxed mb-8" style="color: color-mix(in srgb, {{ panel_text }} 70%, transparent);">
             {{ section.settings.text }}
           </div>
         {%- endif -%}
         
         {%- if section.settings.btn_label != blank and section.settings.btn_link != blank -%}
-          <a href="{{ section.settings.btn_link }}" class="button button--secondary">
+          <a href="{{ section.settings.btn_link }}" class="button button--secondary" style="border-color: {{ panel_text }} !important; color: {{ panel_text }} !important;">
             {{ section.settings.btn_label | escape }}
           </a>
         {%- endif -%}
@@ -33,14 +44,14 @@
     </div>
     
     {%- comment -%}Right Side: Full-height image{%- endcomment -%}
-    <div class="flex-1 min-h-[40vh] md:min-h-screen relative overflow-hidden">
+    <div class="flex-grow min-h-[40vh] md:min-h-screen relative overflow-hidden">
       {%- if section.settings.image != blank -%}
         {{ section.settings.image | image_url: width: 1500 | image_tag:
           class: 'absolute inset-0 w-full h-full object-cover',
           loading: 'lazy'
         }}
       {%- else -%}
-        <img src="{{ 'yuri-about.png' | asset_url }}" class="absolute inset-0 w-full h-full object-cover" alt="YURI Zen About Us" loading="lazy">
+        <img src="{{ 'yuri-about.png' | asset_url }}" class="absolute inset-0 w-full h-full object-cover" alt="YURI Zen About Us" loading="lazy" width="1024" height="1024">
       {%- endif -%}
     </div>
     
@@ -60,10 +71,24 @@
       "default": "scheme-1"
     },
     {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Text Side Background Color",
-      "default": "#f4efe6"
+      "type": "select",
+      "id": "bg_style",
+      "label": "Text Side Background Style",
+      "options": [
+        {
+          "value": "brand_bg",
+          "label": "Standard Brand Background"
+        },
+        {
+          "value": "gold",
+          "label": "Gold Accent"
+        },
+        {
+          "value": "rose",
+          "label": "Rose Accent"
+        }
+      ],
+      "default": "brand_bg"
     },
     {
       "type": "text",

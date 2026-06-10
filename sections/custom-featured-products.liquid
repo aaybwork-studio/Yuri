@@ -2,23 +2,23 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
-<div class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding py-16 px-8 md:px-16" style="background-color: var(--color-warm-white);">
+<div class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding py-16 px-8 md:px-16" style="background-color: var(--color-brand-bg);">
   <div class="max-w-[1400px] mx-auto relative">
     
     {%- comment -%}Section Header{%- endcomment -%}
     <div class="text-center mb-12 max-w-[800px] mx-auto">
       {%- if section.settings.subheading != blank -%}
-        <p class="font-sans text-sage text-xs uppercase tracking-widest mb-3" style="color: var(--color-sage); letter-spacing: 0.15em;">
+        <p class="font-sans text-xs uppercase tracking-widest mb-3" style="color: color-mix(in srgb, var(--color-brand-text) 70%, transparent); letter-spacing: 0.15em;">
           {{ section.settings.subheading | escape }}
         </p>
       {%- endif -%}
       {%- if section.settings.title != blank -%}
-        <h2 class="font-serif text-forest text-2xl md:text-4xl font-light mb-4 lowercase" style="color: var(--color-forest); font-family: var(--font-serif);">
+        <h2 class="font-serif text-2xl md:text-4xl font-light mb-4 lowercase" style="color: var(--color-brand-text); font-family: var(--font-serif);">
           {{ section.settings.title | escape }}
         </h2>
       {%- endif -%}
       {%- if section.settings.description != blank -%}
-        <p class="font-sans text-sage text-sm md:text-base leading-relaxed" style="color: var(--color-sage);">
+        <p class="font-sans text-sm md:text-base leading-relaxed" style="color: color-mix(in srgb, var(--color-brand-text) 70%, transparent);">
           {{ section.settings.description | escape }}
         </p>
       {%- endif -%}
@@ -28,19 +28,19 @@
     <div class="relative group">
       
       {%- comment -%}Scroll Arrows{%- endcomment -%}
-      <button class="absolute -left-4 md:-left-8 top-1/2 -translate-y-1/2 z-30 bg-warm-white/80 border border-forest/10 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center cursor-pointer hover:bg-forest hover:text-warm-white" 
+      <button class="absolute -left-4 md:-left-8 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center cursor-pointer hover:bg-[var(--color-brand-text)] hover:text-[var(--color-brand-bg)]" 
               id="ScrollPrev-{{ section.id }}"
               aria-label="Previous products"
-              style="background-color: rgba(250, 247, 242, 0.8); border-color: rgba(44, 58, 46, 0.1);">
+              style="background-color: color-mix(in srgb, var(--color-brand-bg) 80%, transparent); border: 1px solid color-mix(in srgb, var(--color-brand-text) 10%, transparent);">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
       </button>
       
-      <button class="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 z-30 bg-warm-white/80 border border-forest/10 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center cursor-pointer hover:bg-forest hover:text-warm-white" 
+      <button class="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center cursor-pointer hover:bg-[var(--color-brand-text)] hover:text-[var(--color-brand-bg)]" 
               id="ScrollNext-{{ section.id }}"
               aria-label="Next products"
-              style="background-color: rgba(250, 247, 242, 0.8); border-color: rgba(44, 58, 46, 0.1);">
+              style="background-color: color-mix(in srgb, var(--color-brand-bg) 80%, transparent); border: 1px solid color-mix(in srgb, var(--color-brand-text) 10%, transparent);">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
@@ -59,23 +59,23 @@
                 <a href="{{ product.url }}" class="block relative aspect-square w-full mb-6 overflow-hidden bg-transparent">
                   {%- if product.featured_media != blank -%}
                     {{ product.featured_media | image_url: width: 600 | image_tag:
-                      class: 'w-full h-full object-contain transition-transform duration-700 hover:scale-105',
-                      loading: 'lazy'
+                       class: 'w-full h-full object-contain transition-transform duration-700 hover:scale-105',
+                       loading: 'lazy'
                     }}
                   {%- else -%}
-                    {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-sand-cream' }}
+                    {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-[var(--color-brand-bg)]' }}
                   {%- endif -%}
                 </a>
 
                 {%- comment -%}Product Info{%- endcomment -%}
                 <div class="flex-grow flex flex-col items-center">
-                  <h3 class="font-serif text-lg text-forest mb-2 font-light lowercase" style="font-family: var(--font-serif); color: var(--color-forest);">
+                  <h3 class="font-serif text-lg mb-2 font-light lowercase" style="font-family: var(--font-serif); color: var(--color-brand-text);">
                     <a href="{{ product.url }}" class="hover:underline">
                       {{ product.title | escape }}
                     </a>
                   </h3>
                   
-                  <p class="font-sans text-xs text-sage mb-3 max-w-[280px]" style="color: var(--color-sage);">
+                  <p class="font-sans text-xs mb-3 max-w-[280px]" style="color: color-mix(in srgb, var(--color-brand-text) 70%, transparent);">
                     {%- if product.metafields.custom.short_description != blank -%}
                       {{ product.metafields.custom.short_description | escape }}
                     {%- else -%}
@@ -83,10 +83,10 @@
                     {%- endif -%}
                   </p>
                   
-                  <div class="text-xs text-sage mb-4 flex items-center gap-2" style="color: var(--color-sage);">
+                  <div class="text-xs mb-4 flex items-center gap-2" style="color: color-mix(in srgb, var(--color-brand-text) 70%, transparent);">
                     {%- unless product.has_only_default_variant -%}
                       <span>{{ product.selected_or_first_available_variant.title | escape }}</span>
-                      <span class="w-1 h-1 rounded-full bg-sage/30"></span>
+                      <span class="w-1 h-1 rounded-full" style="background-color: color-mix(in srgb, var(--color-brand-text) 30%, transparent);"></span>
                     {%- endunless -%}
                     <span>{{ product.price | money }}</span>
                   </div>
@@ -124,17 +124,17 @@
           {%- for i in (1..4) -%}
             <div class="yuri-scroll-item">
               <div class="yuri-card-floating transition-all duration-300 flex flex-col h-full text-center">
-                <div class="aspect-square w-full mb-6 overflow-hidden bg-sand-cream flex items-center justify-center">
+                <div class="aspect-square w-full mb-6 overflow-hidden bg-[var(--color-brand-bg)] flex items-center justify-center">
                   {{ 'product-' | append: i | placeholder_svg_tag: 'w-2/3 h-2/3 object-contain opacity-60' }}
                 </div>
                 <div class="flex-grow flex flex-col items-center">
-                  <h3 class="font-serif text-lg text-forest mb-2 font-light lowercase" style="font-family: var(--font-serif);">
+                  <h3 class="font-serif text-lg mb-2 font-light lowercase" style="font-family: var(--font-serif); color: var(--color-brand-text);">
                     sample botanical product {{ i }}
                   </h3>
-                  <p class="font-sans text-xs text-sage mb-3 max-w-[280px]">
+                  <p class="font-sans text-xs mb-3 max-w-[280px]" style="color: color-mix(in srgb, var(--color-brand-text) 70%, transparent);">
                     natural scent spaces and elegant accessories for everyday comfort.
                   </p>
-                  <div class="text-xs text-sage mb-4">
+                  <div class="text-xs mb-4" style="color: color-mix(in srgb, var(--color-brand-text) 70%, transparent);">
                     <span>9.3 oz</span>
                     <span class="mx-1.5">•</span>
                     <span>$45.00</span>

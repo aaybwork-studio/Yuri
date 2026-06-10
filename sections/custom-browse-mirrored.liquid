@@ -1,21 +1,21 @@
-<div class="color-{{ section.settings.color_scheme }} gradient" style="background-color: var(--color-warm-white);">
+<div class="color-{{ section.settings.color_scheme }} gradient" style="background-color: var(--color-brand-bg);">
 
   {%- comment -%}Mirrored Row 1: Text Left, Image Right{%- endcomment -%}
   <div class="yuri-mirrored-row border-b zen-border">
-    <div class="yuri-mirrored-panel bg-warm-white flex items-center justify-center">
+    <div class="yuri-mirrored-panel bg-[var(--color-brand-bg)] flex items-center justify-center">
       <div class="max-w-[480px]">
         {%- if section.settings.row1_caption != blank -%}
-          <p class="font-sans text-sage text-xs uppercase tracking-widest mb-4" style="color: var(--color-sage); letter-spacing: 0.15em;">
+          <p class="font-sans text-xs uppercase tracking-widest mb-4" style="color: color-mix(in srgb, var(--color-brand-text) 70%, transparent); letter-spacing: 0.15em;">
             {{ section.settings.row1_caption | escape }}
           </p>
         {%- endif -%}
         {%- if section.settings.row1_heading != blank -%}
-          <h2 class="font-serif text-forest text-3xl md:text-5xl font-light mb-6 lowercase" style="color: var(--color-forest); font-family: var(--font-serif); line-height: 1.2;">
+          <h2 class="font-serif text-3xl md:text-5xl font-light mb-6 lowercase" style="color: var(--color-brand-text); font-family: var(--font-serif); line-height: 1.2;">
             {{ section.settings.row1_heading | escape }}
           </h2>
         {%- endif -%}
         {%- if section.settings.row1_text != blank -%}
-          <div class="font-sans text-sage text-sm md:text-base leading-relaxed mb-8" style="color: var(--color-sage);">
+          <div class="font-sans text-sm md:text-base leading-relaxed mb-8" style="color: color-mix(in srgb, var(--color-brand-text) 70%, transparent);">
             {{ section.settings.row1_text }}
           </div>
         {%- endif -%}
@@ -34,27 +34,27 @@
           loading: 'lazy'
         }}
       {%- else -%}
-        <img src="{{ 'yuri-browse-1.png' | asset_url }}" class="absolute inset-0 w-full h-full object-cover" alt="YURI Zen Browse Image 1" loading="lazy">
+        <img src="{{ 'yuri-browse-1.png' | asset_url }}" class="absolute inset-0 w-full h-full object-cover" alt="YURI Zen Browse Image 1" loading="lazy" width="1024" height="1024">
       {%- endif -%}
     </div>
   </div>
 
   {%- comment -%}Mirrored Row 2: Image Left, Text Right{%- endcomment -%}
   <div class="yuri-mirrored-row is-reversed border-b zen-border">
-    <div class="yuri-mirrored-panel bg-warm-white flex items-center justify-center">
+    <div class="yuri-mirrored-panel bg-[var(--color-brand-bg)] flex items-center justify-center">
       <div class="max-w-[480px]">
         {%- if section.settings.row2_caption != blank -%}
-          <p class="font-sans text-sage text-xs uppercase tracking-widest mb-4" style="color: var(--color-sage); letter-spacing: 0.15em;">
+          <p class="font-sans text-xs uppercase tracking-widest mb-4" style="color: color-mix(in srgb, var(--color-brand-text) 70%, transparent); letter-spacing: 0.15em;">
             {{ section.settings.row2_caption | escape }}
           </p>
         {%- endif -%}
         {%- if section.settings.row2_heading != blank -%}
-          <h2 class="font-serif text-forest text-3xl md:text-5xl font-light mb-6 lowercase" style="color: var(--color-forest); font-family: var(--font-serif); line-height: 1.2;">
+          <h2 class="font-serif text-3xl md:text-5xl font-light mb-6 lowercase" style="color: var(--color-brand-text); font-family: var(--font-serif); line-height: 1.2;">
             {{ section.settings.row2_heading | escape }}
           </h2>
         {%- endif -%}
         {%- if section.settings.row2_text != blank -%}
-          <div class="font-sans text-sage text-sm md:text-base leading-relaxed mb-8" style="color: var(--color-sage);">
+          <div class="font-sans text-sm md:text-base leading-relaxed mb-8" style="color: color-mix(in srgb, var(--color-brand-text) 70%, transparent);">
             {{ section.settings.row2_text }}
           </div>
         {%- endif -%}
@@ -73,16 +73,16 @@
           loading: 'lazy'
         }}
       {%- else -%}
-        <img src="{{ 'yuri-browse-2.png' | asset_url }}" class="absolute inset-0 w-full h-full object-cover" alt="YURI Zen Browse Image 2" loading="lazy">
+        <img src="{{ 'yuri-browse-2.png' | asset_url }}" class="absolute inset-0 w-full h-full object-cover" alt="YURI Zen Browse Image 2" loading="lazy" width="1024" height="1024">
       {%- endif -%}
     </div>
   </div>
 
   {%- comment -%}Category List Section{%- endcomment -%}
-  <div class="py-16 px-8 md:px-16" style="background-color: var(--color-warm-white);">
+  <div class="py-16 px-8 md:px-16" style="background-color: var(--color-brand-bg);">
     <div class="max-w-[1400px] mx-auto">
       {%- if section.settings.category_heading != blank -%}
-        <h3 class="font-serif text-forest text-2xl md:text-3xl font-light mb-10 lowercase" style="color: var(--color-forest); font-family: var(--font-serif);">
+        <h3 class="font-serif text-2xl md:text-3xl font-light mb-10 lowercase" style="color: var(--color-brand-text); font-family: var(--font-serif);">
           {{ section.settings.category_heading | escape }}
         </h3>
       {%- endif -%}
@@ -93,7 +93,7 @@
             {%- for block in section.blocks -%}
               {%- if block.type == 'category' -%}
                 <div class="flex-none w-[200px] md:w-[260px] flex flex-col group" {{ block.shopify_attributes }}>
-                  <a href="{{ block.settings.link }}" class="block aspect-square w-full mb-4 overflow-hidden relative bg-sand-cream">
+                  <a href="{{ block.settings.link }}" class="block aspect-square w-full mb-4 overflow-hidden relative bg-[var(--color-brand-bg)]">
                     {%- if block.settings.image != blank -%}
                       {{ block.settings.image | image_url: width: 600 | image_tag:
                         class: 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105',
@@ -103,7 +103,7 @@
                       {{ 'collection-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-60' }}
                     {%- endif -%}
                   </a>
-                  <h4 class="font-sans text-sm font-medium text-forest hover:underline lowercase" style="color: var(--color-forest);">
+                  <h4 class="font-sans text-sm font-medium hover:underline lowercase" style="color: var(--color-brand-text);">
                     <a href="{{ block.settings.link }}">
                       {{ block.settings.title | escape }}
                     </a>
@@ -116,10 +116,10 @@
             {%- assign mock_categories = "candles,fragrances,trays,accessories,gifts" | split: "," -%}
             {%- for mock in mock_categories -%}
               <div class="flex-none w-[200px] md:w-[260px] flex flex-col group">
-                <div class="aspect-square w-full mb-4 overflow-hidden relative bg-sand-cream flex items-center justify-center">
+                <div class="aspect-square w-full mb-4 overflow-hidden relative bg-[var(--color-brand-bg)] flex items-center justify-center">
                   {{ 'collection-' | append: forloop.index | placeholder_svg_tag: 'w-2/3 h-2/3 object-contain opacity-55' }}
                 </div>
-                <h4 class="font-sans text-sm font-medium text-forest hover:underline lowercase" style="color: var(--color-forest);">
+                <h4 class="font-sans text-sm font-medium hover:underline lowercase" style="color: var(--color-brand-text);">
                   <a href="#">
                     {{ mock }}
                   </a>

@@ -162,7 +162,7 @@
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
             {%- if section.settings.logo_position == 'middle-split' -%}
               <div class="header__heading-logo-wrapper">
-                <img src="{{ 'yuri-monogram.png' | asset_url }}" alt="{{ shop.name }}" style="max-height: 48px; width: auto;" class="header__heading-logo">
+                <img src="{{ 'yuri-monogram.png' | asset_url }}" alt="{{ shop.name }}" style="max-height: 48px; width: auto;" class="header__heading-logo" width="417" height="366">
               </div>
             {%- elsif settings.logo != blank -%}
               <div class="header__heading-logo-wrapper">
@@ -181,7 +181,7 @@
                 }}
               </div>
             {%- else -%}
-              <span class="h2 font-serif text-forest tracking-wide font-normal lowercase" style="font-family: var(--font-serif); color: var(--color-forest); font-size: 2.2rem;">{{ shop.name }}</span>
+              <span class="h2 font-serif text-brand-text tracking-wide font-normal lowercase" style="font-family: var(--font-serif); color: var(--color-brand-text); font-size: 2.2rem;">{{ shop.name }}</span>
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}
@@ -221,7 +221,7 @@
                 }}
               </div>
             {%- else -%}
-              <span class="h2 font-serif text-forest tracking-wide font-normal lowercase" style="font-family: var(--font-serif); color: var(--color-forest); font-size: 2.2rem;">{{ shop.name }}</span>
+              <span class="h2 font-serif text-brand-text tracking-wide font-normal lowercase" style="font-family: var(--font-serif); color: var(--color-brand-text); font-size: 2.2rem;">{{ shop.name }}</span>
             {%- endif -%}
           </a>
       {%- if request.page_type == 'index' -%}

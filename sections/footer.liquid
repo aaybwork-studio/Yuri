@@ -27,7 +27,7 @@
   }
 {%- endstyle -%}
 
-<footer class="footer bg-sand-cream text-forest section-{{ section.id }}-padding" style="background-color: var(--color-sand-cream); color: var(--color-forest);">
+<footer class="footer bg-brand-bg text-brand-text section-{{ section.id }}-padding" style="background-color: var(--color-brand-bg); color: var(--color-brand-text);">
   {%- liquid
     assign has_social_icons = true
     if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
@@ -102,7 +102,18 @@
                       </ul>
                     {%- endif -%}
                   {%- when 'brand_information' -%}
-                    <div class="footer-block__brand-info">
+                    {%- liquid
+                      assign card_bg = 'var(--color-accent-rose)'
+                      assign card_text = 'var(--color-brand-bg)'
+                      if section.settings.card_accent_bg == 'gold'
+                        assign card_bg = 'var(--color-accent-gold)'
+                        assign card_text = 'var(--color-brand-text)'
+                      elsif section.settings.card_accent_bg == 'warm_white'
+                        assign card_bg = 'var(--color-brand-bg)'
+                        assign card_text = 'var(--color-brand-text)'
+                      endif
+                    -%}
+                    <div class="footer-block__brand-info yuri-footer-card p-8 border-0" style="background-color: {{ card_bg }}; color: {{ card_text }}; border-radius: 0;">
                       {%- if settings.brand_image != blank -%}
                         {%- assign brand_image_height = settings.brand_image_width
                           | divided_by: settings.brand_image.aspect_ratio
@@ -123,10 +134,10 @@
                         </div>
                       {%- endif -%}
                       {%- if settings.brand_headline != blank -%}
-                        <h2 class="footer-block__heading rte">{{ settings.brand_headline }}</h2>
+                        <h2 class="footer-block__heading rte" style="color: {{ card_text }} !important;">{{ settings.brand_headline }}</h2>
                       {%- endif -%}
                       {%- if settings.brand_description != blank -%}
-                        <div class="rte">{{ settings.brand_description }}</div>
+                        <div class="rte" style="color: color-mix(in srgb, {{ card_text }} 80%, transparent) !important;">{{ settings.brand_description }}</div>
                       {%- endif -%}
                       {%- if block.settings.show_social and has_social_icons -%}
                         {%- render 'social-icons', class: 'footer__list-social' -%}
@@ -424,6 +435,26 @@
     }
   ],
   "settings": [
+    {
+      "type": "select",
+      "id": "card_accent_bg",
+      "label": "Footer Card Background",
+      "options": [
+        {
+          "value": "rose",
+          "label": "Rose"
+        },
+        {
+          "value": "gold",
+          "label": "Gold"
+        },
+        {
+          "value": "warm_white",
+          "label": "Warm White"
+        }
+      ],
+      "default": "rose"
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",

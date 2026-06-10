@@ -1,35 +1,43 @@
 @import "tailwindcss";
 
 @theme {
-  /* Grounded Zen Theme Colors */
-  --color-forest: #2c3a2e;
+  /* YURI Brand Semantic Colors */
+  --color-brand-bg: #eeecd3;
+  --color-brand-text: #403002;
+  --color-accent-rose: #cc1574;
+  --color-accent-gold: #efbf04;
+
+  /* Legacy variable mappings to preserve compatibility */
+  --color-forest: var(--color-brand-text);
   --color-sage: #3d4e3e;
-  --color-clay: #4e3b31;
+  --color-clay: var(--color-brand-text);
   --color-sand: #d9c3b0;
-  --color-ember: #e05a36;
-  --color-warm-white: #faf7f2;
-  --color-sand-cream: #f4efe6;
+  --color-ember: var(--color-accent-rose);
+  --color-warm-white: var(--color-brand-bg);
+  --color-sand-cream: transparent;
 
   /* Typography */
-  --font-serif: "Cormorant Garamond", serif;
-  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-serif: "Space Grotesk", sans-serif;
+  --font-sans: "Hanken Grotesk", sans-serif;
 }
 
 /* Base custom styles to reflect Zen wabi-sabi aesthetics */
 body {
-  font-family: var(--font-sans);
-  background-color: var(--color-warm-white);
-  color: var(--color-forest);
+  font-family: var(--font-sans) !important;
+  background-color: var(--color-brand-bg) !important;
+  color: var(--color-brand-text) !important;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h0 {
+  font-family: var(--font-serif) !important;
   letter-spacing: 0.05em;
 }
 
 .zen-border {
-  border-color: color-mix(in srgb, var(--color-forest) 15%, transparent);
+  border-color: color-mix(in srgb, var(--color-brand-text) 10%, transparent) !important;
 }
 
 /* Navigation Header styling overrides */
@@ -68,12 +76,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Announcement Bar style overrides */
 .utility-bar {
-  border-bottom: 1px solid color-mix(in srgb, var(--color-sand) 15%, transparent) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-brand-text) 10%, transparent) !important;
 }
 
 /* Wabi-sabi elegant cards & borders */
-.card, .card-wrapper, .product-grid, .grid__item {
-  border-color: color-mix(in srgb, var(--color-forest) 10%, transparent) !important;
+.product-grid, .grid__item {
+  border-color: color-mix(in srgb, var(--color-brand-text) 10%, transparent) !important;
 }
 
 /* Add padding & spacing adjustments */
@@ -280,15 +288,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Wabi-sabi card background adjustments based on Aesop reference */
 .card, .card-wrapper {
-  background-color: var(--color-sand-cream) !important;
-  border: 1px solid color-mix(in srgb, var(--color-forest) 8%, transparent) !important;
+  background-color: transparent !important;
+  border: none !important;
   border-radius: 0px !important;
-  transition: transform 0.3s ease, border-color 0.3s ease !important;
+  transition: transform 0.3s ease !important;
   box-shadow: none !important;
 }
 
 .card:hover {
-  border-color: color-mix(in srgb, var(--color-forest) 20%, transparent) !important;
+  border: none !important;
 }
 
 .card__inner {
@@ -401,12 +409,21 @@ h1, h2, h3, h4, h5, h6 {
   justify-self: auto !important;
 }
 
+.header-wrapper {
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
 .header-wrapper.is-transparent {
   background-color: transparent !important;
   position: absolute !important;
   width: 100% !important;
   z-index: 100 !important;
   border-bottom: none !important;
+}
+
+.header-wrapper.is-transparent.is-scrolled {
+  background-color: var(--color-brand-bg) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-brand-text) 10%, transparent) !important;
 }
 
 /* 2. Hero Slideshow Banner */

@@ -1,12 +1,12 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.1
-milestone_name: Homepage Personalization & Brand Vibe
-status: planning
-last_updated: "2026-06-10T13:35:50.942Z"
-last_activity: 2026-06-10
+milestone_name: - Homepage Personalization & Brand Vibe
+status: Defining requirements
+last_updated: "2026-06-10T14:52:33.217Z"
+last_activity: 2026-06-10 — Milestone v1.1 started
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0

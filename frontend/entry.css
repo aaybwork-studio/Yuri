@@ -346,6 +346,8 @@ html.lenis, html.lenis body {
   bottom: 0px; 
   z-index: 1; /* Lower layer index so it slides underneath */
   display: inline-block;
+  width: max-content;
+  max-width: calc(100% - 48px);
   margin-top: 0 !important;
   transform: translateY(100%);
 }

@@ -26,9 +26,9 @@
 <!-- Slide-out Navigation Drawer -->
 <div class="fixed inset-0" data-menu-overlay></div>
 
-<div class="flex flex-col justify-between p-8 sm:p-12" data-menu-drawer>
+<div class="flex flex-col p-8 sm:p-12" data-menu-drawer>
   <!-- Drawer Body: Categories of products (top) -->
-  <div class="flex-none overflow-y-auto">
+  <div class="flex-1">
     <nav class="flex flex-col space-y-6">
       <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Candles</a>
       <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Scents</a>
@@ -39,7 +39,7 @@
   </div>
 
   <!-- Drawer Footer: bottom items separated by gap -->
-  <div class="flex-none pt-8 space-y-6">
+  <div class="mt-auto pt-8 space-y-6 flex-none">
     <!-- Secondary Menu Links -->
     <div class="space-y-4">
       <a href="#" class="text-[11px] sm:text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-0.5">About</a>
@@ -71,15 +71,23 @@
     <div class="pt-6 border-t border-black/5 space-y-4 text-[9px] tracking-[0.15em] font-sans font-light text-neutral-500 uppercase">
       <div>
         Country / Region: 
-        <button type="button" class="text-black hover:opacity-60 transition-opacity font-light bg-transparent border-0 cursor-pointer p-0 ml-1">
+        <button type="button" class="text-black hover:opacity-60 transition-opacity font-light bg-transparent border-0 cursor-pointer p-0 ml-1" data-country-btn>
           France (EUR €)
         </button>
       </div>
       <div class="flex items-center space-x-2">
         <span>Language:</span>
-        <button type="button" class="text-black hover:opacity-60 transition-opacity font-medium bg-transparent border-0 cursor-pointer p-0">EN</button>
+        <button type="button" class="text-black hover:opacity-60 transition-opacity font-medium bg-transparent border-0 cursor-pointer p-0" data-lang-btn data-lang="EN">EN</button>
         <span class="text-neutral-200">|</span>
-        <button type="button" class="text-neutral-400 hover:text-black transition-colors font-light bg-transparent border-0 cursor-pointer p-0">JP</button>
+        <button type="button" class="text-neutral-400 hover:text-black transition-colors font-light bg-transparent border-0 cursor-pointer p-0" data-lang-btn data-lang="JP">JP</button>
+      </div>
+      
+      <!-- Theme Switcher -->
+      <div class="pt-2">
+        Appearance:
+        <button type="button" class="text-black hover:opacity-60 transition-opacity font-light bg-transparent border-0 cursor-pointer p-0 ml-1" data-theme-toggle-btn>
+          <span data-theme-label>Light Mode</span>
+        </button>
       </div>
     </div>
   </div>

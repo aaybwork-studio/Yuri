@@ -17,10 +17,19 @@
     <!-- Preload custom editorial font -->
     {{ 'dia-regular.woff' | asset_url | preload_tag: as: 'font', type: 'font/woff', crossorigin: 'anonymous' }}
 
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme') || 'light';
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark-mode');
+        }
+      })();
+    </script>
     {{ 'yuri-styles.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'yuri-scripts.js' | asset_url }}" defer="defer"></script>
   </head>
   <body class="bg-[#faf8f1] text-black font-sans min-h-screen no-scrollbar">
+
     <div class="scroll-progress-container">
       <div class="scroll-progress-bar" id="scrollIndicator"></div>
     </div>

@@ -193,6 +193,7 @@ html.lenis, html.lenis body {
   background-color: #faf8f1;
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
+  overflow-y: auto;
 }
 
 [data-menu-drawer] {
@@ -328,6 +329,11 @@ html.lenis, html.lenis body {
   padding-top: 0px !important;
   padding-bottom: 0px !important;
 }
+.yuri-media-clip {
+  position: relative;
+  overflow: hidden !important;
+  width: 100%;
+}
 .yuri-media-content {
   position: relative;
   z-index: 2; /* Elevated layer index */
@@ -341,33 +347,27 @@ html.lenis, html.lenis body {
   z-index: 1; /* Lower layer index so it slides underneath */
   display: inline-block;
   margin-top: 0 !important;
+  transform: translateY(100%);
 }
 
 /* Ensure the parent inner container has room at the bottom for absolute captions */
 .yuri-media-inner {
   position: relative;
   z-index: 1;
-  padding-bottom: 25px !important;
 }
 
 /* Create the left-to-right animated underline */
 .yuri-media-caption::after {
   content: '';
   position: absolute;
-  left: 24px; /* Matches the px-6 left padding offset of fullwidth layout text */
+  left: 0 !important;
   bottom: -4px;
-  width: calc(100% - 48px); /* Accounts for px-6 (24px left + 24px right padding) inside fullwidth layout */
+  width: 100% !important; /* Always matches the exact text width */
   height: 1px;
   background-color: #000;
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* For non-fullwidth layouts where px-6 is not present, target the underline to match text boundary */
-.yuri-media:not(.yuri-media--fullsize) .yuri-media-caption::after {
-  left: 0;
-  width: 100%;
 }
 
 /* Triggers when the parent yuri-media section is hovered over */
@@ -394,15 +394,19 @@ html.lenis, html.lenis body {
   /* Full Width Media: Limit content box to maximum height corresponding to 1080p viewport (16:9 ratio style layout) */
   .yuri-media--fullsize .yuri-media-inner {
     padding-bottom: 30px !important; /* Spacing room for absolute caption */
+    max-width: calc((100vh - 80px) * 16 / 9) !important;
+    margin: 0 auto !important;
   }
   .yuri-media--fullsize .yuri-media-content {
     max-height: calc(100vh - 80px) !important;
     aspect-ratio: 16/9;
     width: 100%;
-    margin: 0 auto;
   }
 
   /* When yuri-media--cutoff class is applied, cut the image/video off by an extra 30px from bottom for caption space */
+  .yuri-media--cutoff.yuri-media--fullsize .yuri-media-inner {
+    max-width: calc((100vh - 110px) * 16 / 9) !important;
+  }
   .yuri-media--cutoff.yuri-media--fullsize .yuri-media-content {
     max-height: calc(100vh - 110px) !important; /* cuts off an extra 30px from the bottom */
   }
@@ -477,4 +481,100 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
 .yuri-media:last-of-type {
   margin-bottom: 30px;
 }
+
+/* ============================================
+   DARK MODE OVERRIDES
+   ============================================ */
+body.dark-mode, html.dark-mode {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+/* Smooth transition for theme switching */
+body, .theme-header, [data-menu-drawer], [data-cart-drawer], .yuri-media, .yuri-media-content, .theme-footer, .yuri-media-caption {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .bg-\[\#faf8f1\],
+body.dark-mode .bg-cream,
+body.dark-mode .introduction,
+body.dark-mode .theme-header,
+body.dark-mode .theme-footer,
+body.dark-mode [data-menu-drawer],
+body.dark-mode [data-cart-drawer],
+body.dark-mode .yuri-media-content,
+body.dark-mode .theme-header.is-scrolled {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .text-black,
+body.dark-mode .text-neutral-600,
+body.dark-mode .text-neutral-500,
+body.dark-mode .text-neutral-400,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode a,
+body.dark-mode button,
+body.dark-mode input,
+body.dark-mode label,
+body.dark-mode .yuri-media-caption {
+  color: #ffffff !important;
+}
+
+body.dark-mode input::placeholder {
+  color: #888888 !important;
+}
+
+body.dark-mode input {
+  color: #ffffff !important;
+  background-color: transparent !important;
+}
+
+body.dark-mode svg:not(.header-logo svg) {
+  fill: #ffffff !important;
+  color: #ffffff !important;
+}
+
+body.dark-mode .border-black\/5,
+body.dark-mode .border-black\/15,
+body.dark-mode .border-neutral-100,
+body.dark-mode .border-t,
+body.dark-mode .border-b,
+body.dark-mode .border,
+body.dark-mode .cart-drawer-qty-btn {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .yuri-media-caption::after {
+  background-color: #ffffff !important;
+}
+
+body.dark-mode .bg-black {
+  background-color: #ffffff !important;
+  color: #121212 !important;
+}
+
+body.dark-mode .bg-black:hover {
+  background-color: #e5e5e5 !important;
+}
+
+body.dark-mode .cart-drawer-qty-btn {
+  color: #ffffff !important;
+}
+
+body.dark-mode .text-neutral-200 {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+body.dark-mode .introduction-background {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
 

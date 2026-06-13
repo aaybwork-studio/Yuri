@@ -228,22 +228,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add an elegant scroll-triggered caption slide-in and slide-out under the image
         if (caption) {
-          // A single scrub timeline that handles entry (slide in) and exit (slide out under image)
-          gsap.timeline({
-            scrollTrigger: {
-              trigger: section,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true,
-              invalidateOnRefresh: true
+          // 1. Enter scroll trigger: slide caption up into view from bottom cutoff
+          gsap.fromTo(caption,
+            { yPercent: 100 },
+            {
+              yPercent: 0,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top 85%',
+                end: 'top 15%',
+                scrub: 1.5,
+                invalidateOnRefresh: true
+              }
             }
-          })
-          .fromTo(caption, 
-            { y: 30, opacity: 0 }, // Starts below and hidden when section enters
-            { y: 0, opacity: 1, duration: 0.3, ease: 'power1.out' } // Slides into static position
-          )
-          .to(caption, 
-            { y: -30, opacity: 0, duration: 0.3, ease: 'power1.in' } // Slides up under the image container on exit
+          );
+
+          // 2. Exit scroll trigger: slide caption back down/under the image
+          gsap.fromTo(caption,
+            { yPercent: 0 },
+            {
+              yPercent: 100,
+              ease: 'power2.in',
+              scrollTrigger: {
+                trigger: section,
+                start: 'bottom 85%',
+                end: 'bottom 0%',
+                scrub: 1.5,
+                invalidateOnRefresh: true
+              }
+            }
           );
         }
       });
@@ -334,6 +348,64 @@ document.addEventListener('DOMContentLoaded', () => {
   let openMenu, closeMenu;
 
   if (menuToggle && menuDrawer && menuOverlay) {
+    // Splits text nodes in the menu to allow word-by-word staggered animations
+    const splitAndAnimateMenu = () => {
+      let words = menuDrawer.querySelectorAll('.menu-word');
+      
+      if (words.length === 0) {
+        const elements = [];
+        const traverse = (node) => {
+          if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim()) {
+            elements.push(node);
+          } else {
+            if (node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE' && !node.classList?.contains('menu-word')) {
+              node.childNodes.forEach(traverse);
+            }
+          }
+        };
+        
+        traverse(menuDrawer);
+        
+        elements.forEach(textNode => {
+          const parent = textNode.parentNode;
+          if (parent.classList.contains('menu-word')) return;
+          
+          const text = textNode.nodeValue;
+          const wordsList = text.split(/(\s+)/);
+          
+          const fragment = document.createDocumentFragment();
+          wordsList.forEach(word => {
+            if (word.trim()) {
+              const span = document.createElement('span');
+              span.className = 'menu-word inline-block opacity-0';
+              span.style.transform = 'translateY(3px)';
+              span.textContent = word;
+              fragment.appendChild(span);
+            } else {
+              fragment.appendChild(document.createTextNode(word));
+            }
+          });
+          
+          parent.replaceChild(fragment, textNode);
+        });
+        
+        words = menuDrawer.querySelectorAll('.menu-word');
+      }
+
+      gsap.killTweensOf(words);
+      gsap.fromTo(words, 
+        { opacity: 0, y: 3 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.8, 
+          stagger: 0.015, 
+          ease: 'power2.out',
+          delay: 0.15
+        }
+      );
+    };
+
     openMenu = () => {
       if (typeof closeCart === 'function') closeCart();
       menuDrawer.classList.add('is-open');
@@ -343,6 +415,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof lenis !== 'undefined') {
         lenis.stop();
       }
+      // Trigger word-by-word fade animation
+      splitAndAnimateMenu();
     };
 
     closeMenu = () => {
@@ -353,6 +427,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof lenis !== 'undefined') {
         lenis.start();
       }
+      // Reset word opacities
+      const words = menuDrawer.querySelectorAll('.menu-word');
+      gsap.set(words, { opacity: 0, y: 3 });
     };
 
     menuToggle.addEventListener('click', (e) => {
@@ -661,5 +738,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 7. Menu Drawer Footer Settings: Language, Country, Theme Switcher
+  const themeToggleBtn = document.querySelector('[data-theme-toggle-btn]');
+  const updateThemeUI = (isDark) => {
+    const labelSpan = document.querySelector('[data-theme-label]');
+    if (isDark) {
+      document.body.classList.add('dark-mode');
+      document.documentElement.classList.add('dark-mode');
+      if (labelSpan) labelSpan.textContent = 'Dark Mode';
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.documentElement.classList.remove('dark-mode');
+      if (labelSpan) labelSpan.textContent = 'Light Mode';
+    }
+  };
+
+  const isCurrentlyDark = localStorage.getItem('theme') === 'dark';
+  updateThemeUI(isCurrentlyDark);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const isDarkNow = document.body.classList.contains('dark-mode');
+      const nextDark = !isDarkNow;
+      localStorage.setItem('theme', nextDark ? 'dark' : 'light');
+      updateThemeUI(nextDark);
+    });
+  }
+
+  // Country Selection Cyclic Toggle
+  const countryBtn = document.querySelector('[data-country-btn]');
+  if (countryBtn) {
+    const countries = [
+      'France (EUR €)',
+      'Japan (JPY ¥)',
+      'United States (USD $)'
+    ];
+    let currentIdx = countries.findIndex(c => c.toLowerCase().includes(countryBtn.textContent.trim().toLowerCase()));
+    if (currentIdx === -1) currentIdx = 0;
+
+    countryBtn.addEventListener('click', () => {
+      currentIdx = (currentIdx + 1) % countries.length;
+      countryBtn.textContent = countries[currentIdx];
+      console.log(`Region toggled to: ${countries[currentIdx]}`);
+    });
+  }
+
+  // Language Selection
+  const langBtns = document.querySelectorAll('[data-lang-btn]');
+  langBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      langBtns.forEach(b => {
+        b.classList.remove('font-medium', 'text-black');
+        b.classList.add('font-light', 'text-neutral-400');
+      });
+      btn.classList.remove('font-light', 'text-neutral-400');
+      btn.classList.add('font-medium', 'text-black');
+      console.log(`Language selected: ${btn.getAttribute('data-lang')}`);
+    });
+  });
+
   console.log('YURI custom minimal theme loaded.');
 });
+

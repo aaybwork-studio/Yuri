@@ -539,8 +539,18 @@ body.dark-mode input {
   background-color: transparent !important;
 }
 
-body.dark-mode svg:not(.header-logo svg) {
+body.dark-mode svg:not(.header-logo svg),
+body.dark-mode svg:not(.header-logo svg) path,
+body.dark-mode svg:not(.header-logo svg) rect,
+body.dark-mode svg:not(.header-logo svg) circle,
+body.dark-mode svg:not(.header-logo svg) polygon {
   fill: #ffffff !important;
+  color: #ffffff !important;
+  stroke: #ffffff;
+}
+
+body.dark-mode .introduction-logo,
+body.dark-mode .introduction-logo * {
   color: #ffffff !important;
 }
 

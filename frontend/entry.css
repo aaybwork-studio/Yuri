@@ -330,15 +330,15 @@ html.lenis, html.lenis body {
 }
 .yuri-media-content {
   position: relative;
-  z-index: 10;
+  z-index: 2; /* Elevated layer index */
   overflow: hidden !important;
-  background-color: #faf8f1; /* Cover the text behind it */
+  background-color: #faf8f1; /* Solid background matches parent theme */
 }
 .yuri-media-caption {
   position: absolute;
-  left: 24px; /* Standardize alignment relative to screen padding */
-  bottom: 0px; /* Positions it statically at the bottom inside the inner padding container */
-  z-index: 5;
+  left: 24px;
+  bottom: 0px; 
+  z-index: 1; /* Lower layer index so it slides underneath */
   display: inline-block;
   margin-top: 0 !important;
 }
@@ -346,6 +346,7 @@ html.lenis, html.lenis body {
 /* Ensure the parent inner container has room at the bottom for absolute captions */
 .yuri-media-inner {
   position: relative;
+  z-index: 1;
   padding-bottom: 25px !important;
 }
 

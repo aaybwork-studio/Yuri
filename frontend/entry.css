@@ -333,6 +333,24 @@ html.lenis, html.lenis body {
 .yuri-media-caption {
   position: relative;
   z-index: 5;
+  display: inline-block;
+}
+/* Create the left-to-right animated underline */
+.yuri-media-caption::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background-color: #000;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* Triggers when the parent yuri-media section is hovered over */
+.yuri-media:hover .yuri-media-caption::after {
+  transform: scaleX(1);
 }
 
 /* Adjust sizes of portrait and landscape cards on desktop screens to fit the screen */

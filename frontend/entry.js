@@ -248,16 +248,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 8. Custom Hero Haiku Auto-Cycle Data & Initializer (Changes every 3.14 seconds)
   const haikuData = [
-    { ja: "かり", en: "for a brief moment" },
-    { ja: "そめ", en: "for a brief moment" },
-    { ja: "に、", en: "for a brief moment" },
-    { ja: "さゆ", en: "arranging early lilies" },
-    { ja: "りい", en: "arranging early lilies" },
-    { ja: "けた", en: "arranging early lilies" },
-    { ja: "り、", en: "arranging early lilies" },
-    { ja: "たに", en: "in my valley hut" },
-    { ja: "のぼ", en: "in my valley hut" },
-    { ja: "う。", en: "in my valley hut" }
+    { ja: "かり", en: "fleeting" },
+    { ja: "そめ", en: "transient" },
+    { ja: "に、", en: "momentarily" },
+    { ja: "さゆ", en: "early lilies" },
+    { ja: "りい", en: "gathering" },
+    { ja: "けた", en: "arranged" },
+    { ja: "り、", en: "completed" },
+    { ja: "たに", en: "valley" },
+    { ja: "のぼ", en: "cottage" },
+    { ja: "う。", en: "hermitage" }
   ];
 
   let heroHaikuInterval = null;

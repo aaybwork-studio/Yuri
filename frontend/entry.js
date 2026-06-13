@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!heroHaiku || !heroEn) return;
 
     // Reset initial states
-    heroHaiku.innerHTML = haikuData[0].ja.split('').join('<br>');
+    heroHaiku.innerHTML = haikuData[0].ja.split('').map(char => `<span class="block">${char}</span>`).join('');
     heroEn.textContent = haikuData[0].en;
     gsap.set([heroHaiku, heroEn], { opacity: 1, y: 0 });
     if (arrowSvg) {
@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
         y: -10,
         duration: 0.25,
         onComplete: () => {
-          heroHaiku.innerHTML = haikuData[step].ja.split('').join('<br>');
+          heroHaiku.innerHTML = haikuData[step].ja.split('').map(char => `<span class="block">${char}</span>`).join('');
           heroEn.textContent = haikuData[step].en;
           
           gsap.fromTo([heroHaiku, heroEn],

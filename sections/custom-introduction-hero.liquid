@@ -58,10 +58,11 @@
         <div class="introduction-logo absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none px-4" data-introduction-logo>
           <!-- Japanese Vertical Display (Dia font, 2 characters vertically stacked) -->
           <div class="haiku-hero-container flex flex-col items-center justify-center text-center space-y-6">
-            <div class="japanese-display h-48 flex items-center justify-center select-none">
-              <span class="japanese-pair text-[68px] sm:text-[85px] font-sans font-bold tracking-[0.2em] leading-tight flex flex-col items-center justify-center text-black dark:text-white" data-haiku-ja-hero style="writing-mode: vertical-rl; text-orientation: upright;">
-                か<br>り
-              </span>
+            <div class="japanese-display h-auto flex items-center justify-center select-none">
+              <div class="japanese-pair text-[68px] sm:text-[85px] font-sans font-bold tracking-[0.2em] leading-none flex flex-col items-center justify-center text-black dark:text-white" data-haiku-ja-hero>
+                <span class="block">か</span>
+                <span class="block">り</span>
+              </div>
             </div>
             <!-- English Subtitle in Warm Yellow/Ochre -->
             <div class="english-display h-8 flex items-center justify-center select-none">

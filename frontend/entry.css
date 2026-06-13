@@ -325,7 +325,14 @@ html.lenis, html.lenis body {
   padding-bottom: 30px;
 }
 .yuri-media-content {
+  position: relative;
+  z-index: 10;
   overflow: hidden !important;
+  background-color: #faf8f1; /* Cover the text behind it */
+}
+.yuri-media-caption {
+  position: relative;
+  z-index: 5;
 }
 
 /* Adjust sizes of portrait and landscape cards on desktop screens to fit the screen */

@@ -40,7 +40,7 @@
       "yuri-media-2": {
         "type": "yuri-media-2",
         "settings": {
-          "show_caption": false,
+          "show_caption": true,
           "enable_cutoff": false,
           "layout": "portrait",
           "product": "hinoki-temple-smoke",
@@ -55,7 +55,7 @@
         "type": "yuri-media-3",
         "settings": {
           "show_caption": true,
-          "enable_cutoff": false,
+          "enable_cutoff": true,
           "layout": "fullsize",
           "product": "hinoki-temple-smoke",
           "link": "",

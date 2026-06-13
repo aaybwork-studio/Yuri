@@ -200,45 +200,23 @@ document.addEventListener('DOMContentLoaded', () => {
         // Skip the very first section (index 0) to avoid double-triggers with the hero scroll reveal
         if (index === 0) return;
 
+        const inner = section.querySelector('.yuri-media-inner');
         const mediaContent = section.querySelector('.yuri-media-content');
-        const caption = section.querySelector('.yuri-media-caption');
         
-        if (mediaContent) {
-          const innerMedia = mediaContent.querySelector('img, video');
-          if (innerMedia) {
-            // Animate only the inner media tag inside the clipped container.
-            // Scale it slightly (1.06) to cover shifting boundaries.
-            gsap.fromTo(innerMedia, 
-              { y: -30, scale: 1.06 }, 
-              {
-                y: 30,
-                scale: 1.06,
-                ease: 'none',
-                scrollTrigger: {
-                  trigger: section,
-                  start: 'top bottom',
-                  end: 'bottom top',
-                  scrub: true,
-                  invalidateOnRefresh: true
-                }
-              }
-            );
-          }
-        }
-
-        // Add an elegant, separate scroll-triggered slide-up and fade-in for the caption
-        if (caption) {
-          gsap.fromTo(caption,
-            { y: 15, opacity: 0 },
+        if (inner && mediaContent) {
+          // We animate the inner media block in reverse vertical direction (translateY)
+          // as the parent section scrolls through the viewport, creating a smooth "hold" effect
+          gsap.fromTo(mediaContent, 
+            { y: -30 }, // Start slightly shifted up
             {
-              y: 0,
-              opacity: 1,
-              duration: 0.8,
-              ease: 'power2.out',
+              y: 30,    // Move slightly down as we scroll
+              ease: 'none',
               scrollTrigger: {
                 trigger: section,
-                start: 'top 85%', // Animate when the top of the section reaches 85% viewport height
-                toggleActions: 'play none none reverse'
+                start: 'top bottom', // Start animating as soon as it enters
+                end: 'bottom top',   // End animating when it leaves
+                scrub: true,         // Sync with scroll position
+                invalidateOnRefresh: true
               }
             }
           );

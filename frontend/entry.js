@@ -122,6 +122,12 @@ class IntroductionHero {
       }, '-=0.8');
     }
   }
+
+  kill() {
+    if (this.timeline) {
+      this.timeline.kill();
+    }
+  }
 }
 
 // ============================================
@@ -129,33 +135,51 @@ class IntroductionHero {
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize Intro Scroll Reveal
-  const introEl = document.querySelector('[data-mods="introduction"]');
+  let introHeroInstance = null;
   let introScrollHeight = 0;
 
-  if (introEl) {
-    const introHero = new IntroductionHero(introEl);
-    introScrollHeight = introHero.scrollHeight;
-  } else {
-    // No intro hero on this page, clean up body class
-    document.body.classList.remove('page-introduction-loading');
-  }
+  const initScrollReveal = () => {
+    if (introHeroInstance) {
+      if (typeof introHeroInstance.kill === 'function') {
+        introHeroInstance.kill();
+      }
+      introHeroInstance = null;
+    }
+
+    // Kill all current ScrollTriggers to release any cached height locks
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+    const introEl = document.querySelector('[data-mods="introduction"]');
+    if (introEl) {
+      introHeroInstance = new IntroductionHero(introEl);
+      introScrollHeight = introHeroInstance.scrollHeight;
+    } else {
+      introScrollHeight = 0;
+      document.body.classList.remove('page-introduction-loading');
+    }
+
+    // Refresh ScrollTrigger calculations
+    ScrollTrigger.refresh();
+  };
+
+  // Run initial setup
+  initScrollReveal();
 
   // 2. Header: single scroll-position-based visibility system
-  //    - Hidden while scrollY < introScrollHeight (hero zone)
-  //    - Visible once past the hero
-  //    - Hides on scroll-down, shows on scroll-up (smart sticky)
   const header = document.querySelector('[data-header]');
   if (header) {
     let lastScrollY = lenis.scroll || window.scrollY;
-    const isHomepage = !!introEl;
 
     // Set initial state
-    if (isHomepage && lastScrollY < introScrollHeight) {
+    const initialIntro = document.querySelector('[data-mods="introduction"]');
+    if (initialIntro && lastScrollY < introScrollHeight) {
       header.classList.add('is-intro-active');
     }
 
     lenis.on('scroll', ({ scroll }) => {
       const y = scroll;
+      const activeIntro = document.querySelector('[data-mods="introduction"]');
+      const isHomepage = !!activeIntro;
 
       // --- INTRO HERO ZONE ---
       if (isHomepage && y < introScrollHeight) {
@@ -183,6 +207,33 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       lastScrollY = y;
+    });
+  }
+
+  // Listen for Shopify Customizer changes to dynamically refresh GSAP and Lenis
+  if (window.Shopify && window.Shopify.designMode) {
+    document.addEventListener('shopify:section:load', (e) => {
+      console.log('Shopify theme editor: section loaded, refreshing layout');
+      initScrollReveal();
+      if (typeof lenis !== 'undefined' && lenis.resize) {
+        lenis.resize();
+      }
+    });
+
+    document.addEventListener('shopify:section:unload', (e) => {
+      console.log('Shopify theme editor: section unloaded, refreshing layout');
+      initScrollReveal();
+      if (typeof lenis !== 'undefined' && lenis.resize) {
+        lenis.resize();
+      }
+    });
+
+    document.addEventListener('shopify:section:reorder', (e) => {
+      console.log('Shopify theme editor: section reordered, refreshing layout');
+      initScrollReveal();
+      if (typeof lenis !== 'undefined' && lenis.resize) {
+        lenis.resize();
+      }
     });
   }
 

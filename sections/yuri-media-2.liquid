@@ -3,7 +3,11 @@
   assign product_handle = section.settings.product
   
   if product_handle != blank
-    assign product_obj = all_products[product_handle]
+    if product_handle.title != blank
+      assign product_obj = product_handle
+    else
+      assign product_obj = all_products[product_handle]
+    endif
     assign media_link = product_obj.url
     assign default_image = product_obj.featured_image
     assign default_caption = product_obj.title

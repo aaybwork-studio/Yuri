@@ -229,16 +229,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add an elegant, separate scroll-triggered slide-up and fade-in for the caption
         if (caption) {
           gsap.fromTo(caption,
-            { y: 15, opacity: 0 },
+            { y: -30, opacity: 0 }, // Start shifted upwards slightly (under the image boundary)
             {
               y: 0,
               opacity: 1,
-              duration: 0.8,
-              ease: 'power2.out',
+              ease: 'power1.out',
               scrollTrigger: {
                 trigger: section,
-                start: 'top 85%', // Animate when the top of the section reaches 85% viewport height
-                toggleActions: 'play none none reverse'
+                start: 'top 95%',  // Start slide in when section enters screen
+                end: 'top 70%',    // Finish slide in quickly
+                scrub: true,       // Sync smoothly with scrolling speed
+                invalidateOnRefresh: true
               }
             }
           );

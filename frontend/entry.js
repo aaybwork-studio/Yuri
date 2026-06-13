@@ -106,17 +106,20 @@ class IntroductionHero {
     if (fadeElements.length > 0) {
       this.timeline.to(fadeElements, {
         opacity: 0,
-        duration: 0.6,
+        duration: 0.4,
         ease: 'power1.out'
       });
     }
+
+    // Add scroll resistance/lock interval after fadeout (e.g. 0.4s resistance gap where scroll continues but hero stays in place)
+    this.timeline.to({}, { duration: 0.4 });
 
     // 2. Translate introduction panel vertically up
     this.timeline.to(this.element, {
       yPercent: -100,
       ease: 'none',
       duration: 1.0
-    }, '-=0.1');
+    });
 
     // 3. Fade the background overlay to transparent
     if (this.background) {
@@ -124,7 +127,7 @@ class IntroductionHero {
         backgroundColor: 'rgba(0, 0, 0, 0)',
         ease: 'none',
         duration: 0.5
-      }, '-=0.8');
+      }, '-=1.0');
     }
   }
 

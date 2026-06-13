@@ -61,11 +61,11 @@ a {
   border-bottom: 1px solid transparent;
 }
 
-/* Hidden during intro hero scroll zone */
+/* Visible during intro hero scroll zone, positioned over the image */
 .theme-header.is-intro-active {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-100%);
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 /* Scrolled state: solid cream + blur backdrop */

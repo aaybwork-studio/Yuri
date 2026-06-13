@@ -1,0 +1,110 @@
+{%- liquid
+  assign layout = section.settings.layout | default: 'fullsize'
+  assign image = section.settings.image
+  assign video_url = section.settings.video_url
+  assign caption = section.settings.caption
+  assign link = section.settings.link
+-%}
+
+<div class="yuri-media yuri-media--{{ layout }} w-full bg-[#faf8f1]" id="Media-{{ section.id }}">
+  <div class="yuri-media-inner
+    {%- if layout == 'portrait' %} max-w-[750px] mx-auto px-6 py-12
+    {%- elsif layout == 'landscape' %} max-w-[1100px] mx-auto px-6 py-12
+    {%- endif -%}">
+
+    {%- if link -%}<a href="{{ link }}" class="yuri-media-link block">{%- endif -%}
+
+    <div class="yuri-media-content w-full overflow-hidden
+      {%- if layout == 'portrait' %} aspect-[3/4]
+      {%- elsif layout == 'landscape' %} aspect-[16/10]
+      {%- endif -%}">
+
+      {%- if video_url != blank -%}
+        <video
+          class="w-full h-full object-cover"
+          autoplay
+          loop
+          muted
+          playsinline
+        >
+          <source src="{{ video_url }}" type="video/mp4">
+        </video>
+
+      {%- elsif image != blank -%}
+        {{
+          image
+          | image_url: width: 2000
+          | image_tag:
+            class: 'w-full h-full object-cover',
+            loading: 'lazy',
+            widths: '375, 750, 1100, 1500, 2000'
+        }}
+
+      {%- else -%}
+        <img
+          src="{{ 'yuri-hero-2.png' | asset_url }}"
+          alt=""
+          class="w-full h-full object-cover"
+          loading="lazy"
+          width="1400"
+          height="1000"
+        >
+      {%- endif -%}
+    </div>
+
+    {%- if caption != blank -%}
+      <p class="yuri-media-caption text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black mt-3
+        {%- if layout == 'fullsize' %} px-6{%- endif -%}">
+        {{- caption -}}
+      </p>
+    {%- endif -%}
+
+    {%- if link -%}</a>{%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Yuri Media 6",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "fullsize", "label": "Full Width (edge to edge)" },
+        { "value": "portrait", "label": "Centered Portrait Card" },
+        { "value": "landscape", "label": "Centered Landscape Card" }
+      ],
+      "default": "landscape"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (MP4)",
+      "info": "Upload to Shopify Files and paste URL here."
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Yuri Media 6"
+    }
+  ]
+}
+{% endschema %}

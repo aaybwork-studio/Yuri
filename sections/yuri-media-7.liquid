@@ -4,10 +4,9 @@
   # Card 1 Settings
   assign product_handle_1 = section.settings.product
   if product_handle_1 != blank
-    if product_handle_1.title != blank
+    assign product_obj_1 = all_products[product_handle_1]
+    if product_obj_1 == blank
       assign product_obj_1 = product_handle_1
-    else
-      assign product_obj_1 = all_products[product_handle_1]
     endif
     assign media_link_1 = product_obj_1.url
     assign default_image_1 = product_obj_1.featured_image
@@ -38,10 +37,9 @@
   # Card 2 Settings
   assign product_handle_2 = section.settings.product_2
   if product_handle_2 != blank
-    if product_handle_2.title != blank
+    assign product_obj_2 = all_products[product_handle_2]
+    if product_obj_2 == blank
       assign product_obj_2 = product_handle_2
-    else
-      assign product_obj_2 = all_products[product_handle_2]
     endif
     assign media_link_2 = product_obj_2.url
     assign default_image_2 = product_obj_2.featured_image
@@ -72,10 +70,9 @@
   # Card 3 Settings
   assign product_handle_3 = section.settings.product_3
   if product_handle_3 != blank
-    if product_handle_3.title != blank
+    assign product_obj_3 = all_products[product_handle_3]
+    if product_obj_3 == blank
       assign product_obj_3 = product_handle_3
-    else
-      assign product_obj_3 = all_products[product_handle_3]
     endif
     assign media_link_3 = product_obj_3.url
     assign default_image_3 = product_obj_3.featured_image
@@ -123,6 +120,7 @@
               assign card_link = media_link_1
               assign card_caption = caption_1
               assign card_body = body_text_1
+              assign card_width = section.settings.media_width | default: 100
               assign card_fallback = 'yuri-media-7.png'
             elif i == 2
               assign card_image = image_2
@@ -130,6 +128,7 @@
               assign card_link = media_link_2
               assign card_caption = caption_2
               assign card_body = body_text_2
+              assign card_width = section.settings.media_width_2 | default: 100
               assign card_fallback = 'yuri-media-6b.png'
             else
               assign card_image = image_3
@@ -137,6 +136,7 @@
               assign card_link = media_link_3
               assign card_caption = caption_3
               assign card_body = body_text_3
+              assign card_width = section.settings.media_width_3 | default: 100
               assign card_fallback = 'yuri-media-6c.png'
             endif
           -%}
@@ -146,7 +146,8 @@
             <div class="yuri-media-content w-full overflow-hidden relative
               {%- if layout == 'three-cards-portrait' %} aspect-[3/4]
               {%- elsif layout == 'three-cards-landscape' %} aspect-[16/10]
-              {%- endif -%}">
+              {%- endif -%}"
+              style="max-width: {{ card_width }}%; margin-left: auto; margin-right: auto;">
 
               {%- if card_link -%}<a href="{{ card_link }}" class="yuri-media-link block w-full h-full">{%- endif -%}
 
@@ -190,7 +191,8 @@
         <!-- Media Column -->
         <div class="w-full md:w-1/2 flex-none">
           {%- if media_link_1 -%}<a href="{{ media_link_1 }}" class="yuri-media-link block">{%- endif -%}
-          <div class="yuri-media-content w-full overflow-hidden">
+          <div class="yuri-media-content w-full overflow-hidden"
+            style="max-width: {{ section.settings.media_width | default: 100 }}%; margin-left: auto; margin-right: auto;">
             {%- if video_url_1 != blank -%}
               <video class="w-full h-full object-cover" autoplay loop muted playsinline>
                 <source src="{{ video_url_1 }}" type="video/mp4">
@@ -226,12 +228,13 @@
 
     {%- else -%}
       <!-- Centered/Fullsize Layouts -->
-      {%- if media_link_1 -%}<a href="{{ media_link_1 }}" class="yuri-media-link block">{%- endif -%}
-
       <div class="yuri-media-content w-full overflow-hidden
         {%- if layout == 'portrait' %} aspect-[3/4]
         {%- elsif layout == 'landscape' %} aspect-[16/10]
-        {%- endif -%}">
+        {%- endif -%}"
+        style="max-width: {{ section.settings.media_width | default: 100 }}%; margin-left: auto; margin-right: auto;">
+
+        {%- if media_link_1 -%}<a href="{{ media_link_1 }}" class="yuri-media-link block w-full h-full">{%- endif -%}
 
         {%- if video_url_1 != blank -%}
           <video class="w-full h-full object-cover" autoplay loop muted playsinline>
@@ -242,22 +245,26 @@
         {%- else -%}
           <img src="{{ 'yuri-media-7.png' | asset_url }}" alt="" class="w-full h-full object-cover" loading="lazy" width="1400" height="1000">
         {%- endif -%}
+
+        {%- if media_link_1 -%}</a>{%- endif -%}
       </div>
 
       {%- if caption_1 != blank -%}
         <p class="yuri-media-caption text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black mt-3
           {%- if layout == 'fullsize' %} px-6{%- endif -%}">
+          {%- if media_link_1 -%}<a href="{{ media_link_1 }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
           {{- caption_1 -}}
+          {%- if media_link_1 -%}</a>{%- endif -%}
         </p>
       {%- endif -%}
 
       {%- if body_text_1 != blank -%}
         <div class="yuri-media-body-text max-w-[650px] mx-auto text-center mt-6 px-6 text-[13px] sm:text-[14px] leading-[1.8] tracking-[0.05em] font-sans font-light text-black">
+          {%- if media_link_1 -%}<a href="{{ media_link_1 }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
           {{- body_text_1 -}}
+          {%- if media_link_1 -%}</a>{%- endif -%}
         </div>
       {%- endif -%}
-
-      {%- if media_link_1 -%}</a>{%- endif -%}
     {%- endif -%}
 
   </div>
@@ -317,6 +324,16 @@
       "label": "Body Text Banner"
     },
     {
+      "type": "range",
+      "id": "media_width",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Card 1 Media Width (Desktop)",
+      "default": 100
+    },
+    {
       "type": "header",
       "content": "Card 2 (Optional - for 3 Card Layouts)"
     },
@@ -352,6 +369,16 @@
       "label": "Card 2 Body Text"
     },
     {
+      "type": "range",
+      "id": "media_width_2",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Card 2 Media Width (Desktop)",
+      "default": 100
+    },
+    {
       "type": "header",
       "content": "Card 3 (Optional - for 3 Card Layouts)"
     },
@@ -385,6 +412,16 @@
       "type": "text",
       "id": "body_text_3",
       "label": "Card 3 Body Text"
+    },
+    {
+      "type": "range",
+      "id": "media_width_3",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Card 3 Media Width (Desktop)",
+      "default": 100
     }
   ],
   "presets": [

@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ScrollTrigger.refresh();
   };
 
-  // 8. Custom Haiku Scroll Animation Data & Initializer
+  // 8. Custom Hero Haiku Auto-Cycle Data & Initializer (Changes every 3.14 seconds)
   const haikuData = [
     { ja: "かり", en: "for a brief moment" },
     { ja: "そめ", en: "for a brief moment" },
@@ -243,62 +243,48 @@ document.addEventListener('DOMContentLoaded', () => {
     { ja: "う。", en: "in my valley hut" }
   ];
 
-  let haikuScrollTriggerInstance = null;
+  let heroHaikuInterval = null;
 
-  const initHaikuScrollAnimation = () => {
-    if (haikuScrollTriggerInstance) {
-      haikuScrollTriggerInstance.kill();
-      haikuScrollTriggerInstance = null;
+  const initHeroHaikuCycle = () => {
+    if (heroHaikuInterval) {
+      clearInterval(heroHaikuInterval);
+      heroHaikuInterval = null;
     }
 
-    const haikuSection = document.querySelector('[data-haiku-section]');
-    if (!haikuSection) return;
+    const heroHaiku = document.querySelector('[data-haiku-ja-hero]');
+    const heroEn = document.querySelector('[data-haiku-en-hero]');
+    if (!heroHaiku || !heroEn) return;
 
-    const jaSpan = haikuSection.querySelector('[data-haiku-ja]');
-    const enSub = haikuSection.querySelector('[data-haiku-en]');
-    if (!jaSpan || !enSub) return;
+    // Reset initial states
+    heroHaiku.textContent = haikuData[0].ja;
+    heroEn.textContent = haikuData[0].en;
+    gsap.set([heroHaiku, heroEn], { opacity: 1, y: 0 });
 
-    // Reset initial display states
-    jaSpan.textContent = haikuData[0].ja;
-    enSub.textContent = haikuData[0].en;
-    gsap.set([jaSpan, enSub], { opacity: 1, y: 0 });
+    let step = 0;
 
-    let currentStep = 0;
-
-    haikuScrollTriggerInstance = ScrollTrigger.create({
-      trigger: haikuSection,
-      start: 'top top',
-      end: '+=250%',
-      pin: true,
-      scrub: true,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        let step = Math.floor(progress * haikuData.length);
-        if (step >= haikuData.length) step = haikuData.length - 1;
-
-        if (step !== currentStep) {
-          currentStep = step;
-          gsap.to([jaSpan, enSub], {
-            opacity: 0,
-            y: -10,
-            duration: 0.12,
-            onComplete: () => {
-              jaSpan.textContent = haikuData[step].ja;
-              enSub.textContent = haikuData[step].en;
-              gsap.fromTo([jaSpan, enSub],
-                { opacity: 0, y: 10 },
-                { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' }
-              );
-            }
-          });
+    heroHaikuInterval = setInterval(() => {
+      step = (step + 1) % haikuData.length;
+      
+      gsap.to([heroHaiku, heroEn], {
+        opacity: 0,
+        y: -10,
+        duration: 0.25,
+        onComplete: () => {
+          heroHaiku.textContent = haikuData[step].ja;
+          heroEn.textContent = haikuData[step].en;
+          
+          gsap.fromTo([heroHaiku, heroEn],
+            { opacity: 0, y: 10 },
+            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+          );
         }
-      }
-    });
+      });
+    }, 3140); // 3.14 seconds
   };
 
   // Run initial setup
   initScrollReveal();
-  initHaikuScrollAnimation();
+  initHeroHaikuCycle();
 
   // 1b. Initialize Scroll Pins/Holds for all other Yuri Media sections on desktop
   const initMediaScrollHolds = () => {
@@ -423,7 +409,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Shopify theme editor: section loaded, refreshing layout');
       initScrollReveal();
       initMediaScrollHolds();
-      initHaikuScrollAnimation();
+      initHeroHaikuCycle();
       if (typeof lenis !== 'undefined' && lenis.resize) {
         lenis.resize();
       }
@@ -433,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Shopify theme editor: section unloaded, refreshing layout');
       initScrollReveal();
       initMediaScrollHolds();
-      initHaikuScrollAnimation();
+      initHeroHaikuCycle();
       if (typeof lenis !== 'undefined' && lenis.resize) {
         lenis.resize();
       }
@@ -443,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Shopify theme editor: section reordered, refreshing layout');
       initScrollReveal();
       initMediaScrollHolds();
-      initHaikuScrollAnimation();
+      initHeroHaikuCycle();
       if (typeof lenis !== 'undefined' && lenis.resize) {
         lenis.resize();
       }

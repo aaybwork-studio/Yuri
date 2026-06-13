@@ -56,20 +56,20 @@
         </div>
 
         <div class="introduction-logo absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none px-4" data-introduction-logo>
-          {%- if section.settings.logo_svg != blank -%}
-            <div class="w-full h-[80px] md:h-[120px] text-black fill-current flex items-center justify-center">
-              {{ section.settings.logo_svg }}
+          <!-- Japanese Vertical Display (Dia font, 2 characters vertically stacked) -->
+          <div class="haiku-hero-container flex flex-col items-center justify-center text-center space-y-6">
+            <div class="japanese-display h-48 flex items-center justify-center select-none">
+              <span class="japanese-pair text-[64px] sm:text-[80px] font-sans font-light tracking-[0.2em] leading-tight flex flex-col items-center justify-center text-black dark:text-white" data-haiku-ja-hero style="writing-mode: vertical-rl; text-orientation: upright;">
+                かり
+              </span>
             </div>
-          {%- elsif section.settings.logo_image != blank -%}
-            {{ section.settings.logo_image | image_url: width: 1000 | image_tag:
-              class: 'w-full h-[80px] md:h-[120px] object-contain',
-              loading: 'eager'
-            }}
-          {%- else -%}
-            <div class="w-[240px] h-[240px] text-black fill-current flex items-center justify-center">
-              {% render 'yuri-japanese-logo' %}
+            <!-- English Subtitle in Warm Yellow/Ochre -->
+            <div class="english-display h-8 flex items-center justify-center select-none">
+              <p class="english-sub text-[10px] sm:text-[11px] tracking-[0.35em] font-sans uppercase text-[#d9a752] font-light transition-all duration-300" data-haiku-en-hero>
+                for a brief moment
+              </p>
             </div>
-          {%- endif -%}
+          </div>
         </div>
 
         <audio id="BgAudioWaves" loop preload="auto" class="hidden">

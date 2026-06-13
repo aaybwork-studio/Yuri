@@ -1,37 +1,106 @@
 {%- liquid
   assign layout = section.settings.layout | default: 'landscape'
-  assign product_handle = section.settings.product
-  
-  if product_handle != blank
-    if product_handle.title != blank
-      assign product_obj = product_handle
+
+  # Card 1 Settings
+  assign product_handle_1 = section.settings.product
+  if product_handle_1 != blank
+    if product_handle_1.title != blank
+      assign product_obj_1 = product_handle_1
     else
-      assign product_obj = all_products[product_handle]
+      assign product_obj_1 = all_products[product_handle_1]
     endif
-    assign media_link = product_obj.url
-    assign default_image = product_obj.featured_image
-    assign default_caption = product_obj.title
+    assign media_link_1 = product_obj_1.url
+    assign default_image_1 = product_obj_1.featured_image
+    assign default_caption_1 = product_obj_1.title
   else
-    assign media_link = section.settings.link
-    assign default_image = nil
-    assign default_caption = ""
+    assign media_link_1 = section.settings.link
+    assign default_image_1 = nil
+    assign default_caption_1 = ""
   endif
 
   if section.settings.image != blank
-    assign image = section.settings.image
+    assign image_1 = section.settings.image
   else
-    assign image = default_image
+    assign image_1 = default_image_1
   endif
 
-  assign video_url = section.settings.video_url
+  assign video_url_1 = section.settings.video_url
 
   if section.settings.caption != blank
-    assign caption = section.settings.caption
+    assign caption_1 = section.settings.caption
   else
-    assign caption = default_caption
+    assign caption_1 = default_caption_1
   endif
 
-  assign body_text = section.settings.body_text
+  assign body_text_1 = section.settings.body_text
+
+
+  # Card 2 Settings
+  assign product_handle_2 = section.settings.product_2
+  if product_handle_2 != blank
+    if product_handle_2.title != blank
+      assign product_obj_2 = product_handle_2
+    else
+      assign product_obj_2 = all_products[product_handle_2]
+    endif
+    assign media_link_2 = product_obj_2.url
+    assign default_image_2 = product_obj_2.featured_image
+    assign default_caption_2 = product_obj_2.title
+  else
+    assign media_link_2 = section.settings.link_2
+    assign default_image_2 = nil
+    assign default_caption_2 = ""
+  endif
+
+  if section.settings.image_2 != blank
+    assign image_2 = section.settings.image_2
+  else
+    assign image_2 = default_image_2
+  endif
+
+  assign video_url_2 = section.settings.video_url_2
+
+  if section.settings.caption_2 != blank
+    assign caption_2 = section.settings.caption_2
+  else
+    assign caption_2 = default_caption_2
+  endif
+
+  assign body_text_2 = section.settings.body_text_2
+
+
+  # Card 3 Settings
+  assign product_handle_3 = section.settings.product_3
+  if product_handle_3 != blank
+    if product_handle_3.title != blank
+      assign product_obj_3 = product_handle_3
+    else
+      assign product_obj_3 = all_products[product_handle_3]
+    endif
+    assign media_link_3 = product_obj_3.url
+    assign default_image_3 = product_obj_3.featured_image
+    assign default_caption_3 = product_obj_3.title
+  else
+    assign media_link_3 = section.settings.link_3
+    assign default_image_3 = nil
+    assign default_caption_3 = ""
+  endif
+
+  if section.settings.image_3 != blank
+    assign image_3 = section.settings.image_3
+  else
+    assign image_3 = default_image_3
+  endif
+
+  assign video_url_3 = section.settings.video_url_3
+
+  if section.settings.caption_3 != blank
+    assign caption_3 = section.settings.caption_3
+  else
+    assign caption_3 = default_caption_3
+  endif
+
+  assign body_text_3 = section.settings.body_text_3
 -%}
 
 <div class="yuri-media yuri-media--{{ layout }} w-full bg-[#faf8f1] overflow-hidden" id="Media-{{ section.id }}">
@@ -41,42 +110,115 @@
     {%- elsif layout == 'asymmetric-left' %} max-w-[85%] mr-auto ml-6 md:ml-16 px-6 py-12
     {%- elsif layout == 'asymmetric-right' %} max-w-[85%] ml-auto mr-6 md:mr-16 px-6 py-12
     {%- elsif layout == 'split-left' or layout == 'split-right' %} max-w-[1400px] mx-auto px-6 py-12
+    {%- elsif layout contains 'three-cards-' %} max-w-[1400px] mx-auto px-6 py-12
     {%- endif -%}">
 
-    {%- if layout == 'split-left' or layout == 'split-right' -%}
+    {%- if layout contains 'three-cards-' -%}
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 w-full">
+        {%- for i in (1..3) -%}
+          {%- liquid
+            if i == 1
+              assign card_image = image_1
+              assign card_video = video_url_1
+              assign card_link = media_link_1
+              assign card_caption = caption_1
+              assign card_body = body_text_1
+              assign card_fallback = 'yuri-media-6.png'
+            elif i == 2
+              assign card_image = image_2
+              assign card_video = video_url_2
+              assign card_link = media_link_2
+              assign card_caption = caption_2
+              assign card_body = body_text_2
+              assign card_fallback = 'yuri-media-6b.png'
+            else
+              assign card_image = image_3
+              assign card_video = video_url_3
+              assign card_link = media_link_3
+              assign card_caption = caption_3
+              assign card_body = body_text_3
+              assign card_fallback = 'yuri-media-6c.png'
+            endif
+          -%}
+
+          <div class="yuri-media-card w-full flex flex-col">
+            <!-- Media container -->
+            <div class="yuri-media-content w-full overflow-hidden relative
+              {%- if layout == 'three-cards-portrait' %} aspect-[3/4]
+              {%- elsif layout == 'three-cards-landscape' %} aspect-[16/10]
+              {%- endif -%}">
+
+              {%- if card_link -%}<a href="{{ card_link }}" class="yuri-media-link block w-full h-full">{%- endif -%}
+
+              {%- if card_video != blank -%}
+                <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+                  <source src="{{ card_video }}" type="video/mp4">
+                </video>
+              {%- elsif card_image != blank -%}
+                {{ card_image | image_url: width: 1000 | image_tag: class: 'w-full h-full object-cover', loading: 'lazy', widths: '375, 750, 1000' }}
+              {%- else -%}
+                <img src="{{ card_fallback | asset_url }}" alt="" class="w-full h-full object-cover" loading="lazy" width="800" height="600">
+              {%- endif -%}
+
+              {%- if card_link -%}</a>{%- endif -%}
+            </div>
+
+            <!-- Text container -->
+            <div class="yuri-media-text-wrapper w-full text-center">
+              {%- if card_caption != blank -%}
+                <p class="yuri-media-caption text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black mt-3">
+                  {%- if card_link -%}<a href="{{ card_link }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
+                  {{- card_caption -}}
+                  {%- if card_link -%}</a>{%- endif -%}
+                </p>
+              {%- endif -%}
+
+              {%- if card_body != blank -%}
+                <div class="yuri-media-body-text w-full mt-4 text-[13px] sm:text-[14px] leading-[1.8] tracking-[0.05em] font-sans font-light text-black">
+                  {%- if card_link -%}<a href="{{ card_link }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
+                  {{- card_body -}}
+                  {%- if card_link -%}</a>{%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+    {%- elsif layout == 'split-left' or layout == 'split-right' -%}
       <div class="flex flex-col md:flex-row {%- if layout == 'split-right' %} md:flex-row-reverse {%- endif %} md:items-center md:gap-12 w-full">
         <!-- Media Column -->
         <div class="w-full md:w-1/2 flex-none">
-          {%- if media_link -%}<a href="{{ media_link }}" class="yuri-media-link block">{%- endif -%}
+          {%- if media_link_1 -%}<a href="{{ media_link_1 }}" class="yuri-media-link block">{%- endif -%}
           <div class="yuri-media-content w-full overflow-hidden">
-            {%- if video_url != blank -%}
+            {%- if video_url_1 != blank -%}
               <video class="w-full h-full object-cover" autoplay loop muted playsinline>
-                <source src="{{ video_url }}" type="video/mp4">
+                <source src="{{ video_url_1 }}" type="video/mp4">
               </video>
-            {%- elsif image != blank -%}
-              {{ image | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover', loading: 'lazy', widths: '375, 750, 1100, 1500, 2000' }}
+            {%- elsif image_1 != blank -%}
+              {{ image_1 | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover', loading: 'lazy', widths: '375, 750, 1100, 1500, 2000' }}
             {%- else -%}
               <img src="{{ 'yuri-media-6.png' | asset_url }}" alt="" class="w-full h-full object-cover" loading="lazy" width="1400" height="1000">
             {%- endif -%}
           </div>
-          {%- if media_link -%}</a>{%- endif -%}
+          {%- if media_link_1 -%}</a>{%- endif -%}
         </div>
 
         <!-- Text Column -->
         <div class="w-full flex-1 py-6 md:py-0">
-          {%- if caption != blank -%}
+          {%- if caption_1 != blank -%}
             <p class="yuri-media-caption text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black md:text-left">
-              {%- if media_link -%}<a href="{{ media_link }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
-              {{- caption -}}
-              {%- if media_link -%}</a>{%- endif -%}
+              {%- if media_link_1 -%}<a href="{{ media_link_1 }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
+              {{- caption_1 -}}
+              {%- if media_link_1 -%}</a>{%- endif -%}
             </p>
           {%- endif -%}
 
-          {%- if body_text != blank -%}
+          {%- if body_text_1 != blank -%}
             <div class="yuri-media-body-text max-w-[650px] text-center md:text-left mt-6 text-[13px] sm:text-[14px] leading-[1.8] tracking-[0.05em] font-sans font-light text-black">
-              {%- if media_link -%}<a href="{{ media_link }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
-              {{- body_text -}}
-              {%- if media_link -%}</a>{%- endif -%}
+              {%- if media_link_1 -%}<a href="{{ media_link_1 }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
+              {{- body_text_1 -}}
+              {%- if media_link_1 -%}</a>{%- endif -%}
             </div>
           {%- endif -%}
         </div>
@@ -84,38 +226,38 @@
 
     {%- else -%}
       <!-- Centered/Fullsize Layouts -->
-      {%- if media_link -%}<a href="{{ media_link }}" class="yuri-media-link block">{%- endif -%}
+      {%- if media_link_1 -%}<a href="{{ media_link_1 }}" class="yuri-media-link block">{%- endif -%}
 
       <div class="yuri-media-content w-full overflow-hidden
         {%- if layout == 'portrait' %} aspect-[3/4]
         {%- elsif layout == 'landscape' %} aspect-[16/10]
         {%- endif -%}">
 
-        {%- if video_url != blank -%}
+        {%- if video_url_1 != blank -%}
           <video class="w-full h-full object-cover" autoplay loop muted playsinline>
-            <source src="{{ video_url }}" type="video/mp4">
+            <source src="{{ video_url_1 }}" type="video/mp4">
           </video>
-        {%- elsif image != blank -%}
-          {{ image | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover', loading: 'lazy', widths: '375, 750, 1100, 1500, 2000' }}
+        {%- elsif image_1 != blank -%}
+          {{ image_1 | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover', loading: 'lazy', widths: '375, 750, 1100, 1500, 2000' }}
         {%- else -%}
           <img src="{{ 'yuri-media-6.png' | asset_url }}" alt="" class="w-full h-full object-cover" loading="lazy" width="1400" height="1000">
         {%- endif -%}
       </div>
 
-      {%- if caption != blank -%}
+      {%- if caption_1 != blank -%}
         <p class="yuri-media-caption text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black mt-3
           {%- if layout == 'fullsize' %} px-6{%- endif -%}">
-          {{- caption -}}
+          {{- caption_1 -}}
         </p>
       {%- endif -%}
 
-      {%- if body_text != blank -%}
+      {%- if body_text_1 != blank -%}
         <div class="yuri-media-body-text max-w-[650px] mx-auto text-center mt-6 px-6 text-[13px] sm:text-[14px] leading-[1.8] tracking-[0.05em] font-sans font-light text-black">
-          {{- body_text -}}
+          {{- body_text_1 -}}
         </div>
       {%- endif -%}
 
-      {%- if media_link -%}</a>{%- endif -%}
+      {%- if media_link_1 -%}</a>{%- endif -%}
     {%- endif -%}
 
   </div>
@@ -136,7 +278,10 @@
         { "value": "split-left", "label": "Split Screen (Media Left, Text Right)" },
         { "value": "split-right", "label": "Split Screen (Media Right, Text Left)" },
         { "value": "asymmetric-left", "label": "Asymmetric Offset Left" },
-        { "value": "asymmetric-right", "label": "Asymmetric Offset Right" }
+        { "value": "asymmetric-right", "label": "Asymmetric Offset Right" },
+        { "value": "three-cards-fullsize", "label": "Three Cards (Full Width / Natural)" },
+        { "value": "three-cards-portrait", "label": "Three Cards (Portrait 3:4)" },
+        { "value": "three-cards-landscape", "label": "Three Cards (Landscape 16:10)" }
       ],
       "default": "landscape"
     },
@@ -170,6 +315,76 @@
       "type": "text",
       "id": "body_text",
       "label": "Body Text Banner"
+    },
+    {
+      "type": "header",
+      "content": "Card 2 (Optional - for 3 Card Layouts)"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Card 2 Product Link"
+    },
+    {
+      "type": "url",
+      "id": "link_2",
+      "label": "Card 2 Custom Link Override"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Card 2 Custom Image Override"
+    },
+    {
+      "type": "text",
+      "id": "video_url_2",
+      "label": "Card 2 Video URL (MP4)",
+      "info": "Upload to Shopify Files and paste URL here."
+    },
+    {
+      "type": "text",
+      "id": "caption_2",
+      "label": "Card 2 Custom Caption"
+    },
+    {
+      "type": "text",
+      "id": "body_text_2",
+      "label": "Card 2 Body Text"
+    },
+    {
+      "type": "header",
+      "content": "Card 3 (Optional - for 3 Card Layouts)"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Card 3 Product Link"
+    },
+    {
+      "type": "url",
+      "id": "link_3",
+      "label": "Card 3 Custom Link Override"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Card 3 Custom Image Override"
+    },
+    {
+      "type": "text",
+      "id": "video_url_3",
+      "label": "Card 3 Video URL (MP4)",
+      "info": "Upload to Shopify Files and paste URL here."
+    },
+    {
+      "type": "text",
+      "id": "caption_3",
+      "label": "Card 3 Custom Caption"
+    },
+    {
+      "type": "text",
+      "id": "body_text_3",
+      "label": "Card 3 Body Text"
     }
   ],
   "presets": [

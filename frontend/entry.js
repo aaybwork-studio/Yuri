@@ -248,16 +248,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 8. Custom Hero Haiku Auto-Cycle Data & Initializer (Changes every 3.14 seconds)
   const haikuData = [
-    { ja: "かり", en: "fleeting" },
-    { ja: "そめ", en: "transient" },
-    { ja: "に、", en: "momentarily" },
-    { ja: "さゆ", en: "early lilies" },
-    { ja: "りい", en: "gathering" },
-    { ja: "けた", en: "arranged" },
-    { ja: "り、", en: "completed" },
-    { ja: "たに", en: "valley" },
-    { ja: "のぼ", en: "cottage" },
-    { ja: "う。", en: "hermitage" }
+    { ja: "かり", en: "Transient" },
+    { ja: "そめ", en: "Fleeting" },
+    { ja: "に、", en: "Passing" },
+    { ja: "さゆ", en: "Early Lily" },
+    { ja: "りい", en: "Gathered" },
+    { ja: "けた", en: "Arranged" },
+    { ja: "り、", en: "Offered" },
+    { ja: "たに", en: "Valley" },
+    { ja: "のぼ", en: "Hermitage" },
+    { ja: "う。", en: "Hut" }
   ];
 
   let heroHaikuInterval = null;
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!heroHaiku || !heroEn) return;
 
     // Reset initial states
-    heroHaiku.textContent = haikuData[0].ja;
+    heroHaiku.innerHTML = haikuData[0].ja.split('').join('<br>');
     heroEn.textContent = haikuData[0].en;
     gsap.set([heroHaiku, heroEn], { opacity: 1, y: 0 });
 
@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         y: -10,
         duration: 0.25,
         onComplete: () => {
-          heroHaiku.textContent = haikuData[step].ja;
+          heroHaiku.innerHTML = haikuData[step].ja.split('').join('<br>');
           heroEn.textContent = haikuData[step].en;
           
           gsap.fromTo([heroHaiku, heroEn],

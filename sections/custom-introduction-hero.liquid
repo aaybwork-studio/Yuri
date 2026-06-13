@@ -1,5 +1,13 @@
 <div class="introduction w-full h-[100vh] h-[100dvh] relative overflow-hidden" data-mods="introduction" id="IntroHero-{{ section.id }}" data-scroll-height="{{ section.settings.scroll_duration }}">
   <div class="introduction-wrapper w-full h-full relative z-10">
+    
+    <!-- Sound toggle button centered at the top of the frame below header -->
+    <div class="absolute top-24 left-1/2 transform -translate-x-1/2 z-30 pointer-events-auto">
+      <button type="button" class="text-[11px] sm:text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity bg-transparent border-0 cursor-pointer p-0" data-sound-toggle>
+        Play Sound
+      </button>
+    </div>
+
     <div class="introduction-container w-full h-full relative" data-introduction-wrapper>
       <div class="introduction-media w-full h-full relative">
         
@@ -42,10 +50,6 @@
               {% render 'yuri-japanese-logo' %}
             </div>
           {%- endif -%}
-          
-          <button type="button" class="mt-8 pointer-events-auto text-[11px] sm:text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity bg-transparent border-0 cursor-pointer p-0" data-sound-toggle>
-            Play Sound
-          </button>
         </div>
 
         <audio id="BgAudio" loop preload="auto" class="hidden">

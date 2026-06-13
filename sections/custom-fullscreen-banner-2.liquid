@@ -15,7 +15,7 @@
           loading: 'lazy'
         }}
       {% else %}
-        {%- assign desktop_fallback = 'yuri-hero-2.png' | asset_url -%}
+        {%- assign desktop_fallback = 'yuri-hero-1.png' | asset_url -%}
         <img src="{{ desktop_fallback }}" class="w-full h-full object-cover hidden sm:block" alt="" loading="lazy" width="1600" height="1200">
       {% endif %}
 
@@ -25,7 +25,7 @@
           loading: 'lazy'
         }}
       {% else %}
-        {%- assign mobile_fallback = 'yuri-hero-2.png' | asset_url -%}
+        {%- assign mobile_fallback = 'yuri-hero-1.png' | asset_url -%}
         <img src="{{ mobile_fallback }}" class="w-full h-full object-cover sm:hidden" alt="" loading="lazy" width="800" height="800">
       {% endif %}
     {% endif %}
@@ -69,7 +69,8 @@
     {
       "type": "text",
       "id": "label_text",
-      "label": "Caption Label Text"
+      "label": "Caption Label Text",
+      "default": "MAD ET LEN / HANDMADE IN FRANCE"
     },
     {
       "type": "select",

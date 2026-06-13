@@ -23,7 +23,7 @@
             loading: 'lazy'
           }}
         {% else %}
-          {%- assign fallback_img = 'yuri-browse-1.png' | asset_url -%}
+          {%- assign fallback_img = 'yuri-about.png' | asset_url -%}
           <img src="{{ fallback_img }}" class="w-full h-full object-cover" alt="" loading="lazy" width="800" height="800">
         {% endif %}
       {% endif %}
@@ -73,7 +73,7 @@
         { "value": "landscape_banner", "label": "Landscape Banner (16:9)" },
         { "value": "boxed_center", "label": "Contained Boxed Layout (16:10 with indicators)" }
       ],
-      "default": "portrait_card"
+      "default": "boxed_center"
     },
     {
       "type": "image_picker",
@@ -89,12 +89,14 @@
     {
       "type": "text",
       "id": "caption_top",
-      "label": "Top Caption Label"
+      "label": "Top Caption Label",
+      "default": "03 / BOXED NARRATIVE"
     },
     {
       "type": "text",
       "id": "caption_bottom",
-      "label": "Bottom Caption Label"
+      "label": "Bottom Caption Label",
+      "default": "THE SENSORY ARCHIVE"
     },
     {
       "type": "url",

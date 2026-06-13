@@ -47,7 +47,7 @@ class IntroductionHero {
     this.background = this.element.querySelector('[data-introduction-background]');
     this.logo = this.element.querySelector('[data-introduction-logo]');
     this.scrollArrow = this.element.querySelector('[data-scroll-arrow]');
-    this.images = Array.from(this.element.querySelectorAll('img'));
+    this.images = Array.from(this.element.querySelectorAll('img, video'));
     this.mainContent = document.querySelector('#MainContent');
     
     // Remove loading lock (allow scrolling)
@@ -60,13 +60,22 @@ class IntroductionHero {
       return;
     }
 
-    const preloads = this.images.map(img => {
+    const preloads = this.images.map(media => {
       return new Promise(resolve => {
-        if (img.complete) {
-          resolve();
+        if (media.tagName === 'VIDEO') {
+          if (media.readyState >= 3) {
+            resolve();
+          } else {
+            media.oncanplay = resolve;
+            media.onerror = resolve;
+          }
         } else {
-          img.onload = resolve;
-          img.onerror = resolve;
+          if (media.complete) {
+            resolve();
+          } else {
+            media.onload = resolve;
+            media.onerror = resolve;
+          }
         }
       });
     });
@@ -77,8 +86,11 @@ class IntroductionHero {
   onReady() {
     setTimeout(() => {
       this.element.classList.add('is-ready');
-      this.images.forEach(img => {
-        img.style.opacity = '1';
+      this.images.forEach(media => {
+        media.style.opacity = '1';
+        if (media.tagName === 'VIDEO') {
+          media.play().catch(err => console.log('Video autoplay delayed:', err));
+        }
       });
     }, 100);
   }
@@ -799,16 +811,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 8. Custom Haiku Scroll Animation
   const haikuData = [
-    { ja: "とも", en: "a single flame" },
-    { ja: "しび", en: "a single flame" },
-    { ja: "の、", en: "of a candle" },
-    { ja: "とも", en: "transfers itself" },
-    { ja: "しび", en: "transfers itself" },
-    { ja: "にう", en: "to another" },
-    { ja: "つる", en: "to another" },
-    { ja: "はる", en: "in the soft glow" },
-    { ja: "のゆ", en: "of spring" },
-    { ja: "う。", en: "twilight" }
+    { ja: "かり", en: "for a brief moment" },
+    { ja: "そめ", en: "for a brief moment" },
+    { ja: "に、", en: "for a brief moment" },
+    { ja: "さゆ", en: "arranging early lilies" },
+    { ja: "りい", en: "arranging early lilies" },
+    { ja: "けた", en: "arranging early lilies" },
+    { ja: "り、", en: "arranging early lilies" },
+    { ja: "たに", en: "in my valley hut" },
+    { ja: "のぼ", en: "in my valley hut" },
+    { ja: "う。", en: "in my valley hut" }
   ];
 
   const haikuSection = document.querySelector('[data-haiku-section]');

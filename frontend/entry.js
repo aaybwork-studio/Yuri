@@ -186,5 +186,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 3. Slide-out Drawer Navigation Menu
+  const menuToggle = document.querySelector('[data-menu-toggle]');
+  const menuClose = document.querySelector('[data-menu-close]');
+  const menuOverlay = document.querySelector('[data-menu-overlay]');
+  const menuDrawer = document.querySelector('[data-menu-drawer]');
+
+  if (menuToggle && menuDrawer && menuOverlay) {
+    const openMenu = () => {
+      menuDrawer.classList.remove('-translate-x-full');
+      menuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+      menuOverlay.classList.add('opacity-100', 'pointer-events-auto');
+      document.body.classList.add('overflow-hidden');
+      if (typeof lenis !== 'undefined') {
+        lenis.stop();
+      }
+    };
+
+    const closeMenu = () => {
+      menuDrawer.classList.add('-translate-x-full');
+      menuOverlay.classList.add('opacity-0', 'pointer-events-none');
+      menuOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+      document.body.classList.remove('overflow-hidden');
+      if (typeof lenis !== 'undefined') {
+        lenis.start();
+      }
+    };
+
+    menuToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      openMenu();
+    });
+
+    if (menuClose) {
+      menuClose.addEventListener('click', closeMenu);
+    }
+    menuOverlay.addEventListener('click', closeMenu);
+  }
+
   console.log('YURI custom minimal theme loaded.');
 });

@@ -1,9 +1,21 @@
 {%- liquid
   assign layout = section.settings.layout | default: 'fullsize'
-  assign image = section.settings.image
+  assign product_obj = section.settings.product
+  
+  if product_obj != blank
+    assign media_link = product_obj.url
+    assign default_image = product_obj.featured_image
+    assign default_caption = product_obj.title
+  else
+    assign media_link = section.settings.link
+    assign default_image = nil
+    assign default_caption = ""
+  endif
+
+  assign image = section.settings.image | default: default_image
   assign video_url = section.settings.video_url
-  assign caption = section.settings.caption
-  assign link = section.settings.link
+  assign caption = section.settings.caption | default: default_caption
+  assign body_text = section.settings.body_text
 -%}
 
 <div class="yuri-media yuri-media--{{ layout }} w-full bg-[#faf8f1]" id="Media-{{ section.id }}">
@@ -12,7 +24,7 @@
     {%- elsif layout == 'landscape' %} max-w-[1100px] mx-auto px-6 py-12
     {%- endif -%}">
 
-    {%- if link -%}<a href="{{ link }}" class="yuri-media-link block">{%- endif -%}
+    {%- if media_link -%}<a href="{{ media_link }}" class="yuri-media-link block">{%- endif -%}
 
     <div class="yuri-media-content w-full overflow-hidden
       {%- if layout == 'portrait' %} aspect-[3/4]
@@ -42,7 +54,7 @@
 
       {%- else -%}
         <img
-          src="{{ 'yuri-about.png' | asset_url }}"
+          src="{{ 'yuri-media-7.png' | asset_url }}"
           alt=""
           class="w-full h-full object-cover"
           loading="lazy"
@@ -59,7 +71,13 @@
       </p>
     {%- endif -%}
 
-    {%- if link -%}</a>{%- endif -%}
+    {%- if body_text != blank -%}
+      <div class="yuri-media-body-text max-w-[650px] mx-auto text-center mt-6 px-6 text-[13px] sm:text-[14px] leading-[1.8] tracking-[0.05em] font-sans font-light text-black">
+        {{- body_text -}}
+      </div>
+    {%- endif -%}
+
+    {%- if media_link -%}</a>{%- endif -%}
 
   </div>
 </div>
@@ -80,9 +98,19 @@
       "default": "fullsize"
     },
     {
+      "type": "product",
+      "id": "product",
+      "label": "Product Link"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Custom Link Override"
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Image"
+      "label": "Custom Image Override"
     },
     {
       "type": "text",
@@ -93,12 +121,12 @@
     {
       "type": "text",
       "id": "caption",
-      "label": "Caption"
+      "label": "Custom Caption Override"
     },
     {
-      "type": "url",
-      "id": "link",
-      "label": "Link"
+      "type": "text",
+      "id": "body_text",
+      "label": "Body Text Banner"
     }
   ],
   "presets": [

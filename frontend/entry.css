@@ -285,3 +285,8 @@ html.lenis, html.lenis body {
   color: #000;
 }
 
+/* 30px Spacing between media sections */
+.yuri-media {
+  padding-bottom: 30px;
+}
+

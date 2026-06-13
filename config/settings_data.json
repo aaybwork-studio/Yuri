@@ -83,7 +83,7 @@
       "yuri-media-6": {
         "type": "yuri-media-6",
         "settings": {
-          "layout": "landscape",
+          "layout": "portrait",
           "product": "",
           "link": "",
           "video_url": "",
@@ -94,7 +94,7 @@
       "yuri-media-7": {
         "type": "yuri-media-7",
         "settings": {
-          "layout": "fullsize",
+          "layout": "landscape",
           "product": "",
           "link": "",
           "video_url": "",

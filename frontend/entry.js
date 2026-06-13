@@ -229,8 +229,76 @@ document.addEventListener('DOMContentLoaded', () => {
     ScrollTrigger.refresh();
   };
 
+  // 8. Custom Haiku Scroll Animation Data & Initializer
+  const haikuData = [
+    { ja: "かり", en: "for a brief moment" },
+    { ja: "そめ", en: "for a brief moment" },
+    { ja: "に、", en: "for a brief moment" },
+    { ja: "さゆ", en: "arranging early lilies" },
+    { ja: "りい", en: "arranging early lilies" },
+    { ja: "けた", en: "arranging early lilies" },
+    { ja: "り、", en: "arranging early lilies" },
+    { ja: "たに", en: "in my valley hut" },
+    { ja: "のぼ", en: "in my valley hut" },
+    { ja: "う。", en: "in my valley hut" }
+  ];
+
+  let haikuScrollTriggerInstance = null;
+
+  const initHaikuScrollAnimation = () => {
+    if (haikuScrollTriggerInstance) {
+      haikuScrollTriggerInstance.kill();
+      haikuScrollTriggerInstance = null;
+    }
+
+    const haikuSection = document.querySelector('[data-haiku-section]');
+    if (!haikuSection) return;
+
+    const jaSpan = haikuSection.querySelector('[data-haiku-ja]');
+    const enSub = haikuSection.querySelector('[data-haiku-en]');
+    if (!jaSpan || !enSub) return;
+
+    // Reset initial display states
+    jaSpan.textContent = haikuData[0].ja;
+    enSub.textContent = haikuData[0].en;
+    gsap.set([jaSpan, enSub], { opacity: 1, y: 0 });
+
+    let currentStep = 0;
+
+    haikuScrollTriggerInstance = ScrollTrigger.create({
+      trigger: haikuSection,
+      start: 'top top',
+      end: '+=250%',
+      pin: true,
+      scrub: true,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        let step = Math.floor(progress * haikuData.length);
+        if (step >= haikuData.length) step = haikuData.length - 1;
+
+        if (step !== currentStep) {
+          currentStep = step;
+          gsap.to([jaSpan, enSub], {
+            opacity: 0,
+            y: -10,
+            duration: 0.12,
+            onComplete: () => {
+              jaSpan.textContent = haikuData[step].ja;
+              enSub.textContent = haikuData[step].en;
+              gsap.fromTo([jaSpan, enSub],
+                { opacity: 0, y: 10 },
+                { opacity: 1, y: 0, duration: 0.2, ease: 'power2.out' }
+              );
+            }
+          });
+        }
+      }
+    });
+  };
+
   // Run initial setup
   initScrollReveal();
+  initHaikuScrollAnimation();
 
   // 1b. Initialize Scroll Pins/Holds for all other Yuri Media sections on desktop
   const initMediaScrollHolds = () => {
@@ -355,6 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Shopify theme editor: section loaded, refreshing layout');
       initScrollReveal();
       initMediaScrollHolds();
+      initHaikuScrollAnimation();
       if (typeof lenis !== 'undefined' && lenis.resize) {
         lenis.resize();
       }
@@ -364,6 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Shopify theme editor: section unloaded, refreshing layout');
       initScrollReveal();
       initMediaScrollHolds();
+      initHaikuScrollAnimation();
       if (typeof lenis !== 'undefined' && lenis.resize) {
         lenis.resize();
       }
@@ -373,6 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Shopify theme editor: section reordered, refreshing layout');
       initScrollReveal();
       initMediaScrollHolds();
+      initHaikuScrollAnimation();
       if (typeof lenis !== 'undefined' && lenis.resize) {
         lenis.resize();
       }
@@ -836,57 +907,6 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(`Language selected: ${btn.getAttribute('data-lang')}`);
     });
   });
-
-  // 8. Custom Haiku Scroll Animation
-  const haikuData = [
-    { ja: "かり", en: "for a brief moment" },
-    { ja: "そめ", en: "for a brief moment" },
-    { ja: "に、", en: "for a brief moment" },
-    { ja: "さゆ", en: "arranging early lilies" },
-    { ja: "りい", en: "arranging early lilies" },
-    { ja: "けた", en: "arranging early lilies" },
-    { ja: "り、", en: "arranging early lilies" },
-    { ja: "たに", en: "in my valley hut" },
-    { ja: "のぼ", en: "in my valley hut" },
-    { ja: "う。", en: "in my valley hut" }
-  ];
-
-  const haikuSection = document.querySelector('[data-haiku-section]');
-  if (haikuSection) {
-    const jaSpan = haikuSection.querySelector('[data-haiku-ja]');
-    const enSub = haikuSection.querySelector('[data-haiku-en]');
-    let currentStep = -1;
-
-    ScrollTrigger.create({
-      trigger: haikuSection,
-      start: 'top top',
-      end: '+=250%',
-      pin: true,
-      scrub: true,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        let step = Math.floor(progress * haikuData.length);
-        if (step >= haikuData.length) step = haikuData.length - 1;
-
-        if (step !== currentStep) {
-          currentStep = step;
-          gsap.to([jaSpan, enSub], {
-            opacity: 0,
-            y: -10,
-            duration: 0.15,
-            onComplete: () => {
-              if (jaSpan) jaSpan.textContent = haikuData[step].ja;
-              if (enSub) enSub.textContent = haikuData[step].en;
-              gsap.fromTo([jaSpan, enSub],
-                { opacity: 0, y: 10 },
-                { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }
-              );
-            }
-          });
-        }
-      }
-    });
-  }
 
   // Apply seamless looping to all video elements in the document
   document.querySelectorAll('video').forEach(video => {

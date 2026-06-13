@@ -20,7 +20,7 @@
     {{ 'yuri-styles.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'yuri-scripts.js' | asset_url }}" defer="defer"></script>
   </head>
-  <body class="bg-[#faf8f1] text-black font-sans min-h-screen {% if template == 'index' %}page-introduction-loading{% endif %}">
+  <body class="bg-[#faf8f1] text-black font-sans min-h-screen">
     {% section 'header' %}
     <main id="MainContent" role="main" tabindex="-1">
       {{ content_for_layout }}

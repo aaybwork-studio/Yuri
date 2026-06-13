@@ -24,9 +24,8 @@ class IntroductionHero {
     this.images = Array.from(this.element.querySelectorAll('img'));
     this.mainContent = document.querySelector('#MainContent');
     
-    // Set loading states
+    // Remove loading lock (allow scrolling)
     document.body.classList.remove('page-introduction-loading');
-    document.body.classList.add('page-introduction-rendering');
   }
 
   preloadAndReveal() {
@@ -58,18 +57,9 @@ class IntroductionHero {
     }, 100);
   }
 
-  onComplete() {
-    if (this.isAnimationActive) {
-      this.isAnimationActive = false;
-      document.body.classList.remove('page-introduction-rendering');
-      ScrollTrigger.refresh();
-    }
-  }
-
   initTimeline() {
     if (!this.mainContent) return;
 
-    // Build the scroll pinning timeline using GSAP ScrollTrigger
     this.timeline = gsap.timeline({
       scrollTrigger: {
         trigger: this.mainContent,
@@ -79,15 +69,6 @@ class IntroductionHero {
         pin: true,
         once: false,
         invalidateOnRefresh: true
-      },
-      onUpdate: () => {
-        const progress = this.timeline.progress();
-        if (progress >= 0.99 && this.isAnimationActive) {
-          this.onComplete();
-        } else if (progress < 0.99 && !this.isAnimationActive) {
-          this.isAnimationActive = true;
-          document.body.classList.add('page-introduction-rendering');
-        }
       }
     });
 
@@ -118,7 +99,9 @@ class IntroductionHero {
   }
 }
 
-// Initialize components on DOM load
+// ============================================
+// INIT
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize Intro Scroll Reveal
   const introEl = document.querySelector('[data-mods="introduction"]');
@@ -128,47 +111,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const introHero = new IntroductionHero(introEl);
     introScrollHeight = introHero.scrollHeight;
   } else {
+    // No intro hero on this page, clean up body class
     document.body.classList.remove('page-introduction-loading');
   }
 
-  // 2. Smart Sticky Hiding Header with Intro Hero synchronization
+  // 2. Header: single scroll-position-based visibility system
+  //    - Hidden while scrollY < introScrollHeight (hero zone)
+  //    - Visible once past the hero
+  //    - Hides on scroll-down, shows on scroll-up (smart sticky)
   const header = document.querySelector('[data-header]');
   if (header) {
     let lastScrollY = window.scrollY;
+    const isHomepage = !!introEl;
 
-    // Set initial active state if we are loaded at the top
-    if (introEl && lastScrollY < introScrollHeight) {
+    // Set initial state
+    if (isHomepage && lastScrollY < introScrollHeight) {
       header.classList.add('is-intro-active');
     }
 
     window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const isIntroActive = introEl && (currentScrollY < introScrollHeight);
+      const y = window.scrollY;
 
-      if (isIntroActive) {
+      // --- INTRO HERO ZONE ---
+      if (isHomepage && y < introScrollHeight) {
         header.classList.add('is-intro-active');
-        header.classList.remove('is-scrolled');
-        header.classList.remove('is-hidden');
-      } else {
-        header.classList.remove('is-intro-active');
-
-        // Scrolled state (adds background blur/border)
-        if (currentScrollY > 15) {
-          header.classList.add('is-scrolled');
-        } else {
-          header.classList.remove('is-scrolled');
-        }
-
-        // Hide on scroll down, show on scroll up (smart sticky behavior)
-        // Only trigger hide behavior after we have scrolled past the intro hero pin area
-        if (currentScrollY > lastScrollY && currentScrollY > (introScrollHeight + 40)) {
-          header.classList.add('is-hidden');
-        } else {
-          header.classList.remove('is-hidden');
-        }
+        header.classList.remove('is-scrolled', 'is-hidden');
+        lastScrollY = y;
+        return;
       }
 
-      lastScrollY = currentScrollY;
+      // --- PAST HERO: header is visible ---
+      header.classList.remove('is-intro-active');
+
+      // Background blur when scrolled
+      if (y > introScrollHeight + 15) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+
+      // Smart sticky: hide on scroll-down, show on scroll-up
+      if (y > lastScrollY && y > introScrollHeight + 60) {
+        header.classList.add('is-hidden');
+      } else {
+        header.classList.remove('is-hidden');
+      }
+
+      lastScrollY = y;
     }, { passive: true });
   }
 

@@ -205,10 +205,10 @@ document.addEventListener('DOMContentLoaded', () => {
           ScrollTrigger.create({
             trigger: section,
             start: 'top top',
-            end: '+=180', // Pin duration
+            end: '+=100', // Subtle hesitation hold duration
             pin: inner,
-            pinSpacing: false, // Keep disabled so blocks overlap elegantly
-            pinType: 'transform', // Forces ScrollTrigger to use transforms instead of position fixed to prevent flashing/flickers
+            pinSpacing: true, // Let ScrollTrigger handle spacing to prevent uneven section overlap
+            pinType: 'transform',
             scrub: true,
             invalidateOnRefresh: true
           });

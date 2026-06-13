@@ -64,7 +64,7 @@
 
         <!-- Text Column -->
         <div class="w-full flex-1 py-6 md:py-0">
-          {%- if caption != blank -%}
+          {%- if caption != blank and section.settings.show_caption -%}
             <p class="yuri-media-caption text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black md:text-left">
               {%- if media_link -%}<a href="{{ media_link }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
               {{- caption -}}
@@ -102,7 +102,7 @@
         {%- endif -%}
       </div>
 
-      {%- if caption != blank -%}
+      {%- if caption != blank and section.settings.show_caption -%}
         <p class="yuri-media-caption text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black mt-3
           {%- if layout == 'fullsize' %} px-6{%- endif -%}">
           {{- caption -}}
@@ -125,6 +125,13 @@
 {
   "name": "Yuri Media 2",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_caption",
+      "label": "Show Caption",
+      "default": true
+    },
+    
     {
       "type": "checkbox",
       "id": "enable_cutoff",

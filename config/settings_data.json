@@ -62,9 +62,10 @@
       "yuri-media-4": {
         "type": "yuri-media-4",
         "settings": {
-          "layout": "fullsize",
+          "layout": "landscape",
           "product": "",
           "link": "",
+          "image": "shopify://shop_images/Gemini_Generated_Image_242xka242xka242x-clean.png",
           "video_url": "",
           "caption": "",
           "body_text": ""
@@ -73,7 +74,7 @@
       "yuri-media-5": {
         "type": "yuri-media-5",
         "settings": {
-          "layout": "landscape",
+          "layout": "portrait",
           "product": "",
           "link": "",
           "video_url": "",
@@ -95,9 +96,10 @@
       "yuri-media-7": {
         "type": "yuri-media-7",
         "settings": {
-          "layout": "landscape",
+          "layout": "fullsize",
           "product": "",
           "link": "",
+          "image": "shopify://shop_images/Gemini_Generated_Image_g4o5sfg4o5sfg4o5-clean.png",
           "video_url": "",
           "caption": "",
           "body_text": ""

@@ -104,10 +104,8 @@ class IntroductionHero {
           if (header) {
             if (self.progress < 0.78) {
               header.classList.add('is-intro-active');
-              header.classList.remove('is-scrolled');
             } else {
               header.classList.remove('is-intro-active');
-              header.classList.add('is-scrolled');
             }
           }
         }

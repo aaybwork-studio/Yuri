@@ -129,9 +129,10 @@ body.page-introduction-loading {
 
 /* Header logo dimensions */
 .header-logo svg {
-  height: 100%;
+  fill: #ff6f00;
+  color: #ff6f00;
   width: auto;
-  fill: currentColor;
+  height: 100%;
 }
 
 /* Fullscreen Media styling */
@@ -315,5 +316,27 @@ html.lenis, html.lenis body {
 /* 30px Spacing between media sections */
 .yuri-media {
   padding-bottom: 30px;
+}
+
+/* Adjust sizes of portrait and landscape cards on desktop screens to fit the screen */
+@media screen and (min-width: 768px) {
+  /* Portrait Cards: Limit sizing so aspect ratio doesn't make height taller than viewport */
+  .yuri-media--portrait .yuri-media-inner {
+    max-width: 480px !important;
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  /* Landscape Cards: Limit sizing */
+  .yuri-media--landscape .yuri-media-inner {
+    max-width: 850px !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+/* Add 30px spacing after the last media card before the footer */
+.yuri-media:last-of-type {
+  margin-bottom: 30px;
 }
 

@@ -489,17 +489,26 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchCart();
 
   // 5. Background Audio System
-  const audio = document.getElementById('BgAudio');
+  const wavesAudio = document.getElementById('BgAudioWaves');
+  const bowlAudio = document.getElementById('BgAudioBowl');
   const soundToggle = document.querySelector('[data-sound-toggle]');
   
-  if (audio && soundToggle) {
+  if ((wavesAudio || bowlAudio) && soundToggle) {
     let hasInteracted = false;
 
-    const playAudio = () => {
-      audio.play().then(() => {
+    // Set volumes according to requirements
+    if (wavesAudio) wavesAudio.volume = 0.3;
+    if (bowlAudio) bowlAudio.volume = 0.75;
+
+    const playAllAudio = () => {
+      const playPromises = [];
+      if (wavesAudio) playPromises.push(wavesAudio.play());
+      if (bowlAudio) playPromises.push(bowlAudio.play());
+
+      Promise.all(playPromises).then(() => {
         soundToggle.textContent = 'MUTE';
       }).catch(err => {
-        console.log('Autoplay blocked by browser. Sound remains paused until user gesture.');
+        console.log('Autoplay blocked by browser. Sound remains paused until user gesture.', err);
         soundToggle.textContent = 'PLAY SOUND';
       });
     };
@@ -507,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const initAutoplay = () => {
       if (hasInteracted) return;
       hasInteracted = true;
-      playAudio();
+      playAllAudio();
       
       document.removeEventListener('click', initAutoplay);
       document.removeEventListener('touchstart', initAutoplay);
@@ -522,16 +531,28 @@ document.addEventListener('DOMContentLoaded', () => {
       e.stopPropagation();
       hasInteracted = true;
 
-      if (audio.paused) {
-        audio.play();
-        audio.muted = false;
+      // We determine play/pause state based on wavesAudio if present, else bowlAudio
+      const primaryAudio = wavesAudio || bowlAudio;
+      if (!primaryAudio) return;
+
+      if (primaryAudio.paused) {
+        if (wavesAudio) {
+          wavesAudio.play();
+          wavesAudio.muted = false;
+        }
+        if (bowlAudio) {
+          bowlAudio.play();
+          bowlAudio.muted = false;
+        }
         soundToggle.textContent = 'MUTE';
       } else {
-        if (audio.muted) {
-          audio.muted = false;
+        if (primaryAudio.muted) {
+          if (wavesAudio) wavesAudio.muted = false;
+          if (bowlAudio) bowlAudio.muted = false;
           soundToggle.textContent = 'MUTE';
         } else {
-          audio.muted = true;
+          if (wavesAudio) wavesAudio.muted = true;
+          if (bowlAudio) bowlAudio.muted = true;
           soundToggle.textContent = 'UNMUTE';
         }
       }

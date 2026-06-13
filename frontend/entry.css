@@ -346,6 +346,34 @@ html.lenis, html.lenis body {
   .yuri-media--cutoff.yuri-media--fullsize .yuri-media-content {
     max-height: calc(100vh - 110px) !important; /* cuts off an extra 30px from the bottom */
   }
+
+  /* Absolute Full Screen Layout (no spacing, full viewport dimensions) */
+  .yuri-media--fullscreen {
+    padding-bottom: 0px !important;
+  }
+  .yuri-media--fullscreen .yuri-media-inner {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .yuri-media--fullscreen .yuri-media-content {
+    width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    aspect-ratio: auto !important;
+  }
+}
+
+/* Base style overrides for absolute fullscreen */
+.yuri-media--fullscreen {
+  padding-bottom: 0px !important;
+}
+.yuri-media--fullscreen .yuri-media-inner {
+  padding: 0 !important;
+}
+.yuri-media--fullscreen .yuri-media-content {
+  width: 100% !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
 }
 
 /* Hide default browser scrollbars */

@@ -200,19 +200,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // Skip the very first section (index 0) to avoid double-pinning with the hero scroll reveal
         if (index === 0) return;
 
-        const inner = section.querySelector('.yuri-media-inner');
-        if (inner) {
-          ScrollTrigger.create({
-            trigger: section,
-            start: 'top top',
-            end: '+=100', // Subtle hesitation hold duration
-            pin: inner,
-            pinSpacing: true, // Let ScrollTrigger handle spacing to prevent uneven section overlap
-            pinType: 'transform',
-            scrub: true,
-            invalidateOnRefresh: true
-          });
-        }
+        ScrollTrigger.create({
+          trigger: section,
+          start: 'top top',
+          end: '+=100', // Subtle hesitation hold duration
+          pin: section, // Pin the outer block-level section element to avoid inner layout shifts
+          pinSpacing: true,
+          scrub: true,
+          invalidateOnRefresh: true
+        });
       });
     }
   };

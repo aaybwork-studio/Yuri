@@ -1,9 +1,17 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Dia';
+  src: url('../assets/dia-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* YURI Brand Semantic Colors */
-  --color-brand-bg: #eeecd3;
-  --color-brand-text: #403002;
+  --color-brand-bg: #faf8f1;
+  --color-brand-text: #000000;
   --color-accent-rose: #cc1574;
   --color-accent-gold: #efbf04;
 
@@ -18,7 +26,7 @@
 
   /* Typography */
   --font-serif: "Space Grotesk", sans-serif;
-  --font-sans: "Hanken Grotesk", sans-serif;
+  --font-sans: "Dia", sans-serif;
 }
 
 /* Base custom styles to reflect Zen wabi-sabi aesthetics */
@@ -691,5 +699,171 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h0 {
   border-left: none !important;
   border-right: none !important;
   color: var(--color-warm-white) !important;
+}
+
+/* ==========================================================================
+   HOMEPAGE SCROLL REVEAL & SMART HEADER CUSTOM OVERRIDES (MAD ET LEN STYLE)
+   ========================================================================== */
+
+/* 1. Global Page Introduction Classes */
+body.page-introduction-loading {
+  overflow: hidden !important;
+}
+
+body.page-introduction-loading .section-header {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+body.page-introduction {
+  overflow: hidden !important;
+}
+
+body.page-introduction .section-header {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}
+
+body.page-introduction .header-wrapper {
+  background-color: transparent !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* 2. Introduction Section Styles */
+.introduction {
+  background-color: #000000;
+  height: 100vh;
+  height: 100dvh;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+.introduction-background {
+  background-color: #000000;
+  pointer-events: none;
+}
+
+.introduction-wrapper {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+.introduction-container {
+  height: 100%;
+  position: relative;
+}
+
+.introduction-media {
+  height: 100%;
+  width: 100%;
+}
+
+.introduction-media-image {
+  height: 100%;
+  width: 100%;
+}
+
+.introduction-media-image img {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  height: 100%;
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .introduction-media-mobile {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .introduction-media-desktop {
+    display: none !important;
+  }
+}
+
+.introduction-logo svg {
+  width: 100%;
+  height: auto;
+  fill: #ffffff !important;
+}
+
+.introduction-logo svg path,
+.introduction-logo svg polygon {
+  fill: #ffffff !important;
+}
+
+/* 3. Smooth Smart Hiding Header */
+.section-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease !important;
+  will-change: transform;
+}
+
+.shopify-section-header-hidden {
+  transform: translateY(-100%) !important;
+}
+
+.shopify-section-header-sticky {
+  position: fixed !important;
+  width: 100%;
+  top: 0;
+}
+
+/* 4. Minimalist Header elements (MENU, BAG) */
+.header__icon--menu svg,
+.header__icon--close svg {
+  display: none !important;
+}
+
+.header__icon--menu span::after {
+  content: "MENU" !important;
+  font-family: var(--font-sans) !important;
+  font-size: 1.1rem !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--color-brand-text) !important;
+  display: inline-block;
+}
+
+details[open] .header__icon--menu span::after {
+  content: "CLOSE" !important;
+}
+
+.header__cart-text-only {
+  text-decoration: none !important;
+}
+
+.header__cart-text {
+  font-family: var(--font-sans) !important;
+  font-size: 1.1rem !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--color-brand-text) !important;
+  display: inline-block;
+}
+
+/* 5. Clean minimalist typography styling */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h0 {
+  text-transform: uppercase !important;
+  letter-spacing: 0.15em !important;
+}
+
+body, p, a, span, div {
+  font-family: var(--font-sans) !important;
+  font-weight: 300;
 }
 

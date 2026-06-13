@@ -1,0 +1,80 @@
+{
+  "sections": {
+    "introduction_hero": {
+      "type": "custom-introduction-hero",
+      "settings": {
+        "scroll_duration": 600
+      }
+    },
+    "page_1_fullscreen_with_label": {
+      "type": "custom-fullscreen-banner",
+      "settings": {
+        "media_type": "image",
+        "show_label": true,
+        "label_text": "bleu outrenoir mad et len x nicole hollis",
+        "label_position": "top-left",
+        "overlay_opacity": 15
+      }
+    },
+    "page_2_narrow_video": {
+      "type": "custom-gallery-block",
+      "settings": {
+        "layout_style": "portrait-card",
+        "media_type": "video",
+        "video_url": "https://mad-et-len-cms.s3.eu-west-3.amazonaws.com/prod/site_1/928dcf4ec2bd19ade9d9fd608e879423.mp4?X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIATPX2NE5VDLG6MVAH%2F20260612%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20260612T192135Z&X-Amz-SignedHeaders=host&X-Amz-Expires=14400&X-Amz-Signature=cea049b1e4d0d3680cf3942c7c6da6a9e35e20445f7003909aa3ac0e12da26ad",
+        "top_left_label": "bleu outrenoir mad et len x nicole hollis",
+        "bottom_center_label": "discover our fumiste candle"
+      }
+    },
+    "page_3_fullscreen_with_label": {
+      "type": "custom-fullscreen-banner",
+      "settings": {
+        "media_type": "image",
+        "show_label": true,
+        "label_text": "pot pourri mineral totem",
+        "label_position": "bottom-left",
+        "overlay_opacity": 10
+      }
+    },
+    "page_4_narrow_boxed": {
+      "type": "custom-gallery-block",
+      "settings": {
+        "layout_style": "centered-boxed",
+        "media_type": "image",
+        "bottom_left_label": "bleu outrenoir mad et len x nicole hollis",
+        "show_center_dot": true
+      }
+    },
+    "page_5_narrow_boxed_2": {
+      "type": "custom-gallery-block",
+      "settings": {
+        "layout_style": "portrait-card",
+        "media_type": "image",
+        "top_left_label": "candles — sang bleu",
+        "bottom_center_label": "bougies parfumées — sang bleu"
+      }
+    },
+    "page_6_fullscreen_without_label": {
+      "type": "custom-fullscreen-banner",
+      "settings": {
+        "media_type": "image",
+        "show_label": false,
+        "overlay_opacity": 0
+      }
+    },
+    "about_us": {
+      "type": "custom-about-us",
+      "settings": {}
+    }
+  },
+  "order": [
+    "introduction_hero",
+    "page_1_fullscreen_with_label",
+    "page_2_narrow_video",
+    "page_3_fullscreen_with_label",
+    "page_4_narrow_boxed",
+    "page_5_narrow_boxed_2",
+    "page_6_fullscreen_without_label",
+    "about_us"
+  ]
+}

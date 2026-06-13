@@ -1,0 +1,204 @@
+<div class="custom-gallery-block py-12 px-4 md:py-20 md:px-8 bg-[var(--color-brand-bg)] w-full flex flex-col justify-center items-center relative overflow-hidden" id="GalleryBlock-{{ section.id }}">
+  
+  {%- if section.settings.link != blank -%}
+    <a href="{{ section.settings.link }}" class="w-full flex flex-col items-center group no-underline">
+  {%- endif -%}
+
+  {%- if section.settings.layout_style == 'portrait-card' -%}
+    {%- comment -%}Portrait Card (Image 2 style){%- endcomment -%}
+    <div class="w-full max-w-[1400px] flex flex-col relative px-4 md:px-12">
+      {%- if section.settings.top_left_label != blank -%}
+        <div class="self-start text-left mb-6 select-none">
+          <span class="font-sans text-[1.1rem] tracking-[0.15em] uppercase text-black font-light" style="font-family: var(--font-sans); font-size: 1.1rem; letter-spacing: 0.15em;">
+            {{ section.settings.top_left_label | escape }}
+          </span>
+        </div>
+      {%- endif -%}
+      
+      <div class="w-full max-w-[600px] mx-auto aspect-[3/4] relative overflow-hidden">
+        {%- if section.settings.media_type == 'video' and section.settings.video_url != blank -%}
+          <video class="w-full h-full object-cover" autoplay loop muted playsinline poster="{{ section.settings.image | image_url: width: 1000 }}">
+            <source src="{{ section.settings.video_url }}" type="video/mp4">
+          </video>
+        {%- else -%}
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image | image_url: width: 1200 | image_tag: 
+              class: 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]',
+              loading: 'lazy'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover bg-neutral-200 opacity-60' }}
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.bottom_center_label != blank -%}
+        <div class="text-center mt-8 select-none">
+          <span class="font-sans text-[1.1rem] tracking-[0.15em] uppercase text-black font-light border-b border-transparent hover:border-black transition-colors pb-0.5" style="font-family: var(--font-sans); font-size: 1.1rem; letter-spacing: 0.15em;">
+            {{ section.settings.bottom_center_label | escape }}
+          </span>
+        </div>
+      {%- endif -%}
+    </div>
+
+  {%- elsif section.settings.layout_style == 'landscape-banner' -%}
+    {%- comment -%}Landscape Banner (Image 3 style){%- endcomment -%}
+    <div class="w-full max-w-[1400px] flex flex-col relative px-4 md:px-12">
+      <div class="w-full aspect-[16/9] relative overflow-hidden">
+        {%- if section.settings.media_type == 'video' and section.settings.video_url != blank -%}
+          <video class="w-full h-full object-cover" autoplay loop muted playsinline poster="{{ section.settings.image | image_url: width: 1600 }}">
+            <source src="{{ section.settings.video_url }}" type="video/mp4">
+          </video>
+        {%- else -%}
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image | image_url: width: 2000 | image_tag: 
+              class: 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]',
+              loading: 'lazy'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full object-cover bg-neutral-200 opacity-60' }}
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+      
+      {%- if section.settings.bottom_left_label != blank -%}
+        <div class="w-full bg-transparent py-4 text-left select-none">
+          <span class="font-sans text-[1.1rem] tracking-[0.15em] uppercase text-black font-light" style="font-family: var(--font-sans); font-size: 1.1rem; letter-spacing: 0.15em;">
+            {{ section.settings.bottom_left_label | escape }}
+          </span>
+        </div>
+      {%- endif -%}
+    </div>
+
+  {%- elsif section.settings.layout_style == 'centered-boxed' -%}
+    {%- comment -%}Centered Boxed (Image 4 style){%- endcomment -%}
+    <div class="w-full max-w-[1400px] flex flex-col relative px-4 md:px-12 items-center">
+      <div class="w-full max-w-[950px] aspect-[4/3] md:aspect-[1.5] relative overflow-hidden">
+        {%- if section.settings.media_type == 'video' and section.settings.video_url != blank -%}
+          <video class="w-full h-full object-cover" autoplay loop muted playsinline poster="{{ section.settings.image | image_url: width: 1400 }}">
+            <source src="{{ section.settings.video_url }}" type="video/mp4">
+          </video>
+        {%- else -%}
+          {%- if section.settings.image != blank -%}
+            {{ section.settings.image | image_url: width: 1600 | image_tag: 
+              class: 'w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]',
+              loading: 'lazy'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full object-cover bg-neutral-200 opacity-60' }}
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+      
+      <div class="w-full max-w-[950px] flex justify-between items-center mt-6 select-none relative">
+        <div class="text-left max-w-[60%]">
+          {%- if section.settings.bottom_left_label != blank -%}
+            <span class="font-sans text-[1.1rem] tracking-[0.15em] uppercase text-black font-light" style="font-family: var(--font-sans); font-size: 1.1rem; letter-spacing: 0.15em;">
+              {{ section.settings.bottom_left_label | escape }}
+            </span>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.show_center_dot -%}
+          <div class="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <span class="w-4 h-4 md:w-5 md:h-5 rounded-full bg-black block"></span>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.link != blank -%}
+    </a>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Yuri Gallery Block",
+  "tag": "section",
+  "class": "section-gallery",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout_style",
+      "label": "Layout Style",
+      "options": [
+        {
+          "value": "portrait-card",
+          "label": "Portrait Centered Card (Image 2)"
+        },
+        {
+          "value": "landscape-banner",
+          "label": "Landscape Wide Banner (Image 3)"
+        },
+        {
+          "value": "centered-boxed",
+          "label": "Boxed Centered Media (Image 4)"
+        }
+      ],
+      "default": "portrait-card"
+    },
+    {
+      "type": "select",
+      "id": "media_type",
+      "label": "Media Type",
+      "options": [
+        {
+          "value": "image",
+          "label": "Image"
+        },
+        {
+          "value": "video",
+          "label": "Video (MP4)"
+        }
+      ],
+      "default": "image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image / Video Poster"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "MP4 Video URL",
+      "info": "Paste MP4 video link (e.g. S3 or Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "top_left_label",
+      "label": "Top Left Label",
+      "default": "bleu outrenoir mad et len x nicole hollis"
+    },
+    {
+      "type": "text",
+      "id": "bottom_left_label",
+      "label": "Bottom Left Label"
+    },
+    {
+      "type": "text",
+      "id": "bottom_center_label",
+      "label": "Bottom Center Label",
+      "default": "discover our product"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_center_dot",
+      "label": "Show Centered Scroll Dot",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Block Click Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Yuri Gallery Block"
+    }
+  ]
+}
+{% endschema %}

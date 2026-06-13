@@ -1,0 +1,94 @@
+<div class="introduction w-full h-[100vh] h-[100dvh] relative overflow-hidden" data-mods="introduction" id="IntroHero-{{ section.id }}" data-scroll-height="{{ section.settings.scroll_duration }}">
+  <div class="introduction-wrapper w-full h-full relative z-10">
+    <div class="introduction-container w-full h-full relative" data-introduction-wrapper>
+      <div class="introduction-media w-full h-full relative">
+        
+        <div class="introduction-media-image w-full h-full relative">
+          {%- if section.settings.image_mobile != blank -%}
+            {{ section.settings.image_mobile | image_url: width: 1000 | image_tag: 
+              class: 'introduction-media-mobile w-full h-full object-cover opacity-0 transition-opacity duration-300',
+              loading: 'eager',
+              fetchpriority: 'high'
+            }}
+          {%- else -%}
+            {%- assign mobile_fallback = 'yuri-hero-1.png' | asset_url -%}
+            <img src="{{ mobile_fallback }}" class="introduction-media-mobile w-full h-full object-cover opacity-0 transition-opacity duration-300" alt="" loading="eager" width="800" height="800">
+          {%- endif -%}
+
+          {%- if section.settings.image_desktop != blank -%}
+            {{ section.settings.image_desktop | image_url: width: 2000 | image_tag: 
+              class: 'introduction-media-desktop w-full h-full object-cover opacity-0 transition-opacity duration-300',
+              loading: 'eager',
+              fetchpriority: 'high'
+            }}
+          {%- else -%}
+            {%- assign desktop_fallback = 'yuri-hero-1.png' | asset_url -%}
+            <img src="{{ desktop_fallback }}" class="introduction-media-desktop w-full h-full object-cover opacity-0 transition-opacity duration-300" alt="" loading="eager" width="1600" height="1200">
+          {%- endif -%}
+        </div>
+
+        <div class="introduction-logo absolute inset-0 z-30 flex items-center justify-center pointer-events-none px-4" data-introduction-logo>
+          {%- if section.settings.logo_svg != blank -%}
+            <div class="w-full max-w-[280px] sm:max-w-[400px] md:max-w-[650px] lg:max-w-[850px] text-white fill-current">
+              {{ section.settings.logo_svg }}
+            </div>
+          {%- elsif section.settings.logo_image != blank -%}
+            {{ section.settings.logo_image | image_url: width: 1000 | image_tag:
+              class: 'w-full max-w-[280px] sm:max-w-[400px] md:max-w-[500px] h-auto object-contain',
+              loading: 'eager'
+            }}
+          {%- else -%}
+            <span class="text-white text-3xl sm:text-4xl md:text-6xl tracking-[0.2em] font-sans font-extralight uppercase select-none">{{ shop.name }}</span>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="introduction-background absolute inset-0 bg-black z-20 pointer-events-none" data-introduction-background></div>
+</div>
+
+{% schema %}
+{
+  "name": "Yuri Intro Scroll Hero",
+  "tag": "section",
+  "class": "section-intro",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop Hero Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile Hero Image (Vertical Aspect)"
+    },
+    {
+      "type": "textarea",
+      "id": "logo_svg",
+      "label": "SVG Logo Markup",
+      "info": "Paste raw SVG markup here. Fill will be overridden to white."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image Fallback"
+    },
+    {
+      "type": "range",
+      "id": "scroll_duration",
+      "min": 200,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Scroll Pinning Distance",
+      "default": 600
+    }
+  ],
+  "presets": [
+    {
+      "name": "Yuri Intro Scroll Hero"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,17 @@
+name: Deploy Theme
+
+on:
+  push:
+    branches:
+      - feature/custom-minimal-theme
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Deploy to Shopify
+        uses: shopify/cli@latest
+        with:
+          args: theme push --theme ${{ secrets.SHOPIFY_THEME_ID }} --store ${{ secrets.SHOPIFY_STORE_URL }} --password ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }} --allow-live --nodelete

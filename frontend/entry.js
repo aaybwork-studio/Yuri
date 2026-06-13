@@ -122,51 +122,50 @@ class IntroductionHero {
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize Intro Scroll Reveal
   const introEl = document.querySelector('[data-mods="introduction"]');
+  let introScrollHeight = 0;
+
   if (introEl) {
-    new IntroductionHero(introEl);
-
-    // Safety fallback: if introduction rendering is stuck, force remove it after 2.5s
-    setTimeout(() => {
-      if (document.body.classList.contains('page-introduction-rendering')) {
-        document.body.classList.remove('page-introduction-rendering');
-        document.body.classList.remove('page-introduction-loading');
-        console.warn('YURI: Safety fallback triggered. Restored header visibility.');
-      }
-    }, 2500);
-
-    // Safety scroll fallback: if user scrolls manually, restore header visibility
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20 && document.body.classList.contains('page-introduction-rendering')) {
-        document.body.classList.remove('page-introduction-rendering');
-        document.body.classList.remove('page-introduction-loading');
-      }
-    }, { passive: true });
+    const introHero = new IntroductionHero(introEl);
+    introScrollHeight = introHero.scrollHeight;
   } else {
     document.body.classList.remove('page-introduction-loading');
   }
 
-  // 2. Initialize Smart Sticky Hiding Header
+  // 2. Smart Sticky Hiding Header with Intro Hero synchronization
   const header = document.querySelector('[data-header]');
   if (header) {
     let lastScrollY = window.scrollY;
 
+    // Set initial active state if we are loaded at the top
+    if (introEl && lastScrollY < introScrollHeight) {
+      header.classList.add('is-intro-active');
+    }
+
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
+      const isIntroActive = introEl && (currentScrollY < introScrollHeight);
 
-      // Scrolled state
-      if (currentScrollY > 15) {
-        header.classList.add('is-scrolled');
-      } else {
+      if (isIntroActive) {
+        header.classList.add('is-intro-active');
         header.classList.remove('is-scrolled');
-      }
-
-      // Hide / Show on direction
-      if (currentScrollY > lastScrollY && currentScrollY > 60) {
-        // Scrolling down - hide header
-        header.classList.add('is-hidden');
-      } else {
-        // Scrolling up - show header
         header.classList.remove('is-hidden');
+      } else {
+        header.classList.remove('is-intro-active');
+
+        // Scrolled state (adds background blur/border)
+        if (currentScrollY > 15) {
+          header.classList.add('is-scrolled');
+        } else {
+          header.classList.remove('is-scrolled');
+        }
+
+        // Hide on scroll down, show on scroll up (smart sticky behavior)
+        // Only trigger hide behavior after we have scrolled past the intro hero pin area
+        if (currentScrollY > lastScrollY && currentScrollY > (introScrollHeight + 40)) {
+          header.classList.add('is-hidden');
+        } else {
+          header.classList.remove('is-hidden');
+        }
       }
 
       lastScrollY = currentScrollY;

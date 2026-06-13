@@ -1,6 +1,37 @@
 {%- liquid
-  assign layout = section.settings.layout | default: 'fullsize'
-  assign aspect_ratio = section.settings.aspect_ratio | default: 'natural'
+  assign layout = section.settings.layout | default: 'landscape'
+  assign product_handle = section.settings.product
+  
+  if product_handle != blank
+    if product_handle.title != blank
+      assign product_obj = product_handle
+    else
+      assign product_obj = all_products[product_handle]
+    endif
+    assign media_link = product_obj.url
+    assign default_image = product_obj.featured_image
+    assign default_caption = product_obj.title
+  else
+    assign media_link = section.settings.link
+    assign default_image = nil
+    assign default_caption = ""
+  endif
+
+  if section.settings.image != blank
+    assign image = section.settings.image
+  else
+    assign image = default_image
+  endif
+
+  assign video_url = section.settings.video_url
+
+  if section.settings.caption != blank
+    assign caption = section.settings.caption
+  else
+    assign caption = default_caption
+  endif
+
+  assign body_text = section.settings.body_text
 -%}
 
 <div class="yuri-media yuri-media--{{ layout }} w-full bg-[#faf8f1] overflow-hidden" id="Media-{{ section.id }}">
@@ -12,64 +43,12 @@
     {%- elsif layout == 'split-left' or layout == 'split-right' %} max-w-[1400px] mx-auto px-6 py-12
     {%- endif -%}">
 
-    <div class="grid grid-cols-1
-      {%- if section.blocks.size == 2 %} md:grid-cols-2 gap-10 md:gap-16
-      {%- elsif section.blocks.size >= 3 %} md:grid-cols-3 gap-8 md:gap-12
-      {%- endif -%}">
-
-      {%- for block in section.blocks -%}
-        {%- liquid
-          assign product_handle = block.settings.product
-          
-          if product_handle != blank
-            if product_handle.title != blank
-              assign product_obj = product_handle
-            else
-              assign product_obj = all_products[product_handle]
-            endif
-            assign media_link = product_obj.url
-            assign default_image = product_obj.featured_image
-            assign default_caption = product_obj.title
-          else
-            assign media_link = block.settings.link
-            assign default_image = nil
-            assign default_caption = ""
-          endif
-
-          if block.settings.image != blank
-            assign image = block.settings.image
-          else
-            assign image = default_image
-          endif
-
-          assign video_url = block.settings.video_url
-
-          if block.settings.caption != blank
-            assign caption = block.settings.caption
-          else
-            assign caption = default_caption
-          endif
-
-          assign body_text = block.settings.body_text
-        -%}
-
-        <div class="yuri-media-card w-full flex flex-col
-          {%- if layout == 'split-left' %} md:flex-row md:items-center md:gap-12
-          {%- elsif layout == 'split-right' %} md:flex-row-reverse md:items-center md:gap-12
-          {%- endif -%}" {{ block.shopify_attributes }}>
-
-          <!-- Media container -->
-          <div class="yuri-media-media-wrapper overflow-hidden relative
-            {%- if layout == 'split-left' or layout == 'split-right' %} md:w-1/2 flex-none
-            {%- else %} w-full
-            {%- endif -%}
-            {%- if aspect_ratio == 'portrait' %} aspect-[3/4]
-            {%- elsif aspect_ratio == 'landscape' %} aspect-[16/10]
-            {%- elsif aspect_ratio == 'square' %} aspect-[1/1]
-            {%- endif -%}">
-
-            {%- if media_link -%}<a href="{{ media_link }}" class="yuri-media-link block w-full h-full">{%- endif -%}
-
+    {%- if layout == 'split-left' or layout == 'split-right' -%}
+      <div class="flex flex-col md:flex-row {%- if layout == 'split-right' %} md:flex-row-reverse {%- endif %} md:items-center md:gap-12 w-full">
+        <!-- Media Column -->
+        <div class="w-full md:w-1/2 flex-none">
+          {%- if media_link -%}<a href="{{ media_link }}" class="yuri-media-link block">{%- endif -%}
+          <div class="yuri-media-content w-full overflow-hidden">
             {%- if video_url != blank -%}
               <video class="w-full h-full object-cover" autoplay loop muted playsinline>
                 <source src="{{ video_url }}" type="video/mp4">
@@ -77,49 +56,68 @@
             {%- elsif image != blank -%}
               {{ image | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover', loading: 'lazy', widths: '375, 750, 1100, 1500, 2000' }}
             {%- else -%}
-              {%- liquid
-                assign fallback_img = 'yuri-media-6a.png'
-                if forloop.index == 2
-                  assign fallback_img = 'yuri-media-6b.png'
-                elsif forloop.index == 3
-                  assign fallback_img = 'yuri-media-6c.png'
-                endif
-              -%}
-              <img src="{{ fallback_img | asset_url }}" alt="" class="w-full h-full object-cover" loading="lazy" width="1400" height="1000">
+              <img src="{{ 'yuri-media-6.png' | asset_url }}" alt="" class="w-full h-full object-cover" loading="lazy" width="1400" height="1000">
             {%- endif -%}
-
-            {%- if media_link -%}</a>{%- endif -%}
           </div>
-
-          <!-- Text container -->
-          <div class="yuri-media-text-wrapper flex-1
-            {%- if layout == 'split-left' or layout == 'split-right' %} py-6 md:py-0
-            {%- endif -%}">
-            
-            {%- if caption != blank -%}
-              <p class="yuri-media-caption text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black mt-3
-                {%- if layout == 'fullsize' and section.blocks.size == 1 %} px-6{%- endif -%}">
-                {%- if media_link -%}<a href="{{ media_link }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
-                {{- caption -}}
-                {%- if media_link -%}</a>{%- endif -%}
-              </p>
-            {%- endif -%}
-
-            {%- if body_text != blank -%}
-              <div class="yuri-media-body-text max-w-[650px] text-center mt-6 px-6 text-[13px] sm:text-[14px] leading-[1.8] tracking-[0.05em] font-sans font-light text-black
-                {%- if layout == 'split-left' or layout == 'split-right' %} md:text-left md:px-0 md:mt-4
-                {%- endif -%}">
-                {%- if media_link -%}<a href="{{ media_link }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
-                {{- body_text -}}
-                {%- if media_link -%}</a>{%- endif -%}
-              </div>
-            {%- endif -%}
-
-          </div>
+          {%- if media_link -%}</a>{%- endif -%}
         </div>
-      {%- endfor -%}
 
-    </div>
+        <!-- Text Column -->
+        <div class="w-full flex-1 py-6 md:py-0">
+          {%- if caption != blank -%}
+            <p class="yuri-media-caption text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black md:text-left">
+              {%- if media_link -%}<a href="{{ media_link }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
+              {{- caption -}}
+              {%- if media_link -%}</a>{%- endif -%}
+            </p>
+          {%- endif -%}
+
+          {%- if body_text != blank -%}
+            <div class="yuri-media-body-text max-w-[650px] text-center md:text-left mt-6 text-[13px] sm:text-[14px] leading-[1.8] tracking-[0.05em] font-sans font-light text-black">
+              {%- if media_link -%}<a href="{{ media_link }}" class="hover:opacity-60 transition-opacity">{%- endif -%}
+              {{- body_text -}}
+              {%- if media_link -%}</a>{%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+    {%- else -%}
+      <!-- Centered/Fullsize Layouts -->
+      {%- if media_link -%}<a href="{{ media_link }}" class="yuri-media-link block">{%- endif -%}
+
+      <div class="yuri-media-content w-full overflow-hidden
+        {%- if layout == 'portrait' %} aspect-[3/4]
+        {%- elsif layout == 'landscape' %} aspect-[16/10]
+        {%- endif -%}">
+
+        {%- if video_url != blank -%}
+          <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+            <source src="{{ video_url }}" type="video/mp4">
+          </video>
+        {%- elsif image != blank -%}
+          {{ image | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover', loading: 'lazy', widths: '375, 750, 1100, 1500, 2000' }}
+        {%- else -%}
+          <img src="{{ 'yuri-media-6.png' | asset_url }}" alt="" class="w-full h-full object-cover" loading="lazy" width="1400" height="1000">
+        {%- endif -%}
+      </div>
+
+      {%- if caption != blank -%}
+        <p class="yuri-media-caption text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black mt-3
+          {%- if layout == 'fullsize' %} px-6{%- endif -%}">
+          {{- caption -}}
+        </p>
+      {%- endif -%}
+
+      {%- if body_text != blank -%}
+        <div class="yuri-media-body-text max-w-[650px] mx-auto text-center mt-6 px-6 text-[13px] sm:text-[14px] leading-[1.8] tracking-[0.05em] font-sans font-light text-black">
+          {{- body_text -}}
+        </div>
+      {%- endif -%}
+
+      {%- if media_link -%}</a>{%- endif -%}
+    {%- endif -%}
+
   </div>
 </div>
 
@@ -140,75 +138,43 @@
         { "value": "asymmetric-left", "label": "Asymmetric Offset Left" },
         { "value": "asymmetric-right", "label": "Asymmetric Offset Right" }
       ],
-      "default": "fullsize"
+      "default": "landscape"
     },
     {
-      "type": "select",
-      "id": "aspect_ratio",
-      "label": "Media Aspect Ratio",
-      "options": [
-        { "value": "natural", "label": "Natural" },
-        { "value": "portrait", "label": "Portrait (3:4)" },
-        { "value": "landscape", "label": "Landscape (16:10)" },
-        { "value": "square", "label": "Square (1:1)" }
-      ],
-      "default": "natural"
-    }
-  ],
-  "max_blocks": 3,
-  "blocks": [
+      "type": "product",
+      "id": "product",
+      "label": "Product Link"
+    },
     {
-      "type": "card",
-      "name": "Media Card",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Custom Image Override"
-        },
-        {
-          "type": "text",
-          "id": "video_url",
-          "label": "Video URL (MP4)",
-          "info": "Upload to Shopify Files and paste URL here."
-        },
-        {
-          "type": "product",
-          "id": "product",
-          "label": "Product Link"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Custom Link Override"
-        },
-        {
-          "type": "text",
-          "id": "caption",
-          "label": "Custom Caption Override"
-        },
-        {
-          "type": "text",
-          "id": "body_text",
-          "label": "Body Text Banner"
-        }
-      ]
+      "type": "url",
+      "id": "link",
+      "label": "Custom Link Override"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Custom Image Override"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL (MP4)",
+      "info": "Upload to Shopify Files and paste URL here."
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Custom Caption Override"
+    },
+    {
+      "type": "text",
+      "id": "body_text",
+      "label": "Body Text Banner"
     }
   ],
   "presets": [
     {
-      "name": "Yuri Media 6",
-      "blocks": [
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        },
-        {
-          "type": "card"
-        }
-      ]
+      "name": "Yuri Media 6"
     }
   ]
 }

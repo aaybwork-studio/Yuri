@@ -196,17 +196,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const initMediaScrollHolds = () => {
     if (window.innerWidth >= 768) {
       const mediaSections = document.querySelectorAll('.yuri-media');
-      mediaSections.forEach((section) => {
-        // Skip the very first section if it's the landing zone already handled by the intro scroll-lock,
-        // or pin all of them for a uniform editorial feel. Let's pin all media blocks.
+      mediaSections.forEach((section, index) => {
+        // Skip the very first section (index 0) to avoid double-pinning with the hero scroll reveal
+        if (index === 0) return;
+
         const inner = section.querySelector('.yuri-media-inner');
         if (inner) {
           ScrollTrigger.create({
             trigger: section,
             start: 'top top',
-            end: '+=250', // Pin duration: locks the image briefly on screen
+            end: '+=180', // Slightly reduced duration for smoother transition resistance
             pin: inner,
-            pinSpacer: true,
+            pinSpacing: false, // Disables ScrollTrigger adding spacer gaps underneath pinned items
             scrub: true,
             invalidateOnRefresh: true
           });

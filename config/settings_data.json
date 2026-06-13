@@ -26,7 +26,9 @@
       "yuri-media-1": {
         "type": "yuri-media-1",
         "settings": {
-          "layout": "fullsize",
+          "show_caption": true,
+          "enable_cutoff": false,
+          "layout": "fullscreen",
           "product": "",
           "link": "",
           "image": "shopify://shop_images/Gemini_Generated_Image_hpf9s4hpf9s4hpf9_4fe279af-65b3-4ef6-9c54-a64a566fd73a.png",
@@ -38,6 +40,8 @@
       "yuri-media-2": {
         "type": "yuri-media-2",
         "settings": {
+          "show_caption": true,
+          "enable_cutoff": false,
           "layout": "portrait",
           "product": "hinoki-temple-smoke",
           "link": "",
@@ -50,6 +54,8 @@
       "yuri-media-3": {
         "type": "yuri-media-3",
         "settings": {
+          "show_caption": true,
+          "enable_cutoff": false,
           "layout": "fullsize",
           "product": "hinoki-temple-smoke",
           "link": "",
@@ -62,6 +68,8 @@
       "yuri-media-4": {
         "type": "yuri-media-4",
         "settings": {
+          "show_caption": true,
+          "enable_cutoff": false,
           "layout": "landscape",
           "product": "matcha-raw-bamboo",
           "link": "",
@@ -74,6 +82,8 @@
       "yuri-media-5": {
         "type": "yuri-media-5",
         "settings": {
+          "show_caption": true,
+          "enable_cutoff": false,
           "layout": "portrait",
           "product": "sugi-moss",
           "link": "",
@@ -86,6 +96,8 @@
       "yuri-media-6": {
         "type": "yuri-media-6",
         "settings": {
+          "show_caption": true,
+          "enable_cutoff": false,
           "layout": "portrait",
           "product": "shiso-cold-stone",
           "link": "",
@@ -98,6 +110,8 @@
       "yuri-media-7": {
         "type": "yuri-media-7",
         "settings": {
+          "show_caption": true,
+          "enable_cutoff": false,
           "layout": "fullsize",
           "product": "yuzu-vetiver",
           "link": "",

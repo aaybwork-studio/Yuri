@@ -46,6 +46,7 @@ class IntroductionHero {
     this.wrapper = this.element.querySelector('[data-introduction-wrapper]');
     this.background = this.element.querySelector('[data-introduction-background]');
     this.logo = this.element.querySelector('[data-introduction-logo]');
+    this.scrollArrow = this.element.querySelector('[data-scroll-arrow]');
     this.images = Array.from(this.element.querySelectorAll('img'));
     this.mainContent = document.querySelector('#MainContent');
     
@@ -97,9 +98,13 @@ class IntroductionHero {
       }
     });
 
-    // 1. Fade logo out on scroll down
-    if (this.logo) {
-      this.timeline.to(this.logo, {
+    // 1. Fade logo and scroll indicator arrow out on scroll down
+    const fadeElements = [];
+    if (this.logo) fadeElements.push(this.logo);
+    if (this.scrollArrow) fadeElements.push(this.scrollArrow);
+
+    if (fadeElements.length > 0) {
+      this.timeline.to(fadeElements, {
         opacity: 0,
         duration: 0.6,
         ease: 'power1.out'

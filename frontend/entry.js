@@ -270,18 +270,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const heroHaiku = document.querySelector('[data-haiku-ja-hero]');
     const heroEn = document.querySelector('[data-haiku-en-hero]');
+    const arrowSvg = document.querySelector('[data-scroll-arrow] svg');
     if (!heroHaiku || !heroEn) return;
 
     // Reset initial states
     heroHaiku.innerHTML = haikuData[0].ja.split('').join('<br>');
     heroEn.textContent = haikuData[0].en;
     gsap.set([heroHaiku, heroEn], { opacity: 1, y: 0 });
+    if (arrowSvg) {
+      gsap.set(arrowSvg, { y: 0 });
+    }
 
     let step = 0;
 
     heroHaikuInterval = setInterval(() => {
       step = (step + 1) % haikuData.length;
       
+      // Sync arrow bounce movement with word change
+      if (arrowSvg) {
+        gsap.timeline()
+          .to(arrowSvg, { y: 15, duration: 0.35, ease: 'power2.in' })
+          .to(arrowSvg, { y: 0, duration: 0.65, ease: 'bounce.out' });
+      }
+
       gsap.to([heroHaiku, heroEn], {
         opacity: 0,
         y: -10,

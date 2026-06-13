@@ -192,6 +192,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // Run initial setup
   initScrollReveal();
 
+  // 1b. Initialize Scroll Pins/Holds for all other Yuri Media sections on desktop
+  const initMediaScrollHolds = () => {
+    if (window.innerWidth >= 768) {
+      const mediaSections = document.querySelectorAll('.yuri-media');
+      mediaSections.forEach((section) => {
+        // Skip the very first section if it's the landing zone already handled by the intro scroll-lock,
+        // or pin all of them for a uniform editorial feel. Let's pin all media blocks.
+        const inner = section.querySelector('.yuri-media-inner');
+        if (inner) {
+          ScrollTrigger.create({
+            trigger: section,
+            start: 'top top',
+            end: '+=250', // Pin duration: locks the image briefly on screen
+            pin: inner,
+            pinSpacer: true,
+            scrub: true,
+            invalidateOnRefresh: true
+          });
+        }
+      });
+    }
+  };
+
+  // Run media sections scroll pinning
+  initMediaScrollHolds();
+
   // 2. Header: single scroll-position-based visibility system
   const header = document.querySelector('[data-header]');
   if (header) {
@@ -239,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('shopify:section:load', (e) => {
       console.log('Shopify theme editor: section loaded, refreshing layout');
       initScrollReveal();
+      initMediaScrollHolds();
       if (typeof lenis !== 'undefined' && lenis.resize) {
         lenis.resize();
       }
@@ -247,6 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('shopify:section:unload', (e) => {
       console.log('Shopify theme editor: section unloaded, refreshing layout');
       initScrollReveal();
+      initMediaScrollHolds();
       if (typeof lenis !== 'undefined' && lenis.resize) {
         lenis.resize();
       }
@@ -255,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('shopify:section:reorder', (e) => {
       console.log('Shopify theme editor: section reordered, refreshing layout');
       initScrollReveal();
+      initMediaScrollHolds();
       if (typeof lenis !== 'undefined' && lenis.resize) {
         lenis.resize();
       }

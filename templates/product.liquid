@@ -1,0 +1,49 @@
+<div class="product-page max-w-5xl mx-auto px-4 py-24 md:py-32 font-sans text-xs tracking-widest uppercase text-black">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-start">
+    <!-- Media Gallery -->
+    <div class="product-media space-y-6">
+      {% if product.images.size > 0 %}
+        {% for image in product.images %}
+          <div class="w-full aspect-[3/4] bg-neutral-100 overflow-hidden">
+            <img src="{{ image.src | image_url: width: 1000 }}" alt="{{ image.alt | escape }}" class="w-full h-full object-cover" loading="lazy" width="{{ image.width }}" height="{{ image.height }}">
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="w-full aspect-[3/4] bg-neutral-100 flex items-center justify-center">
+          <span class="text-neutral-400 text-[10px]">NO IMAGE AVAILABLE</span>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Product Details -->
+    <div class="product-info space-y-6 md:sticky md:top-24">
+      <h1 class="text-sm font-normal tracking-[0.2em] font-sans uppercase m-0">{{ product.title }}</h1>
+      <div class="price text-neutral-500 font-sans">{{ product.price | money }}</div>
+      
+      <div class="description text-neutral-600 font-sans tracking-wide leading-relaxed normal-case my-8 font-light text-[11px]">
+        {{ product.description }}
+      </div>
+
+      <form method="post" action="{{ routes.cart_add_url }}" class="space-y-4">
+        {% if product.variants.size > 1 %}
+          <div class="space-y-2">
+            <label class="block text-[10px] text-neutral-400">SELECT VARIANT</label>
+            <select name="id" class="w-full border-b border-black bg-transparent py-2 outline-none font-sans text-xs tracking-widest text-black rounded-none">
+              {% for variant in product.variants %}
+                <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+                  {{ variant.title }} - {{ variant.price | money }}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+        {% else %}
+          <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {% endif %}
+
+        <button type="submit" class="w-full border border-black py-3 text-center text-xs tracking-widest uppercase hover:bg-black hover:text-white transition-colors duration-300 bg-transparent rounded-none mt-6">
+          ADD TO BAG
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

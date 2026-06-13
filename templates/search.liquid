@@ -1,0 +1,40 @@
+<div class="search-page max-w-7xl mx-auto px-4 py-24 md:py-32 font-sans text-xs tracking-widest uppercase text-black">
+  <h1 class="text-sm font-normal tracking-[0.2em] mb-12 text-center">SEARCH RESULTS</h1>
+
+  <div class="max-w-md mx-auto mb-16">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="flex border-b border-black">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search our store..." class="w-full py-2 bg-transparent text-xs tracking-widest outline-none border-0 text-black placeholder-neutral-400 rounded-none">
+      <button type="submit" class="py-2 px-4 text-xs tracking-widest uppercase hover:underline">SEARCH</button>
+    </form>
+  </div>
+
+  {% if search.performed %}
+    {% if search.results_count > 0 %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {% for item in search.results %}
+          {% if item.object_type == 'product' %}
+            <a href="{{ item.url }}" class="group block space-y-4 text-center">
+              <div class="w-full aspect-[3/4] bg-neutral-100 overflow-hidden relative">
+                {% if item.featured_image != blank %}
+                  <img src="{{ item.featured_image | image_url: width: 800 }}" alt="{{ item.title | escape }}" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" loading="lazy" width="{{ item.featured_image.width }}" height="{{ item.featured_image.height }}">
+                {% else %}
+                  <div class="w-full h-full flex items-center justify-center bg-neutral-150">
+                    <span class="text-neutral-400 text-[10px]">NO IMAGE</span>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="space-y-1">
+                <div class="text-xs font-normal tracking-widest group-hover:underline">{{ item.title }}</div>
+                <div class="text-[10px] text-neutral-500">{{ item.price | money }}</div>
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-center py-24 text-neutral-400">
+        NO RESULTS FOUND FOR "{{ search.terms }}"
+      </div>
+    {% endif %}
+  {% endif %}
+</div>

@@ -29,7 +29,7 @@
 
         <div class="introduction-logo absolute inset-0 z-30 flex items-center justify-center pointer-events-none px-4" data-introduction-logo>
           {%- if section.settings.logo_svg != blank -%}
-            <div class="w-full max-w-[280px] sm:max-w-[400px] md:max-w-[650px] lg:max-w-[850px] text-white fill-current">
+            <div class="w-full max-w-[280px] sm:max-w-[400px] md:max-w-[650px] lg:max-w-[850px] text-white fill-current flex items-center justify-center">
               {{ section.settings.logo_svg }}
             </div>
           {%- elsif section.settings.logo_image != blank -%}
@@ -38,13 +38,15 @@
               loading: 'eager'
             }}
           {%- else -%}
-            <span class="text-white text-3xl sm:text-4xl md:text-6xl tracking-[0.2em] font-sans font-extralight uppercase select-none">{{ shop.name }}</span>
+            <div class="w-full max-w-[280px] sm:max-w-[400px] md:max-w-[650px] lg:max-w-[850px] text-white fill-current flex items-center justify-center">
+              {% render 'yuri-wordmark-logo' %}
+            </div>
           {%- endif -%}
         </div>
       </div>
     </div>
   </div>
-  <div class="introduction-background absolute inset-0 bg-black z-20 pointer-events-none" data-introduction-background></div>
+  <div class="introduction-background absolute inset-0 bg-[#faf8f1] z-20 pointer-events-none" data-introduction-background></div>
 </div>
 
 {% schema %}

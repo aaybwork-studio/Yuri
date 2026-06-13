@@ -1,0 +1,20 @@
+<div class="list-collections max-w-7xl mx-auto px-4 py-24 md:py-32 font-sans text-xs tracking-widest uppercase text-black">
+  <h1 class="text-sm font-normal tracking-[0.2em] mb-16 text-center">COLLECTIONS</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    {% for collection in collections %}
+      <a href="{{ collection.url }}" class="group block space-y-4 text-center">
+        <div class="w-full aspect-[3/4] bg-neutral-100 overflow-hidden relative">
+          {% if collection.featured_image != blank %}
+            <img src="{{ collection.featured_image | image_url: width: 800 }}" alt="{{ collection.title | escape }}" class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" loading="lazy" width="{{ collection.featured_image.width }}" height="{{ collection.featured_image.height }}">
+          {% else %}
+            <div class="w-full h-full flex items-center justify-center bg-neutral-150">
+              <span class="text-neutral-400 text-[10px]">NO IMAGE</span>
+            </div>
+          {% endif %}
+        </div>
+        <div class="text-xs font-normal tracking-widest group-hover:underline">{{ collection.title }}</div>
+      </a>
+    {% endfor %}
+  </div>
+</div>

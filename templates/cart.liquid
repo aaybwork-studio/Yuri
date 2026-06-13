@@ -1,0 +1,68 @@
+<div class="cart-page max-w-4xl mx-auto px-4 py-24 md:py-32 font-sans text-xs tracking-widest uppercase text-black">
+  <h1 class="text-sm font-normal tracking-[0.2em] mb-12 text-center">BAG</h1>
+
+  {% if cart.item_count > 0 %}
+    <form action="{{ routes.cart_url }}" method="post" class="space-y-12">
+      <div class="border-t border-b border-neutral-200 divide-y divide-neutral-200">
+        {% for item in cart.items %}
+          <div class="py-6 grid grid-cols-12 gap-6 items-center">
+            <!-- Image -->
+            <div class="col-span-3 sm:col-span-2">
+              <a href="{{ item.url }}" class="block aspect-[3/4] bg-neutral-100 overflow-hidden">
+                {% if item.image != blank %}
+                  <img src="{{ item.image | image_url: width: 300 }}" alt="{{ item.title | escape }}" class="w-full h-full object-cover" width="{{ item.image.width }}" height="{{ item.image.height }}">
+                {% else %}
+                  <div class="w-full h-full bg-neutral-150"></div>
+                {% endif %}
+              </a>
+            </div>
+
+            <!-- Description -->
+            <div class="col-span-6 sm:col-span-6 space-y-1">
+              <a href="{{ item.url }}" class="text-xs font-normal tracking-widest hover:underline block">{{ item.product.title }}</a>
+              {% if item.variant.title != 'Default Title' %}
+                <div class="text-[10px] text-neutral-500">{{ item.variant.title }}</div>
+              {% endif %}
+              <div class="text-[10px] text-neutral-500">{{ item.price | money }}</div>
+              <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="text-[9px] text-neutral-400 hover:text-black underline block pt-2">REMOVE</a>
+            </div>
+
+            <!-- Qty -->
+            <div class="col-span-3 sm:col-span-4 flex flex-col sm:flex-row items-end sm:items-center sm:justify-end gap-4">
+              <div class="flex items-center border border-neutral-300">
+                <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0" class="w-12 text-center py-1 bg-transparent text-xs outline-none rounded-none border-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+              </div>
+              <div class="text-xs tracking-widest">{{ item.final_line_price | money }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Footer -->
+      <div class="flex flex-col items-end space-y-4">
+        <div class="flex justify-between w-full sm:max-w-xs text-xs tracking-widest">
+          <span>SUBTOTAL</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <div class="text-[9px] text-neutral-400 normal-case tracking-normal">
+          Taxes and shipping calculated at checkout.
+        </div>
+        <div class="flex gap-4 w-full sm:w-auto pt-6">
+          <button type="submit" name="update" class="flex-1 sm:flex-initial border border-neutral-300 px-6 py-3 text-center text-xs tracking-widest hover:bg-neutral-100 bg-transparent rounded-none">
+            UPDATE BAG
+          </button>
+          <button type="submit" name="checkout" class="flex-1 sm:flex-initial bg-black text-white px-8 py-3 text-center text-xs tracking-widest hover:bg-neutral-800 rounded-none">
+            CHECKOUT
+          </button>
+        </div>
+      </div>
+    </form>
+  {% else %}
+    <div class="text-center py-24 space-y-6">
+      <div class="text-neutral-400">YOUR BAG IS CURRENTLY EMPTY.</div>
+      <a href="{{ routes.root_url }}" class="inline-block border border-black px-8 py-3 text-xs tracking-widest hover:bg-black hover:text-white transition-colors duration-300 bg-transparent rounded-none">
+        CONTINUE SHOPPING
+      </a>
+    </div>
+  {% endif %}
+</div>

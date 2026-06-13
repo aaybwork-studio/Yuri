@@ -1,4 +1,4 @@
-// YURI Theme Frontend Entrypoint
+// YURI Custom Theme JS Entrypoint
 import './entry.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -24,9 +24,8 @@ class IntroductionHero {
     this.images = Array.from(this.element.querySelectorAll('img'));
     this.mainContent = document.querySelector('#MainContent');
     
-    // Add active classes to body on start
+    // Set loading states
     document.body.classList.remove('page-introduction-loading');
-    document.body.classList.add('page-introduction');
     document.body.classList.add('page-introduction-rendering');
   }
 
@@ -42,7 +41,7 @@ class IntroductionHero {
           resolve();
         } else {
           img.onload = resolve;
-          img.onerror = resolve; // Continue even if an image fails to load
+          img.onerror = resolve;
         }
       });
     });
@@ -53,20 +52,16 @@ class IntroductionHero {
   onReady() {
     setTimeout(() => {
       this.element.classList.add('is-ready');
-      // Fade in preloaded vertical/desktop images
       this.images.forEach(img => {
         img.style.opacity = '1';
       });
-    }, 150);
+    }, 100);
   }
 
   onComplete() {
     if (this.isAnimationActive) {
       this.isAnimationActive = false;
-      document.body.classList.remove('page-introduction');
       document.body.classList.remove('page-introduction-rendering');
-      
-      // Trigger resize for ScrollTrigger updates
       ScrollTrigger.refresh();
     }
   }
@@ -74,10 +69,7 @@ class IntroductionHero {
   initTimeline() {
     if (!this.mainContent) return;
 
-    // Set body to auto scroll
-    gsap.set(document.body, { overflowY: 'auto' });
-
-    // Build the scroll pinning timeline
+    // Build the scroll pinning timeline using GSAP ScrollTrigger
     this.timeline = gsap.timeline({
       scrollTrigger: {
         trigger: this.mainContent,
@@ -94,47 +86,75 @@ class IntroductionHero {
           this.onComplete();
         } else if (progress < 0.99 && !this.isAnimationActive) {
           this.isAnimationActive = true;
-          document.body.classList.add('page-introduction');
           document.body.classList.add('page-introduction-rendering');
         }
       }
     });
 
-    // 1. Fade the logo out
+    // 1. Fade logo out on scroll down
     if (this.logo) {
       this.timeline.to(this.logo, {
         opacity: 0,
-        duration: 0.7,
+        duration: 0.6,
         ease: 'power1.out'
       });
     }
 
-    // 2. Wipe the introduction panel vertically out of view
+    // 2. Translate introduction panel vertically up
     this.timeline.to(this.element, {
       yPercent: -100,
       ease: 'none',
       duration: 1.0
-    }, '-=0.2');
+    }, '-=0.1');
 
     // 3. Fade the background overlay to transparent
     if (this.background) {
       this.timeline.to(this.background, {
         backgroundColor: 'rgba(0, 0, 0, 0)',
         ease: 'none',
-        duration: 0.6
+        duration: 0.5
       }, '-=0.8');
     }
   }
 }
 
+// Initialize components on DOM load
 document.addEventListener('DOMContentLoaded', () => {
+  // 1. Initialize Intro Scroll Reveal
   const introEl = document.querySelector('[data-mods="introduction"]');
   if (introEl) {
     new IntroductionHero(introEl);
   } else {
-    // If no intro hero is present, ensure correct body layout classes
     document.body.classList.remove('page-introduction-loading');
   }
 
-  console.log('YURI Theme: Homepage Scroll Reveal Initialized');
+  // 2. Initialize Smart Sticky Hiding Header
+  const header = document.querySelector('[data-header]');
+  if (header) {
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      // Scrolled state
+      if (currentScrollY > 15) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+
+      // Hide / Show on direction
+      if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        // Scrolling down - hide header
+        header.classList.add('is-hidden');
+      } else {
+        // Scrolling up - show header
+        header.classList.remove('is-hidden');
+      }
+
+      lastScrollY = currentScrollY;
+    }, { passive: true });
+  }
+
+  console.log('YURI custom minimal theme loaded.');
 });

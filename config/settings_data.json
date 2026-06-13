@@ -1,5 +1,114 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-  "current": "Default",
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu"
+        }
+      },
+      "custom-introduction-hero": {
+        "type": "custom-introduction-hero",
+        "settings": {
+          "logo_svg": "",
+          "scroll_duration": 600
+        }
+      },
+      "yuri-media-1": {
+        "type": "yuri-media-1",
+        "settings": {
+          "layout": "fullsize",
+          "product": "",
+          "link": "",
+          "image": "shopify://shop_images/Gemini_Generated_Image_hpf9s4hpf9s4hpf9_4fe279af-65b3-4ef6-9c54-a64a566fd73a.png",
+          "video_url": "",
+          "caption": "",
+          "body_text": ""
+        }
+      },
+      "yuri-media-2": {
+        "type": "yuri-media-2",
+        "settings": {
+          "layout": "portrait",
+          "product": "",
+          "link": "",
+          "image": "shopify://shop_images/5-4.png",
+          "video_url": "",
+          "caption": "",
+          "body_text": ""
+        }
+      },
+      "yuri-media-3": {
+        "type": "yuri-media-3",
+        "settings": {
+          "layout": "portrait",
+          "product": "",
+          "link": "",
+          "video_url": "",
+          "caption": "",
+          "body_text": ""
+        }
+      },
+      "yuri-media-4": {
+        "type": "yuri-media-4",
+        "settings": {
+          "layout": "fullsize",
+          "product": "",
+          "link": "",
+          "video_url": "",
+          "caption": "",
+          "body_text": ""
+        }
+      },
+      "yuri-media-5": {
+        "type": "yuri-media-5",
+        "settings": {
+          "layout": "landscape",
+          "product": "",
+          "link": "",
+          "video_url": "",
+          "caption": "",
+          "body_text": ""
+        }
+      },
+      "yuri-media-6": {
+        "type": "yuri-media-6",
+        "settings": {
+          "layout": "landscape",
+          "product": "",
+          "link": "",
+          "video_url": "",
+          "caption": "",
+          "body_text": ""
+        }
+      },
+      "yuri-media-7": {
+        "type": "yuri-media-7",
+        "settings": {
+          "layout": "fullsize",
+          "product": "",
+          "link": "",
+          "video_url": "",
+          "caption": "",
+          "body_text": ""
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {}
+      }
+    },
+    "content_for_index": []
+  },
   "presets": {
     "Default": {}
   }

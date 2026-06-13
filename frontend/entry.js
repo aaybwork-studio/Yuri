@@ -1,10 +1,35 @@
 // YURI Custom Theme JS Entrypoint
 import './entry.css';
+import Lenis from 'lenis';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Register GSAP ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
+
+// Initialize Lenis smooth scroll
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  direction: 'vertical',
+  gestureDirection: 'vertical',
+  smooth: true,
+  mouseMultiplier: 1,
+  smoothTouch: false,
+  touchMultiplier: 2,
+  infinite: false,
+});
+
+// Update ScrollTrigger on scroll
+lenis.on('scroll', ScrollTrigger.update);
+
+// Sync GSAP ticker with Lenis RAF
+gsap.ticker.add((time) => {
+  lenis.raf(time * 1000);
+});
+
+// Disable lag smoothing to prevent syncing jumps
+gsap.ticker.lagSmoothing(0);
 
 class IntroductionHero {
   constructor(element) {
@@ -121,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //    - Hides on scroll-down, shows on scroll-up (smart sticky)
   const header = document.querySelector('[data-header]');
   if (header) {
-    let lastScrollY = window.scrollY;
+    let lastScrollY = lenis.scroll || window.scrollY;
     const isHomepage = !!introEl;
 
     // Set initial state
@@ -129,8 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
       header.classList.add('is-intro-active');
     }
 
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
+    lenis.on('scroll', ({ scroll }) => {
+      const y = scroll;
 
       // --- INTRO HERO ZONE ---
       if (isHomepage && y < introScrollHeight) {
@@ -153,12 +178,12 @@ document.addEventListener('DOMContentLoaded', () => {
       // Smart sticky: hide on scroll-down, show on scroll-up
       if (y > lastScrollY && y > introScrollHeight + 60) {
         header.classList.add('is-hidden');
-      } else {
+      } else if (y < lastScrollY) {
         header.classList.remove('is-hidden');
       }
 
       lastScrollY = y;
-    }, { passive: true });
+    });
   }
 
   console.log('YURI custom minimal theme loaded.');

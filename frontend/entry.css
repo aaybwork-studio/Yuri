@@ -619,8 +619,8 @@ body.dark-mode .introduction-loader .border-black\/10 {
 
 /* Rounded scroll arrow button with 30px soft shadow */
 .scroll-arrow-btn {
-  width: 96px;
-  height: 96px;
+  width: 48px;
+  height: 48px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
@@ -634,6 +634,14 @@ body.dark-mode .introduction-loader .border-black\/10 {
   background: rgba(255, 255, 255, 0.16);
   border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* Theme sensitive haiku vertical text */
+[data-haiku-ja-hero] {
+  color: #000000 !important;
+}
+body.dark-mode [data-haiku-ja-hero] {
+  color: #ffffff !important;
 }
 
 

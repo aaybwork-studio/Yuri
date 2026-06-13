@@ -82,7 +82,9 @@ class IntroductionHero {
       this.scrollArrow.addEventListener('click', (e) => {
         e.preventDefault();
         if (typeof lenis !== 'undefined') {
-          lenis.scrollTo(this.scrollHeight);
+          lenis.scrollTo(this.scrollHeight, {
+            duration: 2.2
+          });
         } else {
           window.scrollTo({
             top: this.scrollHeight,

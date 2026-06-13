@@ -348,6 +348,43 @@ html.lenis, html.lenis body {
   }
 }
 
+/* Hide default browser scrollbars */
+html, body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Custom minimal scroll progress bar indicator at the top of the page */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px; /* Super thin minimalist line */
+  background: transparent;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  width: 100%;
+  background: #ff6f00; /* Uses matching orange branding color */
+  transform: scaleX(0); /* Uses hardware accelerated transform scale rather than width updates */
+  transform-origin: left center;
+  will-change: transform;
+}
+
 /* Add 30px spacing after the last media card before the footer */
 .yuri-media:last-of-type {
   margin-bottom: 30px;

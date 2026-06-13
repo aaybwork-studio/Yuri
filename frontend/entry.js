@@ -614,5 +614,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // 6. Custom minimalist top progress bar
+  const scrollIndicator = document.getElementById('scrollIndicator');
+  if (scrollIndicator) {
+    lenis.on('scroll', ({ scroll, limit }) => {
+      const progress = limit > 0 ? scroll / limit : 0;
+      // Use scaleX for optimized hardware-accelerated transform animations
+      scrollIndicator.style.transform = `scaleX(${progress})`;
+    });
+  }
+
   console.log('YURI custom minimal theme loaded.');
 });

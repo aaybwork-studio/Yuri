@@ -31,6 +31,33 @@ gsap.ticker.add((time) => {
 // Disable lag smoothing to prevent syncing jumps
 gsap.ticker.lagSmoothing(0);
 
+// Helper to enable seamless loop on any video element
+const makeVideoLoopSeamless = (video) => {
+  if (!video) return;
+  
+  // Disable native loop to prevent native black flashes
+  video.removeAttribute('loop');
+  video.loop = false;
+  
+  // Smooth looping logic
+  video.addEventListener('timeupdate', () => {
+    // Cut off the last 0.25s and start 0.1s in to skip any initial/trailing black frames
+    const endOffset = 0.25;
+    const startOffset = 0.1;
+    
+    if (video.duration && video.currentTime >= video.duration - endOffset) {
+      video.currentTime = startOffset;
+      video.play().catch(err => console.log('Loop playback retry:', err));
+    }
+  });
+
+  // Fallback in case timeupdate event intervals miss the exact end
+  video.addEventListener('ended', () => {
+    video.currentTime = 0.1;
+    video.play().catch(err => console.log('Loop playback fallback:', err));
+  });
+};
+
 class IntroductionHero {
   constructor(element) {
     this.element = element;
@@ -90,13 +117,7 @@ class IntroductionHero {
         media.style.opacity = '1';
         if (media.tagName === 'VIDEO') {
           media.play().catch(err => console.log('Video autoplay delayed:', err));
-          
-          // Smooth loop seeking: jumps past any trailing/leading black frames before standard loop starts
-          media.addEventListener('timeupdate', () => {
-            if (media.duration && media.currentTime >= media.duration - 0.15) {
-              media.currentTime = 0.05;
-            }
-          });
+          makeVideoLoopSeamless(media);
         }
       });
     }, 100);
@@ -866,6 +887,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Apply seamless looping to all video elements in the document
+  document.querySelectorAll('video').forEach(video => {
+    makeVideoLoopSeamless(video);
+  });
 
   console.log('YURI custom minimal theme loaded.');
 });

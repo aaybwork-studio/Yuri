@@ -324,6 +324,10 @@ html.lenis, html.lenis body {
 .yuri-media {
   padding-bottom: 30px;
 }
+.yuri-media-inner {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
 .yuri-media-content {
   position: relative;
   z-index: 10;
@@ -374,18 +378,21 @@ html.lenis, html.lenis body {
   /* Portrait Cards: Limit sizing so aspect ratio doesn't make height taller than viewport */
   .yuri-media--portrait .yuri-media-inner {
     max-width: 480px !important;
-    padding-top: 1.5rem !important;
-    padding-bottom: 35px !important;
+    padding-top: 0px !important;
+    padding-bottom: 30px !important; /* Space for the absolute caption */
   }
   
   /* Landscape Cards: Limit sizing */
   .yuri-media--landscape .yuri-media-inner {
     max-width: 850px !important;
-    padding-top: 2rem !important;
-    padding-bottom: 35px !important;
+    padding-top: 0px !important;
+    padding-bottom: 30px !important; /* Space for the absolute caption */
   }
 
   /* Full Width Media: Limit content box to maximum height corresponding to 1080p viewport (16:9 ratio style layout) */
+  .yuri-media--fullsize .yuri-media-inner {
+    padding-bottom: 30px !important; /* Spacing room for absolute caption */
+  }
   .yuri-media--fullsize .yuri-media-content {
     max-height: calc(100vh - 80px) !important;
     aspect-ratio: 16/9;

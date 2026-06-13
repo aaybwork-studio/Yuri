@@ -197,18 +197,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.innerWidth >= 768) {
       const mediaSections = document.querySelectorAll('.yuri-media');
       mediaSections.forEach((section, index) => {
-        // Skip the very first section (index 0) to avoid double-pinning with the hero scroll reveal
+        // Skip the very first section (index 0) to avoid double-triggers with the hero scroll reveal
         if (index === 0) return;
 
-        ScrollTrigger.create({
-          trigger: section,
-          start: 'top top',
-          end: '+=100', // Subtle hesitation hold duration
-          pin: section, // Pin the outer block-level section element to avoid inner layout shifts
-          pinSpacing: true,
-          scrub: true,
-          invalidateOnRefresh: true
-        });
+        const inner = section.querySelector('.yuri-media-inner');
+        const mediaContent = section.querySelector('.yuri-media-content');
+        
+        if (inner && mediaContent) {
+          // We animate the inner media block in reverse vertical direction (translateY)
+          // as the parent section scrolls through the viewport, creating a smooth "hold" effect
+          gsap.fromTo(mediaContent, 
+            { y: -30 }, // Start slightly shifted up
+            {
+              y: 30,    // Move slightly down as we scroll
+              ease: 'none',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top bottom', // Start animating as soon as it enters
+                end: 'bottom top',   // End animating when it leaves
+                scrub: true,         // Sync with scroll position
+                invalidateOnRefresh: true
+              }
+            }
+          );
+        }
       });
     }
   };

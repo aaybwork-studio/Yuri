@@ -90,6 +90,13 @@ class IntroductionHero {
         media.style.opacity = '1';
         if (media.tagName === 'VIDEO') {
           media.play().catch(err => console.log('Video autoplay delayed:', err));
+          
+          // Smooth loop seeking: jumps past any trailing/leading black frames before standard loop starts
+          media.addEventListener('timeupdate', () => {
+            if (media.duration && media.currentTime >= media.duration - 0.15) {
+              media.currentTime = 0.05;
+            }
+          });
         }
       });
     }, 100);

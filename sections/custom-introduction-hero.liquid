@@ -9,6 +9,15 @@
     </div>
 
     <div class="introduction-container w-full h-full relative" data-introduction-wrapper>
+      
+      <!-- Centered Loader -->
+      <div class="introduction-loader absolute inset-0 z-40 flex flex-col items-center justify-center bg-[#faf8f1] transition-opacity duration-500 ease-out" data-intro-loader>
+        <div class="flex flex-col items-center space-y-4">
+          <div class="w-8 h-8 border-[1.5px] border-black/10 border-t-[#ff6f00] rounded-full animate-spin"></div>
+          <span class="text-[9px] tracking-[0.35em] font-sans font-light uppercase text-black/40">LOADING</span>
+        </div>
+      </div>
+
       <div class="introduction-media w-full h-full relative">
         
           {%- if section.settings.image_desktop != blank or section.settings.image_mobile != blank -%}

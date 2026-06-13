@@ -113,6 +113,15 @@ body.page-introduction-loading {
   background-color: rgba(0, 0, 0, 0.15);
 }
 
+.introduction-loader {
+  background-color: #faf8f1;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+.introduction.is-ready .introduction-loader {
+  opacity: 0;
+  visibility: hidden;
+}
+
 /* Mobile & Desktop Responsive image layouts */
 .introduction-media-desktop {
   display: none;
@@ -587,6 +596,17 @@ body.dark-mode .text-neutral-200 {
 
 body.dark-mode .introduction-background {
   background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+body.dark-mode .introduction-loader {
+  background-color: #121212 !important;
+}
+body.dark-mode .introduction-loader span {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+body.dark-mode .introduction-loader .border-black\/10 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  border-top-color: #ff6f00 !important;
 }
 
 

@@ -1,8 +1,9 @@
 {%- liquid
   assign layout = section.settings.layout | default: 'portrait'
-  assign product_obj = section.settings.product
+  assign product_handle = section.settings.product
   
-  if product_obj != blank
+  if product_handle != blank
+    assign product_obj = all_products[product_handle]
     assign media_link = product_obj.url
     assign default_image = product_obj.featured_image
     assign default_caption = product_obj.title
@@ -12,9 +13,20 @@
     assign default_caption = ""
   endif
 
-  assign image = section.settings.image | default: default_image
+  if section.settings.image != blank
+    assign image = section.settings.image
+  else
+    assign image = default_image
+  endif
+
   assign video_url = section.settings.video_url
-  assign caption = section.settings.caption | default: default_caption
+
+  if section.settings.caption != blank
+    assign caption = section.settings.caption
+  else
+    assign caption = default_caption
+  endif
+
   assign body_text = section.settings.body_text
 -%}
 

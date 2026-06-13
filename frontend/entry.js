@@ -124,6 +124,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const introEl = document.querySelector('[data-mods="introduction"]');
   if (introEl) {
     new IntroductionHero(introEl);
+
+    // Safety fallback: if introduction rendering is stuck, force remove it after 2.5s
+    setTimeout(() => {
+      if (document.body.classList.contains('page-introduction-rendering')) {
+        document.body.classList.remove('page-introduction-rendering');
+        document.body.classList.remove('page-introduction-loading');
+        console.warn('YURI: Safety fallback triggered. Restored header visibility.');
+      }
+    }, 2500);
+
+    // Safety scroll fallback: if user scrolls manually, restore header visibility
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20 && document.body.classList.contains('page-introduction-rendering')) {
+        document.body.classList.remove('page-introduction-rendering');
+        document.body.classList.remove('page-introduction-loading');
+      }
+    }, { passive: true });
   } else {
     document.body.classList.remove('page-introduction-loading');
   }

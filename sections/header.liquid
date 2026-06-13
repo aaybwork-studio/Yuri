@@ -162,7 +162,7 @@
           <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
             {%- if section.settings.logo_position == 'middle-split' -%}
               <div class="header__heading-logo-wrapper">
-                <img src="{{ 'yuri-monogram.png' | asset_url }}" alt="{{ shop.name }}" style="max-height: 48px; width: auto;" class="header__heading-logo" width="417" height="366">
+                {%- render 'yuri-wordmark-logo' -%}
               </div>
             {%- elsif settings.logo != blank -%}
               <div class="header__heading-logo-wrapper">

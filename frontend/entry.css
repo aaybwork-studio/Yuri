@@ -400,17 +400,40 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h0 {
   justify-content: center !important;
 }
 
-/* Short minimal header padding overrides */
+/* Compact header styling */
 .header {
-  padding-top: 0.8rem !important;
-  padding-bottom: 0.8rem !important;
-  min-height: unset !important;
+  padding-top: 0.4rem !important;
+  padding-bottom: 0.4rem !important;
+  min-height: 40px !important;
 }
 
 @media screen and (min-width: 990px) {
   .header {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+    min-height: 48px !important;
+  }
+}
+
+.header__heading-link {
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
+  display: flex !important;
+  align-items: center;
+}
+
+/* Ensure the inline wordmark logo is compact and clean */
+.header__heading-logo {
+  max-height: 14px !important;
+  height: 14px !important;
+  width: auto !important;
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .header__heading-logo {
+    max-height: 16px !important;
+    height: 16px !important;
   }
 }
 
@@ -715,8 +738,9 @@ body.page-introduction-loading .section-header {
   pointer-events: none !important;
 }
 
+/* Keep overflow auto during intro reveal so scrolltrigger works */
 body.page-introduction {
-  overflow: hidden !important;
+  overflow: auto !important;
 }
 
 body.page-introduction .section-header {

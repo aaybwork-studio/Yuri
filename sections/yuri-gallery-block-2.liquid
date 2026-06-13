@@ -1,0 +1,113 @@
+<div class="gallery-block w-full py-16 px-6 sm:px-12 bg-[#faf8f1] flex justify-center items-center" id="Gallery-{{ section.id }}">
+  <div class="w-full {% if section.settings.layout_style == 'portrait_card' %}max-w-lg{% elif section.settings.layout_style == 'card_5_4' %}max-w-2xl{% elif section.settings.layout_style == 'boxed_center' %}max-w-5xl border border-neutral-100 p-8 sm:p-12 bg-[#faf8f1]{% else %}max-w-7xl{% endif %} flex flex-col space-y-4">
+    
+    {% if section.settings.caption_top != blank %}
+      <div class="text-[10px] tracking-[0.25em] font-sans font-light uppercase text-neutral-400">
+        {{ section.settings.caption_top }}
+      </div>
+    {% endif %}
+
+    <div class="relative w-full {% if section.settings.layout_style == 'portrait_card' %}aspect-[3/4]{% elif section.settings.layout_style == 'card_5_4' %}aspect-[5/4]{% elif section.settings.layout_style == 'boxed_center' %}aspect-[16/10]{% else %}aspect-[16/9]{% endif %} bg-neutral-100 overflow-hidden">
+      {% if section.settings.link != blank %}
+        <a href="{{ section.settings.link }}" class="w-full h-full block">
+      {% endif %}
+
+      {% if section.settings.video_url != blank %}
+        <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+          <source src="{{ section.settings.video_url }}" type="video/mp4">
+        </video>
+      {% else %}
+        {% if section.settings.image != blank %}
+          {{ section.settings.image | image_url: width: 1600 | image_tag: 
+            class: 'w-full h-full object-cover',
+            loading: 'lazy'
+          }}
+        {% else %}
+          {%- assign fallback_img = 'yuri-browse-2.png' | asset_url -%}
+          <img src="{{ fallback_img }}" class="w-full h-full object-cover" alt="" loading="lazy" width="800" height="800">
+        {% endif %}
+      {% endif %}
+
+      {% if section.settings.link != blank %}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="flex items-center justify-between pt-2 relative">
+      {% if section.settings.caption_bottom != blank %}
+        <div class="text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black m-0">
+          {{ section.settings.caption_bottom }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.layout_style == 'card_5_4' %}
+        <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center">
+          <span class="w-1.5 h-1.5 rounded-full bg-black"></span>
+        </div>
+      {% endif %}
+
+      {% if section.settings.layout_style == 'boxed_center' %}
+        <div class="flex space-x-1.5 items-center">
+          <span class="w-1.5 h-1.5 rounded-full bg-black"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-neutral-200"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-neutral-200"></span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Yuri Gallery Block 2",
+  "tag": "section",
+  "class": "section-gallery-block",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout_style",
+      "label": "Layout Style",
+      "options": [
+        { "value": "portrait_card", "label": "Narrow Portrait Card (3:4)" },
+        { "value": "card_5_4", "label": "Immersive Card (5:4)" },
+        { "value": "landscape_banner", "label": "Landscape Banner (16:9)" },
+        { "value": "boxed_center", "label": "Contained Boxed Layout (16:10 with indicators)" }
+      ],
+      "default": "portrait_card"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Block Image"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Autoplay Video URL",
+      "info": "Upload video to Shopify Files and paste URL here (MP4 format recommended)."
+    },
+    {
+      "type": "text",
+      "id": "caption_top",
+      "label": "Top Caption Label",
+      "default": "02 / PORTRAIT DETAIL"
+    },
+    {
+      "type": "text",
+      "id": "caption_bottom",
+      "label": "Bottom Caption Label",
+      "default": "TERRE NOIRE POTTERY"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link Destination"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Yuri Gallery Block 2"
+    }
+  ]
+}
+{% endschema %}

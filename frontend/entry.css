@@ -342,9 +342,9 @@ html.lenis, html.lenis body {
     margin: 0 auto;
   }
 
-  /* If fullsize is linked to a product (meaning we have a media-link), cut the image/video off by 30px from bottom for caption space */
-  .yuri-media--fullsize a.yuri-media-link .yuri-media-content {
-    max-height: calc(100vh - 110px); /* cuts off an extra 30px from the bottom */
+  /* When yuri-media--cutoff class is applied, cut the image/video off by an extra 30px from bottom for caption space */
+  .yuri-media--cutoff.yuri-media--fullsize .yuri-media-content {
+    max-height: calc(100vh - 110px) !important; /* cuts off an extra 30px from the bottom */
   }
 }
 

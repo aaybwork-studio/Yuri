@@ -34,7 +34,7 @@
   assign body_text = section.settings.body_text
 -%}
 
-<div class="yuri-media yuri-media--{{ layout }} w-full bg-[#faf8f1] overflow-hidden" id="Media-{{ section.id }}">
+<div class="yuri-media yuri-media--{{ layout }}{% if section.settings.enable_cutoff %} yuri-media--cutoff{% endif %} w-full bg-[#faf8f1] overflow-hidden" id="Media-{{ section.id }}">
   <div class="yuri-media-inner
     {%- if layout == 'portrait' %} max-w-[750px] mx-auto px-6 py-12
     {%- elsif layout == 'landscape' %} max-w-[1100px] mx-auto px-6 py-12
@@ -125,6 +125,13 @@
 {
   "name": "Yuri Media 7",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_cutoff",
+      "label": "Enable bottom caption cutoff (30px)",
+      "default": false
+    },
+    
     {
       "type": "select",
       "id": "layout",

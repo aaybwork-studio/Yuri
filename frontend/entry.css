@@ -331,23 +331,39 @@ html.lenis, html.lenis body {
   background-color: #faf8f1; /* Cover the text behind it */
 }
 .yuri-media-caption {
-  position: relative;
+  position: absolute;
+  left: 24px; /* Standardize alignment relative to screen padding */
+  bottom: 0px; /* Positions it statically at the bottom inside the inner padding container */
   z-index: 5;
   display: inline-block;
+  margin-top: 0 !important;
 }
+
+/* Ensure the parent inner container has room at the bottom for absolute captions */
+.yuri-media-inner {
+  position: relative;
+  padding-bottom: 25px !important;
+}
+
 /* Create the left-to-right animated underline */
 .yuri-media-caption::after {
   content: '';
   position: absolute;
   left: 0;
   bottom: -4px;
-  width: 100%;
+  width: calc(100% - 48px); /* Accounts for px-6 (24px left + 24px right padding) inside fullwidth layout */
   height: 1px;
   background-color: #000;
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+/* For non-fullwidth layouts where px-6 is not present, target the underline to match text boundary */
+.yuri-media:not(.yuri-media--fullsize) .yuri-media-caption::after {
+  width: 100%;
+}
+
 /* Triggers when the parent yuri-media section is hovered over */
 .yuri-media:hover .yuri-media-caption::after {
   transform: scaleX(1);
@@ -359,14 +375,14 @@ html.lenis, html.lenis body {
   .yuri-media--portrait .yuri-media-inner {
     max-width: 480px !important;
     padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
+    padding-bottom: 35px !important;
   }
   
   /* Landscape Cards: Limit sizing */
   .yuri-media--landscape .yuri-media-inner {
     max-width: 850px !important;
     padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+    padding-bottom: 35px !important;
   }
 
   /* Full Width Media: Limit content box to maximum height corresponding to 1080p viewport (16:9 ratio style layout) */

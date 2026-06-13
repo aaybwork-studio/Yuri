@@ -11,7 +11,7 @@
               fetchpriority: 'high'
             }}
           {%- else -%}
-            {%- assign mobile_fallback = 'yuri-hero-1.png' | asset_url -%}
+            {%- assign mobile_fallback = 'background-hero.png' | asset_url -%}
             <img src="{{ mobile_fallback }}" class="introduction-media-mobile w-full h-full object-cover opacity-0 transition-opacity duration-300" alt="" loading="eager" width="800" height="800">
           {%- endif -%}
 
@@ -22,7 +22,7 @@
               fetchpriority: 'high'
             }}
           {%- else -%}
-            {%- assign desktop_fallback = 'yuri-hero-1.png' | asset_url -%}
+            {%- assign desktop_fallback = 'background-hero.png' | asset_url -%}
             <img src="{{ desktop_fallback }}" class="introduction-media-desktop w-full h-full object-cover opacity-0 transition-opacity duration-300" alt="" loading="eager" width="1600" height="1200">
           {%- endif -%}
         </div>

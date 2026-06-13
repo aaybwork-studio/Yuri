@@ -1,0 +1,55 @@
+{
+  "sections": {
+    "introduction_hero": {
+      "type": "custom-introduction-hero",
+      "settings": {
+        "scroll_duration": 600
+      }
+    },
+    "fullscreen_banner_1": {
+      "type": "custom-fullscreen-banner-1",
+      "settings": {
+        "label_alignment": "justify-start"
+      }
+    },
+    "gallery_block_1": {
+      "type": "custom-gallery-block-1",
+      "settings": {
+        "layout_style": "card_5_4"
+      }
+    },
+    "fullscreen_banner_2": {
+      "type": "custom-fullscreen-banner-2",
+      "settings": {
+        "label_alignment": "justify-start"
+      }
+    },
+    "gallery_block_2": {
+      "type": "custom-gallery-block-2",
+      "settings": {
+        "layout_style": "portrait_card"
+      }
+    },
+    "gallery_block_3": {
+      "type": "custom-gallery-block-3",
+      "settings": {
+        "layout_style": "portrait_card"
+      }
+    },
+    "fullscreen_banner_3": {
+      "type": "custom-fullscreen-banner-3",
+      "settings": {
+        "label_alignment": "justify-start"
+      }
+    }
+  },
+  "order": [
+    "introduction_hero",
+    "fullscreen_banner_1",
+    "gallery_block_1",
+    "fullscreen_banner_2",
+    "gallery_block_2",
+    "gallery_block_3",
+    "fullscreen_banner_3"
+  ]
+}

@@ -77,6 +77,21 @@ class IntroductionHero {
     this.images = Array.from(this.element.querySelectorAll('img, video'));
     this.mainContent = document.querySelector('#MainContent');
     
+    // Click handler for scroll arrow to smooth scroll to landing page layout
+    if (this.scrollArrow) {
+      this.scrollArrow.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (typeof lenis !== 'undefined') {
+          lenis.scrollTo(this.scrollHeight);
+        } else {
+          window.scrollTo({
+            top: this.scrollHeight,
+            behavior: 'smooth'
+          });
+        }
+      });
+    }
+
     // Remove loading lock (allow scrolling)
     document.body.classList.remove('page-introduction-loading');
   }

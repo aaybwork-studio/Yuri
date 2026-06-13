@@ -609,4 +609,12 @@ body.dark-mode .introduction-loader .border-black\/10 {
   border-top-color: #ff6f00 !important;
 }
 
+/* Force hero elements to remain white over video background */
+.hero-text-constant,
+.hero-text-constant svg,
+.hero-text-constant button {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
 

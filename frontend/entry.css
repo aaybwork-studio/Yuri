@@ -617,4 +617,23 @@ body.dark-mode .introduction-loader .border-black\/10 {
   fill: #ffffff !important;
 }
 
+/* Rounded scroll arrow button with 30px soft shadow */
+.scroll-arrow-btn {
+  width: 96px;
+  height: 96px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.scroll-arrow-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
 

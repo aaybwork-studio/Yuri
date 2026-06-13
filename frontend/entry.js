@@ -104,8 +104,10 @@ class IntroductionHero {
           if (header) {
             if (self.progress < 0.78) {
               header.classList.add('is-intro-active');
+              header.classList.remove('is-scrolled');
             } else {
               header.classList.remove('is-intro-active');
+              header.classList.add('is-scrolled');
             }
           }
         }
@@ -209,8 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // --- INTRO HERO ZONE ---
       if (isHomepage && y < introScrollHeight) {
         // Let the GSAP onUpdate callback handle 'is-intro-active' toggling.
-        // We only clear scroll-related modifiers like background-scrolled styles.
-        header.classList.remove('is-scrolled', 'is-hidden');
+        // We only clear scroll-related modifiers like hidden state here.
+        header.classList.remove('is-hidden');
         lastScrollY = y;
         return;
       }
@@ -218,12 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // --- PAST HERO: header is visible ---
       header.classList.remove('is-intro-active');
 
-      // Background blur when scrolled
-      if (y > introScrollHeight + 15) {
-        header.classList.add('is-scrolled');
-      } else {
-        header.classList.remove('is-scrolled');
-      }
+      // Background blur when scrolled past the hero reveal zone
+      header.classList.add('is-scrolled');
 
       // Smart sticky: hide on scroll-down, show on scroll-up
       if (y > lastScrollY && y > introScrollHeight + 60) {

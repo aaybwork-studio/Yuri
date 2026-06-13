@@ -1,5 +1,5 @@
 <div class="gallery-block w-full py-16 px-6 sm:px-12 bg-[#faf8f1] flex justify-center items-center" id="Gallery-{{ section.id }}">
-  <div class="w-full {% if section.settings.layout_style == 'portrait_card' %}max-w-lg{% elif section.settings.layout_style == 'boxed_center' %}max-w-5xl border border-neutral-100 p-8 sm:p-12 bg-[#faf8f1]{% else %}max-w-7xl{% endif %} flex flex-col space-y-4">
+  <div class="w-full {% if section.settings.layout_style == 'portrait_card' %}max-w-lg{% elif section.settings.layout_style == 'card_5_4' %}max-w-2xl{% elif section.settings.layout_style == 'boxed_center' %}max-w-5xl border border-neutral-100 p-8 sm:p-12 bg-[#faf8f1]{% else %}max-w-7xl{% endif %} flex flex-col space-y-4">
     
     {% if section.settings.caption_top != blank %}
       <div class="text-[10px] tracking-[0.25em] font-sans font-light uppercase text-neutral-400">
@@ -7,7 +7,7 @@
       </div>
     {% endif %}
 
-    <div class="relative w-full {% if section.settings.layout_style == 'portrait_card' %}aspect-[3/4]{% elif section.settings.layout_style == 'boxed_center' %}aspect-[16/10]{% else %}aspect-[16/9]{% endif %} bg-neutral-100 overflow-hidden">
+    <div class="relative w-full {% if section.settings.layout_style == 'portrait_card' %}aspect-[3/4]{% elif section.settings.layout_style == 'card_5_4' %}aspect-[5/4]{% elif section.settings.layout_style == 'boxed_center' %}aspect-[16/10]{% else %}aspect-[16/9]{% endif %} bg-neutral-100 overflow-hidden">
       {% if section.settings.link != blank %}
         <a href="{{ section.settings.link }}" class="w-full h-full block">
       {% endif %}
@@ -33,10 +33,16 @@
       {% endif %}
     </div>
 
-    <div class="flex items-center justify-between pt-2">
+    <div class="flex items-center justify-between pt-2 relative">
       {% if section.settings.caption_bottom != blank %}
         <div class="text-[10px] sm:text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black m-0">
           {{ section.settings.caption_bottom }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.layout_style == 'card_5_4' %}
+        <div class="absolute left-1/2 transform -translate-x-1/2 flex items-center">
+          <span class="w-1.5 h-1.5 rounded-full bg-black"></span>
         </div>
       {% endif %}
 
@@ -63,6 +69,7 @@
       "label": "Layout Style",
       "options": [
         { "value": "portrait_card", "label": "Narrow Portrait Card (3:4)" },
+        { "value": "card_5_4", "label": "Immersive Card (5:4)" },
         { "value": "landscape_banner", "label": "Landscape Banner (16:9)" },
         { "value": "boxed_center", "label": "Contained Boxed Layout (16:10 with indicators)" }
       ],

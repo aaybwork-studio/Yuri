@@ -16,8 +16,8 @@
 
     <!-- Right: Bag Link -->
     <div class="flex-1 flex justify-end">
-      <a href="{{ routes.cart_url }}" class="header-link text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity">
-        BAG ({{ cart.item_count }})
+      <a href="{{ routes.cart_url }}" class="header-link text-[11px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity" data-cart-toggle>
+        BAG (<span data-cart-count>{{ cart.item_count }}</span>)
       </a>
     </div>
   </div>
@@ -65,6 +65,38 @@
   <div class="p-8 border-t border-black/5 text-[9px] tracking-[0.15em] font-light text-neutral-500 uppercase space-y-2">
     <p>Free shipping in France & Europe</p>
     <p>© {{ 'now' | date: "%Y" }} YURI STUDIO</p>
+  </div>
+</div>
+
+<!-- Slide-out Cart Drawer -->
+<div class="fixed inset-0 z-40 bg-black/15 backdrop-blur-[3px] opacity-0 pointer-events-none transition-opacity duration-500" data-cart-overlay></div>
+
+<div class="fixed top-0 right-0 h-full w-[280px] sm:w-[350px] z-50 bg-[#faf8f1] border-l border-black/5 transform translate-x-full transition-transform duration-500 ease-out flex flex-col justify-between" data-cart-drawer>
+  <!-- Drawer Header -->
+  <div class="h-12 px-6 flex items-center justify-between border-b border-black/5">
+    <span class="text-[10px] tracking-[0.2em] font-sans font-light uppercase text-black" data-cart-title>BAG ({{ cart.item_count }})</span>
+    <button type="button" class="text-[10px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity bg-transparent border-0 cursor-pointer p-0" data-cart-close>
+      CLOSE
+    </button>
+  </div>
+
+  <!-- Drawer Body -->
+  <div class="flex-1 overflow-y-auto py-6 px-6" data-cart-items>
+    <!-- Rendered Dynamically via JS -->
+  </div>
+
+  <!-- Drawer Footer -->
+  <div class="p-6 border-t border-black/5 space-y-4" data-cart-footer>
+    <div class="flex justify-between text-[11px] tracking-[0.15em] font-sans font-light text-black">
+      <span>SUBTOTAL</span>
+      <span data-cart-subtotal>{{ cart.total_price | money }}</span>
+    </div>
+    <p class="text-[9px] text-neutral-400 normal-case tracking-normal leading-normal">
+      Taxes and shipping calculated at checkout.
+    </p>
+    <a href="/checkout" class="block w-full bg-black text-[#faf8f1] hover:bg-neutral-900 text-center py-3.5 text-[10px] tracking-[0.2em] uppercase font-sans font-light rounded-none transition-colors duration-300">
+      CHECKOUT
+    </a>
   </div>
 </div>
 

@@ -226,3 +226,62 @@ html.lenis, html.lenis body {
 .product-description li {
   margin-bottom: 0.5rem;
 }
+
+/* ============================================
+   CART DRAWER OVERLAY
+   ============================================ */
+[data-cart-drawer] {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+[data-cart-overlay] {
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+/* Cart item layout inside drawer */
+.cart-drawer-item {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.cart-drawer-item img {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.cart-drawer-qty-btn {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  cursor: pointer;
+  font-size: 10px;
+  line-height: 1;
+  font-family: var(--font-sans);
+  color: #000;
+  transition: opacity 0.2s ease;
+}
+
+.cart-drawer-qty-btn:hover {
+  opacity: 0.6;
+}
+
+.cart-drawer-qty-input {
+  width: 30px;
+  text-align: center;
+  font-size: 10px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: var(--font-sans);
+  color: #000;
+}
+

@@ -112,7 +112,7 @@
         "settings": {
           "show_caption": true,
           "enable_cutoff": false,
-          "layout": "fullsize",
+          "layout": "fullscreen",
           "product": "yuzu-vetiver",
           "link": "",
           "image": "shopify://shop_images/Gemini_Generated_Image_g4o5sfg4o5sfg4o5-clean.png",

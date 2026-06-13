@@ -488,5 +488,55 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fetch cart data on page load to sync count badge
   fetchCart();
 
+  // 5. Background Audio System
+  const audio = document.getElementById('BgAudio');
+  const soundToggle = document.querySelector('[data-sound-toggle]');
+  
+  if (audio && soundToggle) {
+    let hasInteracted = false;
+
+    const playAudio = () => {
+      audio.play().then(() => {
+        soundToggle.textContent = 'MUTE';
+      }).catch(err => {
+        console.log('Autoplay blocked by browser. Sound remains paused until user gesture.');
+        soundToggle.textContent = 'PLAY SOUND';
+      });
+    };
+
+    const initAutoplay = () => {
+      if (hasInteracted) return;
+      hasInteracted = true;
+      playAudio();
+      
+      document.removeEventListener('click', initAutoplay);
+      document.removeEventListener('touchstart', initAutoplay);
+      document.removeEventListener('scroll', initAutoplay);
+    };
+
+    document.addEventListener('click', initAutoplay);
+    document.addEventListener('touchstart', initAutoplay);
+    document.addEventListener('scroll', initAutoplay);
+
+    soundToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hasInteracted = true;
+
+      if (audio.paused) {
+        audio.play();
+        audio.muted = false;
+        soundToggle.textContent = 'MUTE';
+      } else {
+        if (audio.muted) {
+          audio.muted = false;
+          soundToggle.textContent = 'MUTE';
+        } else {
+          audio.muted = true;
+          soundToggle.textContent = 'UNMUTE';
+        }
+      }
+    });
+  }
+
   console.log('YURI custom minimal theme loaded.');
 });

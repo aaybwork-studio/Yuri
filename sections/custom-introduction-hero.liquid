@@ -27,7 +27,7 @@
           {%- endif -%}
         </div>
 
-        <div class="introduction-logo absolute inset-0 z-30 flex items-center justify-center pointer-events-none px-4" data-introduction-logo>
+        <div class="introduction-logo absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none px-4" data-introduction-logo>
           {%- if section.settings.logo_svg != blank -%}
             <div class="w-full h-[80px] md:h-[120px] text-black fill-current flex items-center justify-center">
               {{ section.settings.logo_svg }}
@@ -42,7 +42,15 @@
               {% render 'yuri-japanese-logo' %}
             </div>
           {%- endif -%}
+          
+          <button type="button" class="mt-8 pointer-events-auto text-[11px] sm:text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity bg-transparent border-0 cursor-pointer p-0" data-sound-toggle>
+            Play Sound
+          </button>
         </div>
+
+        <audio id="BgAudio" loop preload="auto" class="hidden">
+          <source src="{{ 'Sea Waves - Sound Effect.mp3' | asset_url }}" type="audio/mpeg">
+        </audio>
       </div>
     </div>
   </div>

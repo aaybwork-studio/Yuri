@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "shopify-dev": "shopify theme dev --store=yuri.myshopify.com"
+    "shopify-dev": "npx shopify theme dev --store=yuri.myshopify.com"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",

@@ -81,6 +81,13 @@ a {
   transform: translateY(-100%);
 }
 
+/* Force hide when cart or menu slide drawers are active */
+.theme-header.is-drawer-open {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(-100%) !important;
+}
+
 /* ============================================
    INTRODUCTION HERO REVEAL
    ============================================ */

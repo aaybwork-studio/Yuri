@@ -248,9 +248,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (menuToggle && menuDrawer && menuOverlay) {
     openMenu = () => {
       if (typeof closeCart === 'function') closeCart();
-      menuDrawer.classList.remove('-translate-x-full');
-      menuOverlay.classList.remove('opacity-0', 'pointer-events-none');
-      menuOverlay.classList.add('opacity-100', 'pointer-events-auto');
+      menuDrawer.classList.add('is-open');
+      menuOverlay.classList.add('is-open');
       document.body.classList.add('overflow-hidden');
       if (typeof lenis !== 'undefined') {
         lenis.stop();
@@ -258,9 +257,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     closeMenu = () => {
-      menuDrawer.classList.add('-translate-x-full');
-      menuOverlay.classList.add('opacity-0', 'pointer-events-none');
-      menuOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+      menuDrawer.classList.remove('is-open');
+      menuOverlay.classList.remove('is-open');
       document.body.classList.remove('overflow-hidden');
       if (typeof lenis !== 'undefined') {
         lenis.start();
@@ -421,9 +419,8 @@ document.addEventListener('DOMContentLoaded', () => {
     await fetchCart();
     
     if (cartDrawer && cartOverlay) {
-      cartDrawer.classList.remove('translate-x-full');
-      cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
-      cartOverlay.classList.add('opacity-100', 'pointer-events-auto');
+      cartDrawer.classList.add('is-open');
+      cartOverlay.classList.add('is-open');
       document.body.classList.add('overflow-hidden');
       if (typeof lenis !== 'undefined') {
         lenis.stop();
@@ -433,9 +430,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   closeCart = () => {
     if (cartDrawer && cartOverlay) {
-      cartDrawer.classList.add('translate-x-full');
-      cartOverlay.classList.add('opacity-0', 'pointer-events-none');
-      cartOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+      cartDrawer.classList.remove('is-open');
+      cartOverlay.classList.remove('is-open');
       document.body.classList.remove('overflow-hidden');
       if (typeof lenis !== 'undefined') {
         lenis.start();

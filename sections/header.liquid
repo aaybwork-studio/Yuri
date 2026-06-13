@@ -24,54 +24,68 @@
 </header>
 
 <!-- Slide-out Navigation Drawer -->
-<div class="fixed inset-0 z-40 bg-black/15 backdrop-blur-[3px] opacity-0 pointer-events-none transition-opacity duration-500" data-menu-overlay></div>
+<div class="fixed inset-0" data-menu-overlay></div>
 
-<div class="fixed top-0 left-0 h-full w-[280px] sm:w-[350px] z-50 bg-[#faf8f1] border-r border-black/5 transform -translate-x-full transition-transform duration-500 ease-out flex flex-col justify-between" data-menu-drawer>
-  <!-- Drawer Header -->
-  <div class="h-12 px-6 flex items-center justify-between border-b border-black/5">
-    <span class="text-[10px] tracking-[0.2em] font-sans font-light uppercase text-black">NAVIGATION</span>
-    <button type="button" class="text-[10px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity bg-transparent border-0 cursor-pointer p-0" data-menu-close>
-      CLOSE
-    </button>
-  </div>
-
-  <!-- Drawer Body -->
-  <div class="flex-1 overflow-y-auto py-8 px-8">
-    <nav class="flex flex-col space-y-5">
-      {%- assign menu_links = linklists[section.settings.menu].links -%}
-      {%- if menu_links.size > 0 -%}
-        {%- for link in menu_links -%}
-          <div>
-            <a href="{{ link.url }}" class="text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-1">
-              {{ link.title }}
-            </a>
-          </div>
-        {%- endfor -%}
-      {%- else -%}
-        <!-- Fallback Menu mimicking madetlen.com navigation -->
-        <a href="{{ routes.all_products_collection_url }}" class="text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-1">Les Senteurs YURI</a>
-        <a href="{{ routes.all_products_collection_url }}" class="text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-1">Nos Parfums</a>
-        <a href="{{ routes.all_products_collection_url }}" class="text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-1">Parfumage de Chambre</a>
-        <a href="{{ routes.all_products_collection_url }}" class="text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-1">Pot Pourri</a>
-        <a href="{{ routes.all_products_collection_url }}" class="text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-1">Bougies Parfumées</a>
-        <a href="{{ routes.all_products_collection_url }}" class="text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-1">Rawtherapy</a>
-        <a href="/pages/about" class="text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-1">La Maison</a>
-        <a href="/pages/contact" class="text-[12px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-1">Contact</a>
-      {%- endif -%}
+<div class="flex flex-col justify-between p-8 sm:p-12" data-menu-drawer>
+  <!-- Drawer Body: Categories of products (top) -->
+  <div class="flex-none overflow-y-auto">
+    <nav class="flex flex-col space-y-6">
+      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Les Parfums YURI</a>
+      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Bougies Parfumées</a>
+      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Bougies Totem</a>
+      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Pot Pourri d'Apothicaire</a>
+      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Huiles de Parfum</a>
+      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Encens & Accessoires</a>
+      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block mt-4 pt-4 border-t border-black/5">La Maison</a>
+      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Contact</a>
     </nav>
   </div>
 
-  <!-- Drawer Footer -->
-  <div class="p-8 border-t border-black/5 text-[9px] tracking-[0.15em] font-light text-neutral-500 uppercase space-y-2">
-    <p>Free shipping in France & Europe</p>
-    <p>© {{ 'now' | date: "%Y" }} YURI STUDIO</p>
+  <!-- Drawer Footer: bottom items separated by gap -->
+  <div class="flex-none pt-8 space-y-6">
+    <!-- Account / Sign In -->
+    <div class="flex items-center space-x-3 text-[10px] tracking-[0.2em] font-sans font-light text-black">
+      <a href="{{ routes.account_url }}" class="hover:opacity-60 transition-opacity">Account</a>
+      <span class="text-neutral-300 font-light">/</span>
+      <a href="{{ routes.account_login_url }}" class="hover:opacity-60 transition-opacity">Sign In</a>
+    </div>
+
+    <!-- Search -->
+    <div>
+      <a href="{{ routes.search_url }}" class="text-[10px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-0.5">
+        Search
+      </a>
+    </div>
+
+    <!-- Experience -->
+    <div>
+      <a href="/pages/experience" class="text-[10px] tracking-[0.2em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block py-0.5">
+        Experience
+      </a>
+    </div>
+
+    <!-- Country & Language Selection Buttons -->
+    <div class="pt-6 border-t border-black/5 space-y-4 text-[9px] tracking-[0.15em] font-sans font-light text-neutral-500 uppercase">
+      <div>
+        Country / Region: 
+        <button type="button" class="text-black hover:opacity-60 transition-opacity font-light bg-transparent border-0 cursor-pointer p-0 ml-1">
+          France (EUR €)
+        </button>
+      </div>
+      <div class="flex items-center space-x-2">
+        <span>Language:</span>
+        <button type="button" class="text-black hover:opacity-60 transition-opacity font-medium bg-transparent border-0 cursor-pointer p-0">EN</button>
+        <span class="text-neutral-200">|</span>
+        <button type="button" class="text-neutral-400 hover:text-black transition-colors font-light bg-transparent border-0 cursor-pointer p-0">JP</button>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- Slide-out Cart Drawer -->
-<div class="fixed inset-0 z-40 bg-black/15 backdrop-blur-[3px] opacity-0 pointer-events-none transition-opacity duration-500" data-cart-overlay></div>
+<div class="fixed inset-0" data-cart-overlay></div>
 
-<div class="fixed top-0 right-0 h-full w-[280px] sm:w-[350px] z-50 bg-[#faf8f1] border-l border-black/5 transform translate-x-full transition-transform duration-500 ease-out flex flex-col justify-between" data-cart-drawer>
+<div class="flex flex-col justify-between" data-cart-drawer>
   <!-- Drawer Header -->
   <div class="h-12 px-6 flex items-center justify-between border-b border-black/5">
     <span class="text-[10px] tracking-[0.2em] font-sans font-light uppercase text-black" data-cart-title>BAG ({{ cart.item_count }})</span>

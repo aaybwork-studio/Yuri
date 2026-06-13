@@ -173,16 +173,56 @@ html.lenis, html.lenis body {
 }
 
 /* ============================================
-   DRAWER NAVIGATION MENU
+   DRAWER NAVIGATION MENU & CART ANIMATIONS
    ============================================ */
-[data-menu-drawer] {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+[data-menu-drawer], [data-cart-drawer] {
+  position: fixed;
+  top: 0;
+  height: 100dvh;
+  width: 300px;
+  max-width: 85vw;
+  z-index: 50;
+  background-color: #faf8f1;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 
-[data-menu-overlay] {
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+[data-menu-drawer] {
+  left: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  transform: translateX(-100%);
+}
+
+[data-menu-drawer].is-open {
+  transform: translateX(0);
+}
+
+[data-cart-drawer] {
+  right: 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+  transform: translateX(100%);
+}
+
+[data-cart-drawer].is-open {
+  transform: translateX(0);
+}
+
+[data-menu-overlay], [data-cart-overlay] {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background-color: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity;
+}
+
+[data-menu-overlay].is-open, [data-cart-overlay].is-open {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* ============================================
@@ -225,19 +265,6 @@ html.lenis, html.lenis body {
 
 .product-description li {
   margin-bottom: 0.5rem;
-}
-
-/* ============================================
-   CART DRAWER OVERLAY
-   ============================================ */
-[data-cart-drawer] {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
-
-[data-cart-overlay] {
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity;
 }
 
 /* Cart item layout inside drawer */

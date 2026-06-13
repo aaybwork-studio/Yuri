@@ -797,6 +797,57 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // 8. Custom Haiku Scroll Animation
+  const haikuData = [
+    { ja: "とも", en: "a single flame" },
+    { ja: "しび", en: "a single flame" },
+    { ja: "の、", en: "of a candle" },
+    { ja: "とも", en: "transfers itself" },
+    { ja: "しび", en: "transfers itself" },
+    { ja: "にう", en: "to another" },
+    { ja: "つる", en: "to another" },
+    { ja: "はる", en: "in the soft glow" },
+    { ja: "のゆ", en: "of spring" },
+    { ja: "う。", en: "twilight" }
+  ];
+
+  const haikuSection = document.querySelector('[data-haiku-section]');
+  if (haikuSection) {
+    const jaSpan = haikuSection.querySelector('[data-haiku-ja]');
+    const enSub = haikuSection.querySelector('[data-haiku-en]');
+    let currentStep = -1;
+
+    ScrollTrigger.create({
+      trigger: haikuSection,
+      start: 'top top',
+      end: '+=250%',
+      pin: true,
+      scrub: true,
+      onUpdate: (self) => {
+        const progress = self.progress;
+        let step = Math.floor(progress * haikuData.length);
+        if (step >= haikuData.length) step = haikuData.length - 1;
+
+        if (step !== currentStep) {
+          currentStep = step;
+          gsap.to([jaSpan, enSub], {
+            opacity: 0,
+            y: -10,
+            duration: 0.15,
+            onComplete: () => {
+              if (jaSpan) jaSpan.textContent = haikuData[step].ja;
+              if (enSub) enSub.textContent = haikuData[step].en;
+              gsap.fromTo([jaSpan, enSub],
+                { opacity: 0, y: 10 },
+                { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }
+              );
+            }
+          });
+        }
+      }
+    });
+  }
+
   console.log('YURI custom minimal theme loaded.');
 });
 

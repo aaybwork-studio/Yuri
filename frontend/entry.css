@@ -353,7 +353,7 @@ html.lenis, html.lenis body {
 .yuri-media-caption::after {
   content: '';
   position: absolute;
-  left: 0;
+  left: 24px; /* Matches the px-6 left padding offset of fullwidth layout text */
   bottom: -4px;
   width: calc(100% - 48px); /* Accounts for px-6 (24px left + 24px right padding) inside fullwidth layout */
   height: 1px;
@@ -365,6 +365,7 @@ html.lenis, html.lenis body {
 
 /* For non-fullwidth layouts where px-6 is not present, target the underline to match text boundary */
 .yuri-media:not(.yuri-media--fullsize) .yuri-media-caption::after {
+  left: 0;
   width: 100%;
 }
 

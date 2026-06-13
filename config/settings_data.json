@@ -50,9 +50,10 @@
       "yuri-media-3": {
         "type": "yuri-media-3",
         "settings": {
-          "layout": "portrait",
+          "layout": "fullsize",
           "product": "",
           "link": "",
+          "image": "shopify://shop_images/Gemini_Generated_Image_4owoxs4owoxs4owo_f3a4b70a-8482-45b2-b21f-cd5038d0b31a.png",
           "video_url": "",
           "caption": "",
           "body_text": ""

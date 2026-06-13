@@ -86,6 +86,8 @@ class IntroductionHero {
   initTimeline() {
     if (!this.mainContent) return;
 
+    const header = document.querySelector('[data-header]');
+
     this.timeline = gsap.timeline({
       scrollTrigger: {
         trigger: this.mainContent,
@@ -94,7 +96,19 @@ class IntroductionHero {
         scrub: true,
         pin: true,
         once: false,
-        invalidateOnRefresh: true
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          // self.progress ranges from 0 to 1.
+          // The panel translation ends around progress ~0.8.
+          // Once we are past the slide-up animation (e.g. progress > 0.8), show the header by removing 'is-intro-active'
+          if (header) {
+            if (self.progress < 0.78) {
+              header.classList.add('is-intro-active');
+            } else {
+              header.classList.remove('is-intro-active');
+            }
+          }
+        }
       }
     });
 
@@ -111,7 +125,7 @@ class IntroductionHero {
       });
     }
 
-    // Add scroll resistance/lock interval after fadeout (e.g. 0.4s resistance gap where scroll continues but hero stays in place)
+    // Add scroll resistance/lock interval after fadeout (where scroll continues but hero stays in place)
     this.timeline.to({}, { duration: 0.4 });
 
     // 2. Translate introduction panel vertically up
@@ -129,6 +143,9 @@ class IntroductionHero {
         duration: 0.5
       }, '-=1.0');
     }
+
+    // 4. Add resistance/lock at the end (keep layout locked on the main landing page with header visible)
+    this.timeline.to({}, { duration: 0.5 });
   }
 
   kill() {
@@ -191,7 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // --- INTRO HERO ZONE ---
       if (isHomepage && y < introScrollHeight) {
-        header.classList.add('is-intro-active');
+        // Let the GSAP onUpdate callback handle 'is-intro-active' toggling.
+        // We only clear scroll-related modifiers like background-scrolled styles.
         header.classList.remove('is-scrolled', 'is-hidden');
         lastScrollY = y;
         return;

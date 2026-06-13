@@ -30,11 +30,11 @@
   <!-- Drawer Body: Categories of products (top) -->
   <div class="flex-1">
     <nav class="flex flex-col space-y-6">
-      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Candles</a>
-      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Scents</a>
-      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Fragrances</a>
-      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Incense</a>
-      <a href="#" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">Diffusers</a>
+      {%- for link in linklists[section.settings.menu].links -%}
+        <a href="{{ link.url }}" class="text-[12px] sm:text-[13px] tracking-[0.25em] font-sans font-light uppercase text-black hover:opacity-60 transition-opacity block">
+          {{ link.title }}
+        </a>
+      {%- endfor -%}
     </nav>
   </div>
 

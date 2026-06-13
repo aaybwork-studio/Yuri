@@ -335,6 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (typeof closeCart === 'function') closeCart();
       menuDrawer.classList.add('is-open');
       menuOverlay.classList.add('is-open');
+      if (header) header.classList.add('is-hidden');
       document.body.classList.add('overflow-hidden');
       if (typeof lenis !== 'undefined') {
         lenis.stop();
@@ -344,6 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closeMenu = () => {
       menuDrawer.classList.remove('is-open');
       menuOverlay.classList.remove('is-open');
+      if (header) header.classList.remove('is-hidden');
       document.body.classList.remove('overflow-hidden');
       if (typeof lenis !== 'undefined') {
         lenis.start();
@@ -506,6 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cartDrawer && cartOverlay) {
       cartDrawer.classList.add('is-open');
       cartOverlay.classList.add('is-open');
+      if (header) header.classList.add('is-hidden');
       document.body.classList.add('overflow-hidden');
       if (typeof lenis !== 'undefined') {
         lenis.stop();
@@ -517,6 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cartDrawer && cartOverlay) {
       cartDrawer.classList.remove('is-open');
       cartOverlay.classList.remove('is-open');
+      if (header) header.classList.remove('is-hidden');
       document.body.classList.remove('overflow-hidden');
       if (typeof lenis !== 'undefined') {
         lenis.start();

@@ -226,22 +226,24 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        // Add an elegant, separate scroll-triggered slide-up and fade-in for the caption
+        // Add an elegant scroll-triggered caption slide-in and slide-out under the image
         if (caption) {
-          gsap.fromTo(caption,
-            { y: -25, opacity: 0 }, // Start behind the image (shifted up by 25px)
-            {
-              y: 0,
-              opacity: 1,
-              ease: 'power1.out',
-              scrollTrigger: {
-                trigger: section,
-                start: 'top 80%', // Starts animation when the section is 80% from top of screen
-                end: 'top 55%',   // Ends when section reaches 55% height
-                scrub: true,
-                invalidateOnRefresh: true
-              }
+          // A single scrub timeline that handles entry (slide in) and exit (slide out under image)
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: section,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+              invalidateOnRefresh: true
             }
+          })
+          .fromTo(caption, 
+            { y: 30, opacity: 0 }, // Starts below and hidden when section enters
+            { y: 0, opacity: 1, duration: 0.3, ease: 'power1.out' } // Slides into static position
+          )
+          .to(caption, 
+            { y: -30, opacity: 0, duration: 0.3, ease: 'power1.in' } // Slides up under the image container on exit
           );
         }
       });

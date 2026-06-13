@@ -317,6 +317,9 @@ html.lenis, html.lenis body {
 .yuri-media {
   padding-bottom: 30px;
 }
+.yuri-media-content {
+  overflow: hidden !important;
+}
 
 /* Adjust sizes of portrait and landscape cards on desktop screens to fit the screen */
 @media screen and (min-width: 768px) {

@@ -1,6 +1,4 @@
 {
-  "name": "Collection",
-  "wrapper": "div",
   "sections": {
     "main": {
       "type": "main-collection",

@@ -333,6 +333,19 @@ html.lenis, html.lenis body {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
   }
+
+  /* Full Width Media: Limit content box to maximum height corresponding to 1080p viewport (16:9 ratio style layout) */
+  .yuri-media--fullsize .yuri-media-content {
+    max-height: calc(100vh - 80px);
+    aspect-ratio: 16/9;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  /* If fullsize is linked to a product (meaning we have a media-link), cut the image/video off by 30px from bottom for caption space */
+  .yuri-media--fullsize a.yuri-media-link .yuri-media-content {
+    max-height: calc(100vh - 110px); /* cuts off an extra 30px from the bottom */
+  }
 }
 
 /* Add 30px spacing after the last media card before the footer */

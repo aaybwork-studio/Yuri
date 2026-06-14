@@ -561,10 +561,14 @@ body.dark-mode svg:not(.header-logo svg) polygon {
   stroke: #ffffff;
 }
 
-body.dark-mode .header-logo svg,
-body.dark-mode .header-logo svg path {
+body.dark-mode .header-logo svg #EnglishLogo path {
   fill: #ffffff !important;
   color: #ffffff !important;
+}
+
+body.dark-mode .header-logo svg #JapaneseLogo path {
+  fill: #ff6f00 !important;
+  color: #ff6f00 !important;
 }
 
 body.dark-mode .introduction-logo,

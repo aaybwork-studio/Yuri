@@ -31,7 +31,7 @@
           <div class="hidden md:block md:col-span-1 bg-cream"></div>
         {% endif %}
 
-        <a href="{{ product.url }}" class="col-span-2 md:col-span-2 grid grid-cols-2 group bg-cream hover:bg-neutral-50 transition-colors duration-300">
+        <a href="{{ product.url }}" class="col-span-2 md:col-span-2 grid grid-cols-2 group bg-cream hover:bg-neutral-50 transition-all duration-300 hover:z-10 hover:shadow-[0_0_0_1.5px_rgba(0,0,0,0.22)]">
           <!-- Image tile -->
           <div class="aspect-[3/4] bg-neutral-100 overflow-hidden relative border-r border-black/[0.06]">
             {% if product.featured_image != blank %}
@@ -49,16 +49,19 @@
           </div>
           <!-- Details tile -->
           <div class="aspect-[3/4] flex flex-col justify-between p-4 md:p-6 bg-transparent">
-            <div class="text-[9px] tracking-[0.2em] font-bold text-black/60 uppercase">
-              {%- if product.vendor -%}{{ product.vendor }}{%- else -%}YURI{%- endif -%}
+            <div class="text-[12px] tracking-widest font-bold text-black/60 uppercase">
+              {%- if product.metafields.custom.one_liner != blank -%}
+                {{ product.metafields.custom.one_liner }}
+              {%- elsif product.vendor != blank -%}
+                {{ product.vendor }}
+              {%- else -%}
+                YURI
+              {%- endif -%}
             </div>
             <div class="space-y-2">
-              <h3 class="text-[11px] font-bold tracking-widest leading-snug text-black group-hover:underline">
+              <h3 class="text-[11px] font-bold tracking-widest leading-snug text-black">
                 {{ product.title }}
               </h3>
-              <p class="text-[10px] text-black font-bold font-sans tracking-wide">
-                {{ product.price | money }}
-              </p>
             </div>
           </div>
         </a>

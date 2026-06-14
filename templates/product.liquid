@@ -18,20 +18,51 @@
   endfor
 -%}
 
-<div class="product-page bg-[#faf8f1] min-h-screen text-black pt-20 border-b border-black/[0.035]">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+<div class="product-page bg-[#faf8f1] h-screen overflow-hidden text-black pt-20">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch h-full">
     
-    <!-- Left: Image Box with Light Grey Background -->
-    <div class="bg-[#e8e6df] min-h-[50vh] md:min-h-[calc(100vh-80px)] flex items-center justify-center p-8 md:p-16 border-b md:border-b-0 md:border-r border-black/10">
-      {% if product.featured_image != blank %}
-        <img 
-          src="{{ product.featured_image | image_url: width: 1200 }}" 
-          alt="{{ product.title | escape }}" 
-          class="w-full max-w-[500px] h-auto object-contain mix-blend-multiply" 
-          loading="eager"
-          width="{{ product.featured_image.width }}" 
-          height="{{ product.featured_image.height }}"
-        >
+    <!-- Left: Fixed Image Box with Light Grey Background and Slider Controls -->
+    <div class="relative bg-[#e8e6df] h-[50vh] md:h-full flex items-center justify-center p-8 md:p-16 border-b md:border-b-0 md:border-r border-black/10 select-none group">
+      {% if product.images.size > 0 %}
+        <div class="relative w-full max-w-[500px] h-full flex items-center justify-center overflow-hidden">
+          {% for image in product.images %}
+            <img 
+              src="{{ image.src | image_url: width: 1200 }}" 
+              alt="{{ product.title | escape }}" 
+              class="product-slider-img absolute w-full h-full object-contain mix-blend-multiply transition-opacity duration-500 ease-in-out {% if forloop.first %}opacity-100 z-10{% else %}opacity-0 z-0{% endif %}" 
+              data-index="{{ forloop.index0 }}"
+              loading="eager"
+              width="{{ image.width }}" 
+              height="{{ image.height }}"
+            >
+          {% endfor %}
+        </div>
+
+        {% if product.images.size > 1 %}
+          <!-- Left Arrow -->
+          <button 
+            type="button" 
+            class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 bg-transparent text-black/40 hover:text-black p-2 transition-colors duration-200 focus:outline-none"
+            onclick="rotateSlider(-1)"
+            aria-label="Previous Image"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+          </button>
+          
+          <!-- Right Arrow -->
+          <button 
+            type="button" 
+            class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 bg-transparent text-black/40 hover:text-black p-2 transition-colors duration-200 focus:outline-none"
+            onclick="rotateSlider(1)"
+            aria-label="Next Image"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+        {% endif %}
       {% else %}
         <div class="w-full aspect-[3/4] bg-neutral-200 flex items-center justify-center">
           <span class="text-neutral-400 text-[10px] tracking-widest uppercase">NO IMAGE AVAILABLE</span>
@@ -39,8 +70,8 @@
       {% endif %}
     </div>
 
-    <!-- Right: Sticky Product Details -->
-    <div class="flex flex-col justify-between bg-[#faf8f1] p-8 md:p-16 lg:p-24 min-h-[50vh] md:min-h-[calc(100vh-80px)] space-y-12">
+    <!-- Right: Independently Scrollable Details -->
+    <div class="flex flex-col justify-between bg-[#faf8f1] p-8 md:p-16 lg:p-24 h-[50vh] md:h-full overflow-y-auto no-scrollbar space-y-12">
       
       <!-- Top / Info Section -->
       <div class="space-y-10">
@@ -146,3 +177,24 @@
 
   </div>
 </div>
+
+<script>
+  let currentSliderIndex = 0;
+  const sliderImages = document.querySelectorAll('.product-slider-img');
+  const totalSliderImages = sliderImages.length;
+
+  function rotateSlider(direction) {
+    if (totalSliderImages <= 1) return;
+    
+    // Hide current image
+    sliderImages[currentSliderIndex].classList.remove('opacity-100', 'z-10');
+    sliderImages[currentSliderIndex].classList.add('opacity-0', 'z-0');
+    
+    // Calculate new index
+    currentSliderIndex = (currentSliderIndex + direction + totalSliderImages) % totalSliderImages;
+    
+    // Show new image
+    sliderImages[currentSliderIndex].classList.remove('opacity-0', 'z-0');
+    sliderImages[currentSliderIndex].classList.add('opacity-100', 'z-10');
+  }
+</script>

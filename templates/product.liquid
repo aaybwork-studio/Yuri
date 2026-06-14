@@ -18,11 +18,11 @@
   endfor
 -%}
 
-<div class="product-page bg-[#faf8f1] h-screen overflow-hidden text-black pt-20">
+<div class="product-page bg-[#faf8f1] h-[calc(100vh-80px)] overflow-hidden text-black mt-20">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch h-full">
     
     <!-- Left: Fixed Image Box with Light Grey Background and Slider Controls -->
-    <div class="relative bg-[#e8e6df] h-[50vh] md:h-full flex items-center justify-center border-b md:border-b-0 md:border-r border-black/10 select-none group">
+    <div class="relative bg-[#e8e6df] h-[40vh] md:h-full flex items-center justify-center border-b md:border-b-0 md:border-r border-black/10 select-none group">
       {% if product.images.size > 0 %}
         <div class="relative w-full h-full flex items-center justify-center overflow-hidden">
           {% for image in product.images %}
@@ -71,7 +71,7 @@
     </div>
 
     <!-- Right: Independently Scrollable Details -->
-    <div class="flex flex-col justify-between bg-[#faf8f1] p-8 md:p-16 lg:p-24 h-[50vh] md:h-full overflow-y-auto no-scrollbar space-y-12">
+    <div class="flex flex-col justify-between bg-[#faf8f1] p-8 md:p-16 lg:p-24 h-[60vh] md:h-full overflow-y-auto no-scrollbar space-y-12">
       
       <!-- Top / Info Section -->
       <div class="space-y-10">

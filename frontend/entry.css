@@ -513,7 +513,6 @@ body.dark-mode .theme-header,
 body.dark-mode .theme-footer,
 body.dark-mode [data-menu-drawer],
 body.dark-mode [data-cart-drawer],
-body.dark-mode .yuri-media-content,
 body.dark-mode .theme-header.is-scrolled {
   background-color: #121212 !important;
   color: #ffffff !important;

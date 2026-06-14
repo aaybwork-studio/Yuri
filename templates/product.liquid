@@ -22,14 +22,14 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch h-full">
     
     <!-- Left: Fixed Image Box with Light Grey Background and Slider Controls -->
-    <div class="relative bg-[#e8e6df] h-[50vh] md:h-full flex items-center justify-center p-8 md:p-16 border-b md:border-b-0 md:border-r border-black/10 select-none group">
+    <div class="relative bg-[#e8e6df] h-[50vh] md:h-full flex items-center justify-center border-b md:border-b-0 md:border-r border-black/10 select-none group">
       {% if product.images.size > 0 %}
-        <div class="relative w-full max-w-[500px] h-full flex items-center justify-center overflow-hidden">
+        <div class="relative w-full h-full flex items-center justify-center overflow-hidden">
           {% for image in product.images %}
             <img 
               src="{{ image.src | image_url: width: 1200 }}" 
               alt="{{ product.title | escape }}" 
-              class="product-slider-img absolute w-full h-full object-contain mix-blend-multiply transition-opacity duration-500 ease-in-out {% if forloop.first %}opacity-100 z-10{% else %}opacity-0 z-0{% endif %}" 
+              class="product-slider-img absolute w-full h-full object-cover transition-opacity duration-500 ease-in-out {% if forloop.first %}opacity-100 z-10{% else %}opacity-0 z-0{% endif %}" 
               data-index="{{ forloop.index0 }}"
               loading="eager"
               width="{{ image.width }}" 

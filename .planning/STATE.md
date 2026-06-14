@@ -42,6 +42,7 @@ progress:
 **Phase 3: Floating Product Grids & Cards** (COMPLETED)
 * Designed interlocking 5-column product grid in `sections/main-collection.liquid` with tile resizing.
 * Added custom dark mode cream background logic to protect transparent media assets.
+* Optimized collection grid gap to 3px, applied thin outlines, bolded card typography, and pushed changes to GitHub (Commit `b968120`).
 
 **Phase 2: Homepage Hero & Slideshow** (COMPLETED)
 * Created `sections/custom-introduction-hero.liquid` with autoplay video loop and sound controls.

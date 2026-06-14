@@ -400,6 +400,11 @@ document.addEventListener('DOMContentLoaded', () => {
       header.classList.add('is-intro-active');
     }
 
+    const isCollectionPage = document.querySelector('.collection-page') !== null;
+    if (isCollectionPage) {
+      header.classList.add('is-hidden');
+    }
+
     lenis.on('scroll', ({ scroll }) => {
       const y = scroll;
       const activeIntro = document.querySelector('[data-mods="introduction"]');
@@ -421,7 +426,8 @@ document.addEventListener('DOMContentLoaded', () => {
       header.classList.add('is-scrolled');
 
       // Smart sticky: hide on scroll-down, show on scroll-up
-      if (y > lastScrollY && y > introScrollHeight + 60) {
+      const threshold = isHomepage ? introScrollHeight + 60 : 60;
+      if (y > lastScrollY && y > threshold) {
         header.classList.add('is-hidden');
       } else if (y < lastScrollY) {
         header.classList.remove('is-hidden');

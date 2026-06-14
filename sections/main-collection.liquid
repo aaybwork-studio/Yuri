@@ -3,46 +3,46 @@
 -%}
 
 {% paginate collection.products by products_per_page %}
-<div class="collection-page w-full bg-[#faf8f1] dark:bg-[#121212] pt-12 pb-24 font-sans text-xs tracking-widest uppercase text-black transition-colors duration-300">
+<div class="collection-page w-full bg-cream pt-12 pb-24 font-sans text-xs tracking-widest uppercase text-black transition-colors duration-300">
   
   <!-- Collection Header (Below Hero Section) -->
   <div class="text-center mb-16 px-6">
-    <h1 class="text-lg font-normal tracking-[0.2em] uppercase m-0 text-black dark:text-white">{{ collection.title }}</h1>
+    <h1 class="text-lg font-normal tracking-[0.2em] uppercase m-0 text-black">{{ collection.title }}</h1>
     {% if collection.description != blank %}
-      <div class="description text-neutral-500 dark:text-neutral-400 max-w-xl mx-auto mt-4 normal-case text-[11px] font-light tracking-wide leading-relaxed">
+      <div class="description text-neutral-500 max-w-xl mx-auto mt-4 normal-case text-[11px] font-light tracking-wide leading-relaxed">
         {{ collection.description }}
       </div>
     {% endif %}
   </div>
 
-  <!-- Interlocking Product Grid -->
+  <!-- Interlocking Product Grid (5 Columns for 35% bigger tiles) -->
   <div class="max-w-[1400px] mx-auto px-4 md:px-8">
-    <div class="grid grid-cols-2 md:grid-cols-7 gap-y-8 md:gap-y-12 border-t border-b border-black/10 dark:border-white/10 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-y-8 md:gap-y-12 border-t border-b border-black/10 py-12">
       {% for product in collection.products %}
-        {% assign mod = forloop.index0 | modulo: 6 %}
+        {% assign mod = forloop.index0 | modulo: 4 %}
         
-        {% comment %} Row 1 End Spacer: After 3rd product in group of 6 (which are index 0, 1, 2) {% endcomment %}
-        {% if mod == 3 %}
+        {% comment %} Row 1 End Spacer: After 2nd product in group of 4 (which are index 0, 1) {% endcomment %}
+        {% if mod == 2 %}
           <div class="hidden md:block md:col-span-1 bg-transparent"></div>
         {% endif %}
 
-        {% comment %} Row 2 Start Spacer: Before 4th product in group of 6 (which is index 3) {% endcomment %}
-        {% if mod == 3 %}
+        {% comment %} Row 2 Start Spacer: Before 3rd product in group of 4 (which is index 2) {% endcomment %}
+        {% if mod == 2 %}
           <div class="hidden md:block md:col-span-1 bg-transparent"></div>
         {% endif %}
 
-        <a href="{{ product.url }}" class="col-span-2 md:col-span-2 grid grid-cols-2 group border border-black/10 dark:border-white/10 bg-[#faf8f1] dark:bg-[#121212] hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors duration-300">
+        <a href="{{ product.url }}" class="col-span-2 md:col-span-2 grid grid-cols-2 group border border-black/10 bg-cream hover:bg-neutral-50 transition-colors duration-300">
           <!-- Image tile -->
-          <div class="aspect-square bg-neutral-100 dark:bg-neutral-800 overflow-hidden relative border-r border-black/10 dark:border-white/10">
+          <div class="aspect-square bg-neutral-100 overflow-hidden relative border-r border-black/10">
             {% if product.featured_image != blank %}
-              <img src="{{ product.featured_image | image_url: width: 600 }}" 
+              <img src="{{ product.featured_image | image_url: width: 800 }}" 
                    alt="{{ product.title | escape }}" 
                    class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" 
                    loading="lazy" 
                    width="{{ product.featured_image.width }}" 
                    height="{{ product.featured_image.height }}">
             {% else %}
-              <div class="w-full h-full flex items-center justify-center bg-neutral-150 dark:bg-neutral-800">
+              <div class="w-full h-full flex items-center justify-center bg-neutral-150">
                 <span class="text-neutral-400 text-[10px]">NO IMAGE</span>
               </div>
             {% endif %}
@@ -53,10 +53,10 @@
               {%- if product.vendor -%}{{ product.vendor }}{%- else -%}YURI{%- endif -%}
             </div>
             <div class="space-y-2">
-              <h3 class="text-[11px] font-normal tracking-widest leading-snug text-black dark:text-white group-hover:underline">
+              <h3 class="text-[11px] font-normal tracking-widest leading-snug text-black group-hover:underline">
                 {{ product.title }}
               </h3>
-              <p class="text-[10px] text-neutral-500 dark:text-neutral-400 font-sans tracking-wide">
+              <p class="text-[10px] text-neutral-500 font-sans tracking-wide">
                 {{ product.price | money }}
               </p>
             </div>
@@ -71,7 +71,7 @@
 
     <!-- Pagination -->
     {% if paginate.pages > 1 %}
-      <div class="mt-16 flex justify-center text-[10px] tracking-[0.2em] uppercase text-black dark:text-white">
+      <div class="mt-16 flex justify-center text-[10px] tracking-[0.2em] uppercase text-black">
         {{ paginate | default_pagination }}
       </div>
     {% endif %}
@@ -87,9 +87,9 @@
       "type": "range",
       "id": "products_per_page",
       "label": "Products per page",
-      "min": 6,
+      "min": 4,
       "max": 36,
-      "step": 6,
+      "step": 4,
       "default": 12
     }
   ]

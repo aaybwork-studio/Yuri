@@ -1,4 +1,4 @@
-<div class="collection-hero w-full overflow-hidden relative bg-[#faf8f1] dark:bg-[#121212] border-b border-black/10" id="CollectionHero-{{ section.id }}" style="height: {{ section.settings.hero_height }};">
+<div class="collection-hero w-full overflow-hidden relative bg-[#faf8f1] border-b border-black/10" id="CollectionHero-{{ section.id }}" style="height: {{ section.settings.hero_height }};">
   {%- liquid
     assign hero_image = section.settings.hero_image
     if hero_image == blank and section.settings.show_collection_image
@@ -19,7 +19,7 @@
       {%- endif -%}
     </div>
   {%- else -%}
-    <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-neutral-100 dark:bg-neutral-900">
+    <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-neutral-100">
       <span class="text-neutral-400 text-xs tracking-widest uppercase">NO COLLECTION IMAGE SET</span>
     </div>
   {%- endif -%}

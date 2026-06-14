@@ -1,0 +1,75 @@
+<div class="collection-hero w-full overflow-hidden relative bg-[#faf8f1] dark:bg-[#121212] border-b border-black/10" id="CollectionHero-{{ section.id }}" style="height: {{ section.settings.hero_height }};">
+  {%- liquid
+    assign hero_image = section.settings.hero_image
+    if hero_image == blank and section.settings.show_collection_image
+      assign hero_image = collection.image
+    endif
+  -%}
+
+  {%- if hero_image != blank -%}
+    <div class="absolute inset-0 w-full h-full">
+      <img src="{{ hero_image | image_url: width: 2000 }}" 
+           alt="{{ collection.title | escape }}" 
+           class="w-full h-full object-cover" 
+           loading="eager" 
+           width="{{ hero_image.width }}" 
+           height="{{ hero_image.height }}">
+      {%- if section.settings.overlay_opacity > 0 -%}
+        <div class="absolute inset-0 bg-black" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    <div class="absolute inset-0 w-full h-full flex items-center justify-center bg-neutral-100 dark:bg-neutral-900">
+      <span class="text-neutral-400 text-xs tracking-widest uppercase">NO COLLECTION IMAGE SET</span>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection Hero Banner",
+  "tag": "section",
+  "class": "section-collection-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image Override",
+      "info": "Leave blank to use the native Collection Image."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_image",
+      "label": "Use Collection Image as fallback",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "hero_height",
+      "label": "Hero Height",
+      "options": [
+        { "value": "30vh", "label": "Small (30vh)" },
+        { "value": "40vh", "label": "Medium (40vh)" },
+        { "value": "50vh", "label": "Large (50vh)" },
+        { "value": "60vh", "label": "Extra Large (60vh)" }
+      ],
+      "default": "50vh"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity (Dimming)",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 0,
+      "unit": "%"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection Hero Banner"
+    }
+  ]
+}
+{% endschema %}

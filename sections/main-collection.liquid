@@ -17,7 +17,7 @@
 
   <!-- Interlocking Product Grid (5 Columns for 35% bigger tiles, full-width, background outlines) -->
   <div class="w-full">
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-[3px] bg-black/[0.06] p-[3px]">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-[1.5px] bg-black/[0.035] p-[1.5px]">
       {% for product in collection.products %}
         {% assign mod = forloop.index0 | modulo: 4 %}
         
@@ -33,7 +33,7 @@
 
         <a href="{{ product.url }}" class="col-span-2 md:col-span-2 grid grid-cols-2 group bg-cream hover:bg-neutral-50 transition-all duration-300 hover:z-10 hover:shadow-[0_0_0_1.5px_rgba(0,0,0,0.22)]">
           <!-- Image tile -->
-          <div class="aspect-[3/4] bg-neutral-100 overflow-hidden relative border-r border-black/[0.06]">
+          <div class="aspect-[3/4] bg-neutral-100 overflow-hidden relative border-r border-black/[0.035]">
             {% if product.featured_image != blank %}
               <img src="{{ product.featured_image | image_url: width: 800 }}" 
                    alt="{{ product.title | escape }}" 

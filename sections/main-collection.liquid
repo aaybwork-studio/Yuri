@@ -17,7 +17,7 @@
 
   <!-- Interlocking Product Grid (5 Columns for 35% bigger tiles) -->
   <div class="max-w-[1400px] mx-auto px-4 md:px-8">
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-y-8 md:gap-y-12 border-t border-b border-black/10 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-[3px] border-t border-b border-black/10 py-12">
       {% for product in collection.products %}
         {% assign mod = forloop.index0 | modulo: 4 %}
         
@@ -31,9 +31,9 @@
           <div class="hidden md:block md:col-span-1 bg-transparent"></div>
         {% endif %}
 
-        <a href="{{ product.url }}" class="col-span-2 md:col-span-2 grid grid-cols-2 group border border-black/10 bg-cream hover:bg-neutral-50 transition-colors duration-300">
+        <a href="{{ product.url }}" class="col-span-2 md:col-span-2 grid grid-cols-2 group border border-black/[0.06] bg-cream hover:bg-neutral-50 transition-colors duration-300">
           <!-- Image tile -->
-          <div class="aspect-square bg-neutral-100 overflow-hidden relative border-r border-black/10">
+          <div class="aspect-square bg-neutral-100 overflow-hidden relative border-r border-black/[0.06]">
             {% if product.featured_image != blank %}
               <img src="{{ product.featured_image | image_url: width: 800 }}" 
                    alt="{{ product.title | escape }}" 
@@ -49,14 +49,14 @@
           </div>
           <!-- Details tile -->
           <div class="aspect-square flex flex-col justify-between p-4 md:p-6 bg-transparent">
-            <div class="text-[9px] tracking-[0.2em] font-normal text-neutral-400 uppercase">
+            <div class="text-[9px] tracking-[0.2em] font-bold text-black/60 uppercase">
               {%- if product.vendor -%}{{ product.vendor }}{%- else -%}YURI{%- endif -%}
             </div>
             <div class="space-y-2">
-              <h3 class="text-[11px] font-normal tracking-widest leading-snug text-black group-hover:underline">
+              <h3 class="text-[11px] font-bold tracking-widest leading-snug text-black group-hover:underline">
                 {{ product.title }}
               </h3>
-              <p class="text-[10px] text-neutral-500 font-sans tracking-wide">
+              <p class="text-[10px] text-black font-bold font-sans tracking-wide">
                 {{ product.price | money }}
               </p>
             </div>

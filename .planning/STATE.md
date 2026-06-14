@@ -45,6 +45,7 @@ progress:
 * Optimized collection grid gap to 1.5px, applied ultra-thin outlines (3.5% opacity) on unhovered states, and bolded card typography (Commit `6c7ce34`).
 * Added smooth card hover outline highlight via inset-shadow, dynamic one-liner metadata support (`product.metafields.custom.one_liner`) in 12px, removed price display, and disabled text underlines on hover.
 * Expanded mock product database in [shopify_mock_products.csv](file:///Users/exodus/Desktop/KC/ANTIGRAVITY/Yuri/shopify_mock_products.csv) to 100 products (20 items per type: Candle, Incense, Eau de Parfum, Pot Pourri, Reed Diffuser) with custom descriptions, handles, SKUs, and placeholder images.
+* Replaced empty grid spacer slots with single-column image-only product card links using a modulo 6 sequence to maintain a perfect interlocking pattern.
 
 **Phase 2: Homepage Hero & Slideshow** (COMPLETED)
 * Created `sections/custom-introduction-hero.liquid` with autoplay video loop and sound controls.

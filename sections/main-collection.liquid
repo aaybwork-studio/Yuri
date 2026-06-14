@@ -19,52 +19,63 @@
   <div class="w-full">
     <div class="grid grid-cols-2 md:grid-cols-5 gap-[1.5px] bg-black/[0.035] p-[1.5px]">
       {% for product in collection.products %}
-        {% assign mod = forloop.index0 | modulo: 4 %}
+        {% assign mod = forloop.index0 | modulo: 6 %}
         
-        {% comment %} Row 1 End Spacer: After 2nd product in group of 4 (which are index 0, 1) {% endcomment %}
-        {% if mod == 2 %}
-          <div class="hidden md:block md:col-span-1 bg-cream"></div>
-        {% endif %}
-
-        {% comment %} Row 2 Start Spacer: Before 3rd product in group of 4 (which is index 2) {% endcomment %}
-        {% if mod == 2 %}
-          <div class="hidden md:block md:col-span-1 bg-cream"></div>
-        {% endif %}
-
-        <a href="{{ product.url }}" class="col-span-2 md:col-span-2 grid grid-cols-2 group bg-cream hover:bg-neutral-50 transition-all duration-300 hover:z-10 hover:shadow-[0_0_0_1px_#E05A36]">
-          <!-- Image tile -->
-          <div class="aspect-[3/4] bg-neutral-100 overflow-hidden relative border-r border-black/[0.035]">
-            {% if product.featured_image != blank %}
-              <img src="{{ product.featured_image | image_url: width: 800 }}" 
-                   alt="{{ product.title | escape }}" 
-                   class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" 
-                   loading="lazy" 
-                   width="{{ product.featured_image.width }}" 
-                   height="{{ product.featured_image.height }}">
-            {% else %}
-              <div class="w-full h-full flex items-center justify-center bg-neutral-150">
-                <span class="text-neutral-400 text-[10px]">NO IMAGE</span>
+        {% if mod == 2 or mod == 3 %}
+          <!-- 1-Column Image-Only Card -->
+          <a href="{{ product.url }}" class="col-span-1 md:col-span-1 group bg-cream hover:bg-neutral-50 transition-all duration-300 hover:z-10 hover:shadow-[0_0_0_1px_#E05A36]">
+            <div class="aspect-[3/4] bg-neutral-100 overflow-hidden relative">
+              {% if product.featured_image != blank %}
+                <img src="{{ product.featured_image | image_url: width: 800 }}" 
+                     alt="{{ product.title | escape }}" 
+                     class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" 
+                     loading="lazy" 
+                     width="{{ product.featured_image.width }}" 
+                     height="{{ product.featured_image.height }}">
+              {% else %}
+                <div class="w-full h-full flex items-center justify-center bg-neutral-150">
+                  <span class="text-neutral-400 text-[10px]">NO IMAGE</span>
+                </div>
+              {% endif %}
+            </div>
+          </a>
+        {% else %}
+          <!-- 2-Column Standard Card -->
+          <a href="{{ product.url }}" class="col-span-2 md:col-span-2 grid grid-cols-2 group bg-cream hover:bg-neutral-50 transition-all duration-300 hover:z-10 hover:shadow-[0_0_0_1px_#E05A36]">
+            <!-- Image tile -->
+            <div class="aspect-[3/4] bg-neutral-100 overflow-hidden relative border-r border-black/[0.035]">
+              {% if product.featured_image != blank %}
+                <img src="{{ product.featured_image | image_url: width: 800 }}" 
+                     alt="{{ product.title | escape }}" 
+                     class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700" 
+                     loading="lazy" 
+                     width="{{ product.featured_image.width }}" 
+                     height="{{ product.featured_image.height }}">
+              {% else %}
+                <div class="w-full h-full flex items-center justify-center bg-neutral-150">
+                  <span class="text-neutral-400 text-[10px]">NO IMAGE</span>
+                </div>
+              {% endif %}
+            </div>
+            <!-- Details tile -->
+            <div class="aspect-[3/4] flex flex-col justify-between p-4 md:p-6 bg-transparent">
+              <div class="text-[12px] tracking-widest font-bold text-black/60 uppercase">
+                {%- if product.metafields.custom.one_liner != blank -%}
+                  {{ product.metafields.custom.one_liner }}
+                {%- elsif product.vendor != blank -%}
+                  {{ product.vendor }}
+                {%- else -%}
+                  YURI
+                {%- endif -%}
               </div>
-            {% endif %}
-          </div>
-          <!-- Details tile -->
-          <div class="aspect-[3/4] flex flex-col justify-between p-4 md:p-6 bg-transparent">
-            <div class="text-[12px] tracking-widest font-bold text-black/60 uppercase">
-              {%- if product.metafields.custom.one_liner != blank -%}
-                {{ product.metafields.custom.one_liner }}
-              {%- elsif product.vendor != blank -%}
-                {{ product.vendor }}
-              {%- else -%}
-                YURI
-              {%- endif -%}
+              <div class="space-y-2">
+                <h3 class="text-[11px] font-bold tracking-widest leading-snug text-black">
+                  {{ product.title }}
+                </h3>
+              </div>
             </div>
-            <div class="space-y-2">
-              <h3 class="text-[11px] font-bold tracking-widest leading-snug text-black">
-                {{ product.title }}
-              </h3>
-            </div>
-          </div>
-        </a>
+          </a>
+        {% endif %}
       {% else %}
         <div class="col-span-full text-center py-24 text-neutral-400 bg-cream">
           NO PRODUCTS FOUND IN THIS COLLECTION

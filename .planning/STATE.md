@@ -42,7 +42,7 @@ progress:
 **Phase 3: Floating Product Grids & Cards** (COMPLETED)
 * Designed interlocking 5-column product grid in `sections/main-collection.liquid` with tile resizing.
 * Added custom dark mode cream background logic to protect transparent media assets.
-* Optimized collection grid gap to 3px, applied thin outlines, bolded card typography, and pushed changes to GitHub (Commit `b968120`).
+* Optimized collection grid gap to 1.5px, applied ultra-thin outlines (3.5% opacity) on unhovered states, and bolded card typography (Commit `6c7ce34`).
 * Added smooth card hover outline highlight via inset-shadow, dynamic one-liner metadata support (`product.metafields.custom.one_liner`) in 12px, removed price display, and disabled text underlines on hover.
 
 **Phase 2: Homepage Hero & Slideshow** (COMPLETED)

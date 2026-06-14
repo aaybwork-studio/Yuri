@@ -22,11 +22,11 @@ Establish the new brand typography, color palette, and layout system.
 
 Refactor the homepage hero section to showcase the sculptural 3D products and visual assets.
 
-* **Goal**: Personalize the slide-show hero (`sections/custom-hero.liquid`) with the new visual layout, clean margins, and delicate botanical overlays.
+* **Goal**: Personalize the slide-show hero (`sections/custom-hero.liquid` / `sections/custom-introduction-hero.liquid`) with the new visual layout, clean margins, and delicate botanical overlays.
 * **Tasks**:
-  * [ ] Task 2.1: Update schema settings in `sections/custom-hero.liquid` to accommodate the new brand imagery and description text.
-  * [ ] Task 2.2: Apply the new color schemes and typographic hierarchy (Cormorant Garamond headings) to slide text blocks.
-  * [ ] Task 2.3: Implement smooth fade/slide transitions between slideshow frames.
+  * [x] Task 2.1: Update schema settings to accommodate the new brand imagery, description text, and auto-cycling haiku text. (Completed)
+  * [x] Task 2.2: Apply the new color schemes and typographic hierarchy (Cormorant Garamond / Dia headings) to slide text blocks. (Completed)
+  * [x] Task 2.3: Implement smooth fade/slide transitions and background video autoplay loops. (Completed)
 
 ### Phase 3: Floating Product Grids & Cards
 
@@ -34,9 +34,9 @@ Refactor the custom featured products grid to use borderless, visual-heavy layou
 
 * **Goal**: Redesign the featured collection elements and cards on the homepage to highlight the 3D sculptural products.
 * **Tasks**:
-  * [ ] Task 3.1: Modify `sections/custom-featured-products.liquid` and `snippets/card-product.liquid` to use borderless layouts and warm sand cream backgrounds.
-  * [ ] Task 3.2: Implement subtle scale-up, shadow, and text fade animations on card hover.
-  * [ ] Task 3.3: Verify product titles, badges, and pricing layouts use the new editorial typography.
+  * [x] Task 3.1: Modify `sections/main-collection.liquid` to use interlocking grid layouts and warm sand cream backgrounds. (Completed)
+  * [x] Task 3.2: Implement subtle scale-up, shadow, and text transitions on grid item hover. (Completed)
+  * [x] Task 3.3: Verify product titles, badges, and pricing layouts use the new editorial typography. (Completed)
 
 ### Phase 4: Scroll-Driven Narrative Flow
 
@@ -44,9 +44,9 @@ Integrate GSAP and Lenis to create a smooth, meditative scrolling experience.
 
 * **Goal**: Implement high-performance scroll-driven storytelling animations across homepage sections.
 * **Tasks**:
-  * [ ] Task 4.1: Load GSAP, ScrollTrigger, and Lenis libraries into the theme assets and layouts.
-  * [ ] Task 4.2: Add scroll-triggered fade-slide animations (using the `scroll-experience` and `fixing-motion-performance` skills) to sections.
-  * [ ] Task 4.3: Audit layout shifts (CLS) and ensure smooth, jank-free rendering.
+  * [x] Task 4.1: Load GSAP, ScrollTrigger, and Lenis libraries into the theme assets and layouts. (Completed)
+  * [x] Task 4.2: Add scroll-triggered fade-slide animations to sections. (Completed)
+  * [x] Task 4.3: Audit layout shifts and ensure smooth, jank-free rendering. (Completed)
 
 ### Phase 5: Homepage layout reform
 

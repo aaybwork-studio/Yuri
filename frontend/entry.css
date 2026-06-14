@@ -21,6 +21,9 @@ html, body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent browser from auto-darkening images/elements in OS dark mode.
+     This site manages dark/light mode via .dark-mode class instead. */
+  color-scheme: only light;
 }
 
 /* Global uppercase Tracking for Luxury Editorial feel */
@@ -513,6 +516,7 @@ body.dark-mode .theme-header,
 body.dark-mode .theme-footer,
 body.dark-mode [data-menu-drawer],
 body.dark-mode [data-cart-drawer],
+body.dark-mode .yuri-media-content,
 body.dark-mode .theme-header.is-scrolled {
   background-color: #121212 !important;
   color: #ffffff !important;
@@ -594,7 +598,7 @@ body.dark-mode .text-neutral-200 {
 }
 
 body.dark-mode .introduction-background {
-  background-color: rgba(0, 0, 0, 0.6) !important;
+  background-color: rgba(0, 0, 0, 0) !important;
 }
 
 body.dark-mode .introduction-loader {
@@ -635,7 +639,8 @@ body.dark-mode img,
 body.dark-mode video,
 body.dark-mode picture {
   filter: none !important;
-  opacity: 1;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
 }
 
 

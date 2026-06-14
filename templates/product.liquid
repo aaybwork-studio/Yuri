@@ -79,19 +79,19 @@
         <div class="grid grid-cols-3 gap-4 border-b border-black/[0.05] pb-8">
           <div>
             <span class="text-[9px] tracking-[0.25em] font-bold text-black/40 block uppercase mb-1">COMBUSTION</span>
-            <span class="text-[11px] font-bold tracking-wide text-black block">
+            <span class="text-[11px] font-bold tracking-wide text-[#E05A36] block">
               {%- if combustion != blank -%}{{ combustion }}{%- else -%}65h{%- endif -%}
             </span>
           </div>
           <div>
-            <span class="text-[9px] tracking-[0.25em] font-bold text-black/40 block uppercase mb-1">POIDS</span>
-            <span class="text-[11px] font-bold tracking-wide text-black block">
+            <span class="text-[9px] tracking-[0.25em] font-bold text-black/40 block uppercase mb-1">WEIGHT</span>
+            <span class="text-[11px] font-bold tracking-wide text-[#E05A36] block">
               {%- if poids != blank -%}{{ poids }}{%- else -%}500g{%- endif -%}
             </span>
           </div>
           <div>
             <span class="text-[9px] tracking-[0.25em] font-bold text-black/40 block uppercase mb-1">DIMENSIONS</span>
-            <span class="text-[11px] font-bold tracking-wide text-black block normal-case font-sans">
+            <span class="text-[11px] font-bold tracking-wide text-[#E05A36] block normal-case font-sans">
               {%- if dimensions != blank -%}{{ dimensions }}{%- else -%}Height 11cm, diameter 10,5cm{%- endif -%}
             </span>
           </div>
@@ -112,7 +112,7 @@
 
         <!-- Delivery & Services -->
         <div class="space-y-3 pt-6 border-t border-black/[0.05]">
-          <span class="text-[9px] tracking-[0.25em] font-bold text-black/40 block uppercase">LIVRAISON & SERVICES</span>
+          <span class="text-[9px] tracking-[0.25em] font-bold text-[#E05A36] block uppercase">LIVRAISON & SERVICES</span>
           <div class="text-[11px] text-neutral-500 font-sans tracking-wide leading-relaxed normal-case space-y-1">
             {%- if delivery != blank -%}
               {{ delivery }}

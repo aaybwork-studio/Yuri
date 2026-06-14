@@ -6,5 +6,122 @@
     "theme_author": "Antigravity",
     "theme_documentation_url": "https://www.madetlen.com",
     "theme_support_url": "https://www.madetlen.com"
+  },
+  {
+    "name": "Checkout",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Banner"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_banner",
+        "label": "Banner Image",
+        "info": "Recommended: 1000 x 400px"
+      },
+      {
+        "type": "header",
+        "content": "Logo"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_logo_image",
+        "label": "Logo Image"
+      },
+      {
+        "type": "select",
+        "id": "checkout_logo_position",
+        "label": "Logo Position",
+        "options": [
+          { "value": "left", "label": "Left" },
+          { "value": "center", "label": "Center" },
+          { "value": "right", "label": "Right" }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "select",
+        "id": "checkout_logo_size",
+        "label": "Logo Size",
+        "options": [
+          { "value": "small", "label": "Small" },
+          { "value": "medium", "label": "Medium" },
+          { "value": "large", "label": "Large" }
+        ],
+        "default": "medium"
+      },
+      {
+        "type": "header",
+        "content": "Main Content Area"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_main_background_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "checkout_main_background_color",
+        "label": "Background Color",
+        "default": "#faf8f1"
+      },
+      {
+        "type": "header",
+        "content": "Order Summary"
+      },
+      {
+        "type": "image_picker",
+        "id": "checkout_summary_background_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "color",
+        "id": "checkout_summary_background_color",
+        "label": "Background Color",
+        "default": "#e8e6df"
+      },
+      {
+        "type": "header",
+        "content": "Typography"
+      },
+      {
+        "type": "font_picker",
+        "id": "checkout_heading_font",
+        "label": "Heading Font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "checkout_body_font",
+        "label": "Body Font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "checkout_accent_color",
+        "label": "Accents",
+        "info": "Links, highlights, and secondary tags",
+        "default": "#E05A36"
+      },
+      {
+        "type": "color",
+        "id": "checkout_button_color",
+        "label": "Buttons",
+        "info": "Primary action buttons",
+        "default": "#E05A36"
+      },
+      {
+        "type": "color",
+        "id": "checkout_error_color",
+        "label": "Errors",
+        "info": "Error messages and alerts",
+        "default": "#d83812"
+      }
+    ]
   }
 ]

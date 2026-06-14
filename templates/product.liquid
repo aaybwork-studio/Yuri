@@ -1,56 +1,108 @@
-<div class="product-page bg-[#faf8f1] min-h-screen text-black py-24 md:py-32">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-      
-      <!-- Left: Scrollable Media Gallery (Span 7) -->
-      <div class="lg:col-span-7 space-y-6">
-        {% if product.images.size > 0 %}
-          {% for image in product.images %}
-            <div class="w-full bg-[#faf8f1] overflow-hidden">
-              <img 
-                src="{{ image.src | image_url: width: 1500 }}" 
-                alt="{{ image.alt | escape }}" 
-                class="w-full h-auto object-cover" 
-                loading="lazy" 
-                width="{{ image.width }}" 
-                height="{{ image.height }}"
-              >
-            </div>
-          {% endfor %}
-        {% else %}
-          <div class="w-full aspect-[3/4] bg-neutral-100 flex items-center justify-center">
-            <span class="text-neutral-400 text-[10px] tracking-widest uppercase">NO IMAGE AVAILABLE</span>
-          </div>
-        {% endif %}
-      </div>
+{%- liquid
+  assign combustion = product.metafields.custom.combustion
+  assign poids = product.metafields.custom.poids
+  assign dimensions = product.metafields.custom.dimensions
+  assign delivery = product.metafields.custom.delivery_info
 
-      <!-- Right: Sticky Product Details (Span 5) -->
-      <div class="lg:col-span-5 lg:sticky lg:top-24 space-y-8">
-        <div>
-          <!-- Scent / Product Title -->
-          <h1 class="text-sm font-normal tracking-[0.2em] uppercase m-0 leading-tight">
-            {{ product.title }}
-          </h1>
-          
-          <!-- Price and Tax Info -->
-          <p class="text-[11px] tracking-widest uppercase text-neutral-500 mt-2 font-sans">
-            {{ product.price | money }}
-            <span class="text-[9px] text-neutral-400 ml-1">Taxes included</span>
-          </p>
+  # Parse tags as fallbacks
+  for tag in product.tags
+    if tag contains 'Combustion:' or tag contains 'combustion:'
+      assign combustion = tag | split: ':' | last | strip
+    elsif tag contains 'Poids:' or tag contains 'poids:'
+      assign poids = tag | split: ':' | last | strip
+    elsif tag contains 'Dimensions:' or tag contains 'dimensions:'
+      assign dimensions = tag | split: ':' | last | strip
+    elsif tag contains 'Delivery:' or tag contains 'delivery:'
+      assign delivery = tag | split: ':' | last | strip
+    endif
+  endfor
+-%}
+
+<div class="product-page bg-[#faf8f1] min-h-screen text-black pt-20 border-b border-black/[0.035]">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
+    
+    <!-- Left: Image Box with Light Grey Background -->
+    <div class="bg-[#e8e6df] min-h-[50vh] md:min-h-[calc(100vh-80px)] flex items-center justify-center p-8 md:p-16 border-b md:border-b-0 md:border-r border-black/10">
+      {% if product.featured_image != blank %}
+        <img 
+          src="{{ product.featured_image | image_url: width: 1200 }}" 
+          alt="{{ product.title | escape }}" 
+          class="w-full max-w-[500px] h-auto object-contain mix-blend-multiply" 
+          loading="eager"
+          width="{{ product.featured_image.width }}" 
+          height="{{ product.featured_image.height }}"
+        >
+      {% else %}
+        <div class="w-full aspect-[3/4] bg-neutral-200 flex items-center justify-center">
+          <span class="text-neutral-400 text-[10px] tracking-widest uppercase">NO IMAGE AVAILABLE</span>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Right: Sticky Product Details -->
+    <div class="flex flex-col justify-between bg-[#faf8f1] p-8 md:p-16 lg:p-24 min-h-[50vh] md:min-h-[calc(100vh-80px)] space-y-12">
+      
+      <!-- Top / Info Section -->
+      <div class="space-y-10">
+        <!-- Combustion / Poids / Dimensions Metadata -->
+        <div class="grid grid-cols-3 gap-4 border-b border-black/[0.05] pb-8">
+          <div>
+            <span class="text-[9px] tracking-[0.25em] font-bold text-black/40 block uppercase mb-1">COMBUSTION</span>
+            <span class="text-[11px] font-bold tracking-wide text-black block">
+              {%- if combustion != blank -%}{{ combustion }}{%- else -%}65h{%- endif -%}
+            </span>
+          </div>
+          <div>
+            <span class="text-[9px] tracking-[0.25em] font-bold text-black/40 block uppercase mb-1">POIDS</span>
+            <span class="text-[11px] font-bold tracking-wide text-black block">
+              {%- if poids != blank -%}{{ poids }}{%- else -%}500g{%- endif -%}
+            </span>
+          </div>
+          <div>
+            <span class="text-[9px] tracking-[0.25em] font-bold text-black/40 block uppercase mb-1">DIMENSIONS</span>
+            <span class="text-[11px] font-bold tracking-wide text-black block normal-case font-sans">
+              {%- if dimensions != blank -%}{{ dimensions }}{%- else -%}Height 11cm, diameter 10,5cm{%- endif -%}
+            </span>
+          </div>
         </div>
 
-        <!-- Rich Text Description -->
-        {% if product.description != blank %}
-          <div class="product-description pr-4">
-            {{ product.description }}
-          </div>
-        {% endif %}
+        <!-- Title & Description -->
+        <div class="space-y-6">
+          <h1 class="text-sm font-bold tracking-[0.2em] uppercase m-0 leading-tight">
+            {{ product.title }}
+          </h1>
 
-        <!-- Add to Bag Form -->
-        <form method="post" action="{{ routes.cart_add_url }}" class="space-y-6 pt-4 border-t border-black/5">
+          {% if product.description != blank %}
+            <div class="product-description text-[11px] text-neutral-500 font-sans tracking-wide leading-relaxed normal-case">
+              {{ product.description }}
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Delivery & Services -->
+        <div class="space-y-3 pt-6 border-t border-black/[0.05]">
+          <span class="text-[9px] tracking-[0.25em] font-bold text-black/40 block uppercase">LIVRAISON & SERVICES</span>
+          <div class="text-[11px] text-neutral-500 font-sans tracking-wide leading-relaxed normal-case space-y-1">
+            {%- if delivery != blank -%}
+              {{ delivery }}
+            {%- else -%}
+              <p>Paiement sécurisé par Mastercard-Visa-PayPal</p>
+              <p>Délai d'expédition: sous 3 jours ouvrés</p>
+              <p>Livraison: 2 à 5 jours pour la France, 7 à 14 jours à l'international</p>
+              <p>Retour gratuit sous condition: contacter le service client</p>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom / CTA Section -->
+      <div class="space-y-8 pt-8">
+        
+        <!-- Form and Select options -->
+        <form method="post" action="{{ routes.cart_add_url }}" class="space-y-6">
           {% if product.variants.size > 1 %}
             <div class="space-y-2">
-              <label class="block text-[9px] tracking-[0.2em] uppercase text-neutral-400">Select Scent / Variant</label>
+              <label class="block text-[9px] tracking-[0.25em] font-bold text-black/40 uppercase">SELECT YOUR OPTION +</label>
               <select name="id" class="w-full border-b border-black/10 focus:border-black bg-transparent py-2 outline-none font-sans text-xs tracking-widest text-black rounded-none transition-colors">
                 {% for variant in product.variants %}
                   <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
@@ -63,15 +115,34 @@
             <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
           {% endif %}
 
-          <button 
-            type="submit" 
-            class="w-full bg-black text-[#faf8f1] hover:bg-neutral-900 hover:text-white py-3.5 text-center text-[10px] tracking-[0.2em] uppercase font-sans font-light rounded-none transition-colors duration-300 border border-black"
-          >
-            ADD TO BAG
-          </button>
+          <div class="flex flex-col space-y-4">
+            <!-- Price Block -->
+            <div>
+              <span class="text-[13px] font-bold tracking-widest text-black block">
+                {{ product.price | money }}
+              </span>
+              <span class="text-[9px] tracking-[0.2em] text-neutral-400 block uppercase mt-0.5">Taxes included</span>
+            </div>
+
+            <!-- Add to Bag -->
+            <button 
+              type="submit" 
+              class="w-full bg-transparent border border-black/20 hover:border-black text-black/80 hover:text-black py-3.5 text-center text-[10px] tracking-[0.25em] uppercase font-sans font-bold rounded-none transition-colors duration-300"
+            >
+              ADD TO BAG
+            </button>
+          </div>
         </form>
+
+        <!-- Wishlist -->
+        <div class="border-t border-black/[0.05] pt-4">
+          <button type="button" class="text-[10px] tracking-[0.25em] font-bold text-black/60 hover:text-black bg-transparent border-0 cursor-pointer p-0 uppercase">
+            WISHLIST +
+          </button>
+        </div>
       </div>
 
     </div>
+
   </div>
 </div>

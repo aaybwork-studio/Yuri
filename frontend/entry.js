@@ -796,9 +796,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if ((wavesAudio || bowlAudio) && soundToggle) {
     let hasInteracted = false;
 
-    // Set volumes according to requirements
-    if (wavesAudio) wavesAudio.volume = 0.75;
-    if (bowlAudio) bowlAudio.volume = 0.05;
+    // Set volumes according to requirements (scaled to 30% of original levels)
+    if (wavesAudio) wavesAudio.volume = 0.225;
+    if (bowlAudio) bowlAudio.volume = 0.015;
 
     const playAllAudio = () => {
       const playPromises = [];
